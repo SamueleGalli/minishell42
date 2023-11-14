@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:06:17 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/10 18:13:15 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/14 12:11:44 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	fork_loop_major(t_env *e)
 			pipe_com(e);
 		exiting(e, 0);
 	}
-	else
-		variabletype(e);
 	exiting(e, 0);
 }
 
@@ -65,7 +63,6 @@ void	fork_redir(t_env *e)
 		perror("fork");
 		exiting(e, 1);
 	}
-
 }
 
 void	pipe_single(t_env *e)
@@ -103,7 +100,6 @@ void	define_redir(t_env *e)
 	}
 	else if (e->define_pipe == 1)
 	{
-
 		fork_redir(e);
 		if (e->pid_pipe == 0)
 			fork_loop_redir(e);

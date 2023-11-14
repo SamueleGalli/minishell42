@@ -76,6 +76,7 @@ void	alloc_e(int c, char **argv, char **env, t_env *e)
 	e->i = 0;
 	e->init_red = 0;
 	e->r = 0;
+	e->valid = 0;
 	e->status = 0;
 	e->ex = 0;
 	e->equal = 0;

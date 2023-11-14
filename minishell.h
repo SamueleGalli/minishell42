@@ -167,6 +167,7 @@ typedef struct s_env
 	int		flag;
 	int		define_pipe;
 	int		numb;
+	int		valid;
 	int		pipe;
 	int		i_env;
 	int		flag_i;
@@ -175,7 +176,6 @@ typedef struct s_env
 	int		exit_code;
 	int		exit;
 	int		stdin;
-	pid_t	fd_output;
 	int		stdout;
 	int		in_red;
 	int		out_red;
@@ -188,6 +188,7 @@ typedef struct s_env
 	int		red_flag;
 	int		pipefd[2];
 	pid_t	pid;
+	pid_t	fd_output;
 	pid_t	child;
 	pid_t	pid_pipe;
 }	t_env;
@@ -219,7 +220,12 @@ int		check_error_red(int pipe_fd[2]);
 int		venv(t_env *e, int i, int j);
 int		search_mult_arrows(t_env *e, char *s);
 int		path_valid(char *s, t_env *e);
+int		check_multiple(t_env *e);
 
+
+void	in_pipe(t_env *e);
+void	last_in(t_env *e);
+void	do_pipe_cont(t_env *e);
 void	other_redir(t_env	*e);
 void	fork_loop_redir(t_env *e);
 void	define_redir(t_env *e);

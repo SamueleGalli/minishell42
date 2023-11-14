@@ -6,13 +6,13 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:33:21 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/10 18:44:00 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/14 12:51:03 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//cat < file1 | grep 1 > file2 | wc -l
+//echo 42 < file1 | cat | wc -l
 
 int	pipe_or_redir(t_env *e)
 {
@@ -29,6 +29,11 @@ int	pipe_or_redir(t_env *e)
 		return (2);
 	else
 	{
+		if (e->v[i][0] == '>' && i != 0)
+		{
+			e->init_red = e->i;
+			e->valid = 1;
+		}
 		e->i = i;
 		return (1);
 	}
@@ -44,8 +49,7 @@ void	forking(t_env *e)
 
 void	do_pipe(t_env *e)
 {
-	e->c_pipe = 0;
-	e->p_i = 0;
+	in_pipe(e);
 	count_pipe(e);
 	while (e->p_i < e->c_pipe)
 	{
@@ -65,7 +69,7 @@ void	do_pipe(t_env *e)
 			return ;
 		}
 	}
-	if (e->define_pipe == 1)
+	if (e->define_pipe == 1 && check_multiple(e) == 1)
 		parent2(e);
 }
 
@@ -75,17 +79,23 @@ void	do_redir(t_env *e)
 	{
 		while (e->v[e->i][0] != '<' && e->v[e->i][0] != '>')
 			e->i++;
-		if ((e->v[e->i][1] != '>') && (search_mult_arrows(e, "< ") == 1 \
-	|| search_mult_arrows(e, "> ") == 1 || search_mult_arrows(e, "<") == 1 \
-	|| search_mult_arrows(e, ">") == 1))
+		if ((e->v[e->i][1] != '>') && (search_mult_arrows(e, "< ") == 1
+				|| search_mult_arrows(e, "> ") == 1 || search_mult_arrows(e,
+					"<") == 1 || search_mult_arrows(e, ">") == 1))
 			redirect_mult_single(e);
-		else if (search_mult_arrows(e, ">> ") == 1 || \
-	search_mult_arrows(e, ">>") == 1)
+		else if (search_mult_arrows(e, ">> ") == 1 || search_mult_arrows(e,
+				">>") == 1)
 			redirect_mult_double(e);
 		update_redir(e);
 	}
 	if (e->in_red > 0 && e->out_red > 0)
 		last_file(e);
+	else if (e->valid == 1)
+	{
+		last_in(e);
+		e->init_red = 0;
+		e->valid = 0;
+	}
 }
 
 void	pipe_and_redirection(t_env *e)
@@ -98,8 +108,10 @@ void	pipe_and_redirection(t_env *e)
 			do_redir(e);
 		else if (pipe_or_redir(e) == 2)
 		{
-			do_pipe(e);
+			e->c_pipe = 0;
 			e->p_i = 0;
+			do_pipe(e);
+			do_pipe_cont(e);
 		}
 		else
 			break ;

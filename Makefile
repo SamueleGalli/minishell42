@@ -76,6 +76,8 @@ SRC = 	main.c \
 		pipe_and_redirection/pipe_and_redirection.c \
 		pipe_and_redirection/pipe_and_redirection2.c \
 		pipe_and_redirection/pipe_and_redirection3.c \
+		pipe_and_redirection/last_in.c \
+		pipe_and_redirection/check_multiple.c \
 
 OBJ = $(SRC:.c=.o)
 
