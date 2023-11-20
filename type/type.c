@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 09:27:45 by marvin            #+#    #+#             */
-/*   Updated: 2023/11/09 17:01:57 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/15 11:31:21 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,6 @@ void	type_cont(t_env *e)
 	else if (e->v != NULL && e->exit != 1)
 		variabletype(e);
 }
-// 	m
-/*
-** NOTE - cercare se nel comando c'e < o > , << o >> per evitare di far
-** eseguire comandi precedenti
-** TODO - la stampa di echo entra dentro variabletype, evitare se ci sono arrows
-** di eseguire il cmd
-** TODO - da controllare se >... e a fine stringa (ovvero se ha lo spazio dopo)
-** all'interno di e->v quando viene splittato
-
-< file1 > file3
-*/
 
 void	typing(t_env *e)
 {

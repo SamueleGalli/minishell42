@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_red.c                                        :+:      :+:    :+:   */
+/*   pipe_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 15:57:03 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/20 12:44:04 by sgalli           ###   ########.fr       */
+/*   Created: 2023/11/20 09:26:37 by sgalli            #+#    #+#             */
+/*   Updated: 2023/11/20 12:11:31 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
-void	read_and_write(t_env *e)
+//scrivi l'output della pipe nel file1
+//ls / | grep c | cat > file1
+
+void	write_red(t_env *e, int fdout)
 {
-	e->i = e->start_red;
-	if (e->v[e->i][0] == '>' || e->v[e->i][0] == '<')
-		e->i--;
+	dup2(fdout, STDOUT_FILENO);
+	close(fdout);
+	close(e->pipefd[1]);
+	dup2(e->pipefd[0], STDIN_FILENO);
+	close(e->pipefd[0]);
 	e->s = NULL;
 	if (check_builtin(e) == 0)
 	{
@@ -33,95 +38,66 @@ void	read_and_write(t_env *e)
 	exiting(e, 1);
 }
 
-void	forking_red(t_env *e, char *fileoutput, int type, char *fileinput)
+void	forking_in(t_env *e, char *fileoutput, int type)
 {
-	int	fdin;
 	int	fdout;
 
-	fdin = open(fileinput, O_RDONLY);
-	free(fileinput);
 	if (type == 1)
 		fdout = open(fileoutput, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	else if (type == 2)
 		fdout = open(fileoutput, O_WRONLY | O_APPEND | O_CREAT, 0666);
 	free(fileoutput);
-	if (fdout < 0 || fdin < 0)
+	if (fdout < 0)
 	{
+		e->exit_code = 1;
 		perror("open");
-		exiting(e, 1);
 		return ;
 	}
-	dup2(fdout, 1);
-	close(fdout);
-	dup2(fdin, 0);
-	close(fdin);
-	read_and_write(e);
+	write_red(e, fdout);
 }
 
-void	writing(t_env *e, char *fileoutput, int type, char *fileinput)
+void	single_write(t_env *e, char *fileoutput, int type)
 {
 	pid_t	pid;
 
+	e->i = e->check;
 	pid = fork();
 	if (pid == -1)
 	{
 		perror("fork");
-		exiting(e, 1);
+		e->exit = 1;
 		exiting(e, 1);
 	}
 	if (pid == 0)
-		forking_red(e, fileoutput, type, fileinput);
-	else if (pid > 0)
+		forking_in(e, fileoutput, type);
+	else
 	{
-		waitpid(pid, &e->status, 0);
-		if (WIFEXITED(e->status) != 0)
-			e->exit_code = 1;
+		close(e->pipefd[0]);
+		close(e->pipefd[1]);
+		waitpid(pid, NULL, 0);
 	}
 }
 
-void	last_file(t_env *e)
+void	check_file(t_env *e)
 {
-	char	*fileinput;
 	char	*fileoutput;
 
-	e->i = e->in_red;
-	fileinput = find_filepath_minor_mult(e);
-	e->i = e->out_red;
+	e->check = e->i;
+	while (e->v[e->i][0] != '>')
+		e->i++;
+	e->i2 = e->i++;
+	e->i--;
 	if (compare(e->v[e->out_red], ">>") == 1)
 	{
 		fileoutput = find_lasth_filepath(e);
-		writing(e, fileoutput, 2, fileinput);
+		single_write(e, fileoutput, 2);
 	}
 	else
 	{
 		fileoutput = find_lasth_filepath(e);
-		writing(e, fileoutput, 1, fileinput);
+		single_write(e, fileoutput, 1);
 	}
-	if (fileinput != NULL)
-		free(fileinput);
 	if (fileoutput != NULL)
 		free(fileoutput);
-	while (e->v[e->i] != NULL && e->v[e->i][0] != '|')
-		e->i++;
-}
-
-void	update_in_out(t_env *e)
-{
-	int	i;
-
-	i = e->i;
-	while (e->v[i] != NULL)
-	{
-		if (e->v[i][0] == '<')
-		{
-			e->in_red = i;
-			break ;
-		}
-		else if (e->v[i][0] == '>')
-		{
-			e->out_red = i;
-			break ;
-		}
-		i++;
-	}
+	e->i = e->i2;
 }

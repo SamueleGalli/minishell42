@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 11:20:16 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/10 12:09:59 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/16 12:08:57 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	cont_invalid_cmd(t_env *e, int i)
 		{
 			printf("error parse error near `|'\n");
 			e->exit = 1;
-			e->exit_code = 1;
+			e->exit_code = 2;
 			return (1);
 		}
 		i++;

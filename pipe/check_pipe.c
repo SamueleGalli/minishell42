@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:30:26 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/10 17:04:28 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/16 12:08:53 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	valid_pipe(t_env *e)
 	{
 		printf("error parse error near `|'\n");
 		e->exit = 1;
-		e->exit_code = 1;
+		e->exit_code = 2;
 		return (1);
 	}
 	return (0);
@@ -46,7 +46,7 @@ void	count_pipe(t_env *e)
 
 	i = e->i;
 	e->c_pipe = 0;
-	while (e->v[i] != NULL)
+	while (e->v[i] != NULL && e->v[i][0] != '>' && e->v[i][0] != '<')
 	{
 		if (e->v[i][0] == '|')
 			e->c_pipe++;

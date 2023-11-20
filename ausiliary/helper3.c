@@ -6,13 +6,12 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 12:22:39 by sgalli            #+#    #+#             */
-/*   Updated: 2023/10/25 15:22:46 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/15 10:26:33 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// conta la dimensione di un stringa e della successiva saltndo ' e "
 int	size(t_env *e)
 {
 	e->indx = 0;

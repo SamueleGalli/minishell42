@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:11:31 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/10 12:11:36 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/20 13:27:09 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	multiple_redirect(t_env *e)
 	}
 	if (e->in_red != 0 && e->out_red != 0)
 		last_file(e);
+	else if (e->in_red != 0)
+		last_file_in(e);
 	e->exit = 1;
 }
 
@@ -53,8 +55,8 @@ void	single_major_mult_redirect(t_env *e)
 			e->exit_code = 1;
 			perror("open");
 			exiting(e, 0);
+			close(fd);
 		}
-		close(fd);
 	}
 	else
 		check_red_fork(e, filename, 1);

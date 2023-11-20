@@ -6,15 +6,11 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:06:25 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/08 19:11:36 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/15 10:27:19 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// if (e->cmd[i] == '<' || e->cmd[i] == '>')
-//     return (0);
-// printf("e->cmd: (i-1)-> |%c|, (i)-> |%c|\n\n", e->cmd[i - 1], e->cmd[i]);
 
 int	split_pipe(t_env *e)
 {

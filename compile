@@ -1,1 +1,1 @@
-make re && clear && valgrind --leak-check=full --show-leak-kinds=all -s --track-origins=yes --suppressions=override.supp ./minishell
+clear && make re && clear && valgrind --leak-check=full --show-leak-kinds=all -s --track-origins=yes --suppressions=override.supp ./minishell

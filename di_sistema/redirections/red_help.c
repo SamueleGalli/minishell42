@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 11:45:48 by eraccane          #+#    #+#             */
-/*   Updated: 2023/11/09 17:06:36 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/20 13:26:39 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	check_red_fork(t_env *e, char *filename, int type)
 		pathcmd(e);
 		flag_matrix(e);
 	}
-	if (access(e->s, X_OK) == -1)
-		e->exit_code = 1;
 	pid = fork();
 	if (pid < 0)
 	{

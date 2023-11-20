@@ -56,6 +56,7 @@ SRC = 	main.c \
 		di_sistema/execve/commands.c \
 		di_sistema/execve/flags.c \
 		di_sistema/execve/flag2.c \
+		di_sistema/execve/flag_env.c \
 		di_sistema/redirections/redirections.c \
 		di_sistema/redirections/red_help.c \
 		di_sistema/redirections/red_help_2.c \
@@ -65,6 +66,7 @@ SRC = 	main.c \
 		di_sistema/redirections/minor_redirection.c \
 		di_sistema/redirections/mult_redirect.c \
 		di_sistema/redirections/check_red.c \
+		di_sistema/redirections/last_file_in.c \
 		split/split.c \
 		split/split2.c \
 		pipe/pipe.c \
@@ -73,11 +75,12 @@ SRC = 	main.c \
 		pipe/check_pipe.c \
 		path/path.c \
 		path/contiue_path.c \
-		pipe_and_redirection/pipe_and_redirection.c \
-		pipe_and_redirection/pipe_and_redirection2.c \
-		pipe_and_redirection/pipe_and_redirection3.c \
-		pipe_and_redirection/last_in.c \
-		pipe_and_redirection/check_multiple.c \
+		pipe_and_redirection/do_pipe.c \
+		pipe_and_redirection/do_pipe2.c \
+		pipe_and_redirection/check_pipe_or_redirection.c \
+		pipe_and_redirection/do_red.c \
+		pipe_and_redirection/parent_fork_pipe.c \
+		pipe_and_redirection/pipe_file.c \
 
 OBJ = $(SRC:.c=.o)
 

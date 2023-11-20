@@ -23,6 +23,8 @@
 */
 void	nuller(t_env *e)
 {
+	e->output = 0;
+	e->input = 0;
 	if (e->cmd[0] == '\0')
 	{
 		e->v = NULL;
@@ -74,10 +76,10 @@ void	alloc_e(int c, char **argv, char **env, t_env *e)
 	(void)c;
 	(void)argv;
 	e->i = 0;
-	e->init_red = 0;
 	e->r = 0;
 	e->valid = 0;
 	e->status = 0;
+	e->start_red = 0;
 	e->ex = 0;
 	e->equal = 0;
 	e->stdin = dup(STDIN_FILENO);
@@ -85,6 +87,8 @@ void	alloc_e(int c, char **argv, char **env, t_env *e)
 	e->mat_flag = NULL;
 	e->exit_code = 0;
 	e->p_i = 0;
+	e->check = 0;
+	e->input = 0;
 	searchpath(e);
 	e->space = 0;
 	e->c_path = 0;

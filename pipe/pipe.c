@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 12:29:43 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/10 11:21:36 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/20 12:17:45 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	pipe_com(t_env *e)
 {
 	execve(e->s, e->mat_flag, e->env);
 	perror("execve");
-	exiting(e, 1);
+	exiting(e, 0);
 }
 
 void	piping(t_env *e)
