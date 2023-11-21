@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:33:46 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/21 10:28:54 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/21 10:38:21 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	waiting2(t_env *e, pid_t pid)
 	}
 	else
 	{
-		e->exit = 1;
 		if (WIFEXITED(e->status) == 0)
 			e->exit_code = 2;
 		else

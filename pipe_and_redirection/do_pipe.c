@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:26:37 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/20 11:08:07 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:09:50 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	control_pipe(t_env *e)
 	e->c_pipe = 0;
 	e->p_i = 0;
 	count_pipe(e);
+	if (e->check_input == 1)
+		e->c_pipe++;
 	if (e->v[e->i][0] == '|')
 		e->i++;
 	while (e->v[e->check] != NULL && e->v[e->check][0] != '>' && \
@@ -84,9 +86,10 @@ void	do_pipe(t_env *e)
 			return ;
 		}
 		define_redir(e);
-		if (e->define_pipe != 5)
+		if (e->define_pipe != 5 && e->define_pipe != 2)
 			update_pipe(e);
 		e->p_i++;
+		e->check_input = 0;
 	}
 	cont_do_pipe(e);
 }

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 11:25:35 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/21 10:30:13 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:25:03 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	last_check(t_env *e)
 		e->v[e->i][0] != '<' && e->v[e->i][0] != '>')
 			e->i++;
 		if (e->v[e->i] == NULL)
+		{
+			e->i = e->check;
 			return ;
+		}
 		else if (e->v[e->i][0] == '|')
 			e->i = e->check;
 		else if (e->v[e->i][0] == '>')
@@ -35,16 +38,36 @@ void	last_check(t_env *e)
 	}
 }
 
+void	find_input(t_env *e, int i)
+{
+	i++;
+	while (e->v[i][0] != '>' && e->v[i][0] != '<' && e->v[i][0] != '|' \
+	&& e->v[i] != NULL)
+		i++;
+	if (e->v[i][0] == '|')
+		e->check_input = 1;
+}
+
 void	initialize_red(t_env *e)
 {
+	int	i;
+
+	i = 0;
 	e->in_red = 0;
 	e->out_red = 0;
-	/*if (e->v[0][0] != '>' && e->v[0][0] != '<')
+	if (e->v[0][0] != '>' && e->v[0][0] != '<')
 	{
+		while (e->v[i][0] != '>' && e->v[i][0] != '<')
+			i++;
+		if (e->v[i][0] == '<')
+		{
+			//find_input(e, i);
+			return ;
+		}
 		e->i = e->start_red;
 		single_major_mult_redirect(e);
 		update_redir(e);
-	}*/
+	}
 }
 
 void	do_redir(t_env *e)

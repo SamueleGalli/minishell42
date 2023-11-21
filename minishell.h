@@ -186,6 +186,7 @@ typedef struct s_env
 	int		do_redir;
 	int		status;
 	int		c_pipe;
+	int		check_input;
 	int		start_red;
 	int		builtin;
 	int		space;
