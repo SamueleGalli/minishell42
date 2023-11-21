@@ -66,6 +66,25 @@ void	copy_env(t_env *e, char **env)
 	e->env[i] = NULL;
 }
 
+void	cont_allocation(t_env *e)
+{
+	e->start_red = 0;
+	e->ex = 0;
+	e->equal = 0;
+	e->stdin = dup(STDIN_FILENO);
+	e->stdout = dup(STDOUT_FILENO);
+	e->mat_flag = NULL;
+	e->exit_code = 0;
+	e->p_i = 0;
+	e->check = 0;
+	e->input = 0;
+	searchpath(e);
+	e->space = 0;
+	e->do_redir = 0;
+	e->c_path = 0;
+	e->red_flag = 0;
+}
+
 void	alloc_e(int c, char **argv, char **env, t_env *e)
 {
 	e->p = NULL;
@@ -79,20 +98,7 @@ void	alloc_e(int c, char **argv, char **env, t_env *e)
 	e->r = 0;
 	e->valid = 0;
 	e->status = 0;
-	e->start_red = 0;
-	e->ex = 0;
-	e->equal = 0;
-	e->stdin = dup(STDIN_FILENO);
-	e->stdout = dup(STDOUT_FILENO);
-	e->mat_flag = NULL;
-	e->exit_code = 0;
-	e->p_i = 0;
-	e->check = 0;
-	e->input = 0;
-	searchpath(e);
-	e->space = 0;
-	e->c_path = 0;
-	e->red_flag = 0;
+	cont_allocation(e);
 }
 
 int	main(int c, char **argv, char **env)

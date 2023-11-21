@@ -81,6 +81,7 @@ SRC = 	main.c \
 		pipe_and_redirection/do_red.c \
 		pipe_and_redirection/parent_fork_pipe.c \
 		pipe_and_redirection/pipe_file.c \
+		pipe_and_redirection/excve_redir.c \
 
 OBJ = $(SRC:.c=.o)
 

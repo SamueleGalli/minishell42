@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 11:25:35 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/20 13:26:43 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/21 10:30:13 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,29 @@ void	last_check(t_env *e)
 			return ;
 		else if (e->v[e->i][0] == '|')
 			e->i = e->check;
-		else if (e->v[e->i][0] == '>' || e->v[e->i][0] == '<')
+		else if (e->v[e->i][0] == '>')
 		{
 			e->i = e->check + 1;
+			e->do_redir = 1;
 		}
 	}
 }
 
-void	do_redir(t_env *e)
+void	initialize_red(t_env *e)
 {
 	e->in_red = 0;
 	e->out_red = 0;
+	/*if (e->v[0][0] != '>' && e->v[0][0] != '<')
+	{
+		e->i = e->start_red;
+		single_major_mult_redirect(e);
+		update_redir(e);
+	}*/
+}
+
+void	do_redir(t_env *e)
+{
+	initialize_red(e);
 	while (e->v[e->i] != NULL && e->v[e->i][0] != '|')
 	{
 		while (e->v[e->i][0] != '<' && e->v[e->i][0] != '>')
@@ -49,6 +61,8 @@ void	do_redir(t_env *e)
 		else if (search_mult_arrows(e, ">> ") == 1 || search_mult_arrows(e,
 				">>") == 1)
 			redirect_mult_double(e);
+		if (e->do_redir == 1)
+			execve_redir(e);
 		update_redir(e);
 		last_check(e);
 	}

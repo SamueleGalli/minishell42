@@ -183,6 +183,7 @@ typedef struct s_env
 	int		in_red;
 	int		out_red;
 	int		p_i;
+	int		do_redir;
 	int		status;
 	int		c_pipe;
 	int		start_red;
@@ -232,6 +233,7 @@ void	do_pipe(t_env *e);
 void	pipe_loop_redir(t_env *e);
 void	last_in(t_env *e);
 void	other_redir(t_env	*e);
+void	execve_redir(t_env *e);
 void	define_redir(t_env *e);
 void	update_in_out(t_env *e);
 void	last_file_in(t_env *e);
@@ -312,6 +314,7 @@ void	waiting2(t_env *e, pid_t pid);
 void	continuing_minor_double(t_env *e, char *buffer, int pipe_fd[2], \
 pid_t pid);
 void	min_mult_redirect(t_env *e);
+void	single_major_mult_redirect(t_env *e);
 
 char	*find_mult_mult_filepath(t_env *e);
 char	*find_mult_filepath(t_env *e);

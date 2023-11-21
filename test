@@ -164,7 +164,7 @@ mix_mandatory = [
  -	"cat < file1 | grep 1 > file2 | wc -l | echo 42",
  -	"cat < file1 | grep 1 > file2 | wc -l | echo 42 | echo 21",
  -	"> file1 | echo 42 | cat < file1 | grep 1 > file2 | wc -l",
-		"< file1 | echo 42 > file2 | grep 1 | wc -l",
+ -	"< file1 | echo 42 > file2 | grep 1 | wc -l",
  -	"cat < file1 | cat > file2 < file1 | wc -l",
   	"echo 42 > file1 | cat | wc -l",
 		"echo 42 < file1 | cat | wc -l",
