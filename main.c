@@ -83,7 +83,7 @@ void	cont_allocation(t_env *e)
 	e->do_redir = 0;
 	e->c_path = 0;
 	e->red_flag = 0;
-	e->check_input = 0;
+	e->check_input = -1;
 }
 
 void	alloc_e(int c, char **argv, char **env, t_env *e)

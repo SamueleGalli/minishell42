@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:33:21 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/21 11:19:02 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/21 11:40:14 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	pipe_or_redir(t_env *e)
 
 void	pipe_and_redirection(t_env *e)
 {
-	e->check_input = 0;
+	e->check_input = -1;
 	e->in_red = 0;
 	e->out_red = 0;
 	while (e->v[e->i] != NULL)

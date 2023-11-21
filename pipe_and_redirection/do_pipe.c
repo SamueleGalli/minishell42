@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:26:37 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/21 11:09:50 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/21 13:16:40 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,35 @@ void	cont_do_pipe(t_env *e)
 	}
 }
 
+void	input_pipe(t_env *e)
+{
+	if (e->check_input == 1)
+	{
+		e->check = e->i;
+		e->i = 0;
+		if (pipe(e->pipefd) == -1)
+		{
+			perror("pipe");
+			exiting(e, 1);
+		}
+		red_pipe_fork(e);
+		e->i = e->check;
+		e->check_input = -1;
+		e->tmp_i = 1;
+	}
+}
+
 void	control_pipe(t_env *e)
 {
+	e->tmp_i = 0;
 	e->check = e->i;
 	e->c_pipe = 0;
 	e->p_i = 0;
 	count_pipe(e);
-	if (e->check_input == 1)
-		e->c_pipe++;
 	if (e->v[e->i][0] == '|')
 		e->i++;
+	if (e->check_input > 0)
+		input_pipe(e);
 	while (e->v[e->check] != NULL && e->v[e->check][0] != '>' && \
 	e->v[e->check][0] != '<')
 		e->check++;
@@ -89,7 +108,6 @@ void	do_pipe(t_env *e)
 		if (e->define_pipe != 5 && e->define_pipe != 2)
 			update_pipe(e);
 		e->p_i++;
-		e->check_input = 0;
 	}
 	cont_do_pipe(e);
 }

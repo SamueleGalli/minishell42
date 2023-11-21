@@ -169,7 +169,7 @@ mix_mandatory = [
  -	"echo 42 > file1 | cat | wc -l",
 		"echo 42 < file1 | cat | wc -l",
  -  ">> file1 | cat",
-   ">> file1 | echo 42",
+ -  ">> file1 | echo 42",
  -  "> file1 | cat < file1",
  - "> file1 | echo 42 < file1 | cat file1",
 		"echo 42 | wc -l | cat > file1",

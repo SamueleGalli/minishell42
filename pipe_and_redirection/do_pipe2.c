@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:06:17 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/21 11:19:29 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/21 13:01:18 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ void	other_redir(t_env *e)
 		{
 			if (e->in_red > 0 && e->input != -1)
 				e->define_pipe = 5;
-			else if (e->v[e->check][0] == '|' && e->check_input == 0)
+			else if (e->v[e->check][0] == '|')
 				e->define_pipe = 1;
-			else if (e->check_input == 1)
-				e->define_pipe = 2;
 			break ;
 		}
 		e->check++;
@@ -51,19 +49,8 @@ void	zero_input(t_env *e)
 	e->i = e->check;
 }
 
-void	define_redir(t_env *e)
+void	red_pipe_fork(t_env *e)
 {
-	other_redir(e);
-	/*if (e->define_pipe == 2)
-	{
-		zero_input(e);
-		return ;
-	}*/
-	if (e->define_pipe == 0)
-	{
-		parent_pipe_red(e);
-		return ;
-	}
 	e->pid_pipe = fork();
 	if (e->pid_pipe < 0)
 	{
@@ -74,4 +61,15 @@ void	define_redir(t_env *e)
 		pipe_loop_redir(e);
 	else
 		parent_process(e);
+}
+
+void	define_redir(t_env *e)
+{
+	other_redir(e);
+	if (e->define_pipe == 0)
+	{
+		parent_pipe_red(e);
+		return ;
+	}
+	red_pipe_fork(e);
 }
