@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:26:37 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/20 12:11:31 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/22 10:34:06 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,8 @@
 //scrivi l'output della pipe nel file1
 //ls / | grep c | cat > file1
 
-void	write_red(t_env *e, int fdout)
+void	write_red(t_env *e)
 {
-	dup2(fdout, STDOUT_FILENO);
-	close(fdout);
-	close(e->pipefd[1]);
-	dup2(e->pipefd[0], STDIN_FILENO);
-	close(e->pipefd[0]);
 	e->s = NULL;
 	if (check_builtin(e) == 0)
 	{
@@ -42,18 +37,23 @@ void	forking_in(t_env *e, char *fileoutput, int type)
 {
 	int	fdout;
 
+	fdout = 0;
 	if (type == 1)
 		fdout = open(fileoutput, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	else if (type == 2)
 		fdout = open(fileoutput, O_WRONLY | O_APPEND | O_CREAT, 0666);
-	free(fileoutput);
-	if (fdout < 0)
+	if (fdout == -1)
 	{
-		e->exit_code = 1;
 		perror("open");
-		return ;
+		exiting(e, 1);
 	}
-	write_red(e, fdout);
+	if (fileoutput != NULL)
+		free(fileoutput);
+	dup2(fdout, STDOUT_FILENO);
+	close(fdout);
+	close(e->pipefd[0]);
+	close(e->pipefd[1]);
+	write_red(e);
 }
 
 void	single_write(t_env *e, char *fileoutput, int type)
@@ -72,9 +72,9 @@ void	single_write(t_env *e, char *fileoutput, int type)
 		forking_in(e, fileoutput, type);
 	else
 	{
+		waitpid(pid, NULL, 0);
 		close(e->pipefd[0]);
 		close(e->pipefd[1]);
-		waitpid(pid, NULL, 0);
 	}
 }
 
@@ -85,8 +85,7 @@ void	check_file(t_env *e)
 	e->check = e->i;
 	while (e->v[e->i][0] != '>')
 		e->i++;
-	e->i2 = e->i++;
-	e->i--;
+	e->i2 = e->i;
 	if (compare(e->v[e->out_red], ">>") == 1)
 	{
 		fileoutput = find_lasth_filepath(e);
@@ -100,4 +99,5 @@ void	check_file(t_env *e)
 	if (fileoutput != NULL)
 		free(fileoutput);
 	e->i = e->i2;
+	e->i = e->i + 2;
 }

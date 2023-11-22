@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:23:00 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/05 16:27:35 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/22 10:54:33 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	exiting_d(t_env *e)
 		free(e->path);
 	if (e->p != NULL)
 		free(e->p);
-	if (e->s != NULL)
-		free(e->s);
 	if (e->mat_flag != NULL)
 		free_table(e->mat_flag);
 	if (e->env != NULL)

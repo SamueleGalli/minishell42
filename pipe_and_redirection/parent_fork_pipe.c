@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:04:52 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/21 13:36:47 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/22 10:53:58 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	pipe_loop_redir(t_env *e)
 void	parent_pipe_red(t_env *e)
 {
 	close(e->pipefd[1]);
-	//if (e->p_i == 0)
-	dup2(e->pipefd[0], STDIN_FILENO);
+	if (e->p_i == 0)
+		dup2(e->pipefd[0], STDIN_FILENO);
 	close(e->pipefd[0]);
 	if (check_builtin(e) == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:06:17 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/21 13:01:18 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/22 10:48:30 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	other_redir(t_env *e)
 				e->define_pipe = 5;
 			else if (e->v[e->check][0] == '|')
 				e->define_pipe = 1;
+			else if (e->v[e->check][0] == '>')
+				e->define_pipe = 2;
+			else if (e->v[e->check][0] == '<')
+				e->define_pipe = 3;
 			break ;
 		}
 		e->check++;

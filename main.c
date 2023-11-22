@@ -25,6 +25,7 @@ void	nuller(t_env *e)
 {
 	e->output = 0;
 	e->input = 0;
+	e->s = NULL;
 	if (e->cmd[0] == '\0')
 	{
 		e->v = NULL;
@@ -120,6 +121,8 @@ int	main(int c, char **argv, char **env)
 		if (e->cmd == NULL)
 			exiting_d(e);
 		nuller(e);
+		if (e->s != NULL)
+			free(e->s);
 		if (e->cmd[0] != '\0' && e->red_flag == 0)
 			add_history(e->cmd);
 		e->red_flag = 0;
