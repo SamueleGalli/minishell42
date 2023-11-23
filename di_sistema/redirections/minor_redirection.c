@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:25:41 by eraccane          #+#    #+#             */
-/*   Updated: 2023/11/08 14:48:41 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/23 11:45:44 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int	check_error_red(int pipe_fd[2])
 	return (0);
 }
 
-// NOTE - can find check_pid_red() in file -> redirections.c
 void	redirect_double_arrows(t_env *e, char *buffer)
 {
 	int		pipe_fd[2];

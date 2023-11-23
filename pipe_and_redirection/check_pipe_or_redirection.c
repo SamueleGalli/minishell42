@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:33:21 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/21 11:40:14 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/22 12:28:23 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void	pipe_and_redirection(t_env *e)
 	while (e->v[e->i] != NULL)
 	{
 		if (pipe_or_redir(e) == 1)
-			do_redir(e);
+		{
+			if (do_redir(e) == 0)
+				return ;
+		}
 		else
 			do_pipe(e);
 	}

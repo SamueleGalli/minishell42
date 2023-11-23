@@ -6,13 +6,13 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:20:33 by eraccane          #+#    #+#             */
-/*   Updated: 2023/11/20 13:09:00 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/23 13:25:19 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	update_redir(t_env *e)
+int	update_redir(t_env *e)
 {
 	update_in_out(e);
 	if (e->v[e->i][0] == '<' && e->v[e->i][0] == '>' \
@@ -20,24 +20,12 @@ void	update_redir(t_env *e)
 		e->i++;
 	else
 	{
-		while (e->v[e->i] != NULL)
-		{
-			if (e->v[e->i][0] == '<' || e->v[e->i][0] == '>' || \
-			e->v[e->i][0] == '|')
-			{
-				e->i++;
-				break ;
-			}
-			e->i++;
-		}
+		if (check_valid_red(e) == 0)
+			return (0);
 	}
-	while (e->v[e->i] != NULL)
-	{
-		if (e->v[e->i][0] == '<' || e->v[e->i][0] == '>' || \
-		e->v[e->i][0] == '|')
-			break ;
-		e->i++;
-	}
+	if (check_valid_red2(e) == 0)
+		return (0);
+	return (1);
 }
 
 char	*find_filepath(t_env *e)
@@ -62,8 +50,11 @@ void	continuing_minor_double(t_env *e, char *s, int pipe_fd[2], pid_t pid)
 		close(pipe_fd[1]);
 		dup2(pipe_fd[0], STDIN_FILENO);
 		close(pipe_fd[0]);
-		variabletype(e);
-		exiting(e, 1);
+		if (e->v[0][0] != '<')
+		{
+			variabletype(e);
+			exiting(e, 1);
+		}
 	}
 	else
 	{

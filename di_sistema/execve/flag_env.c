@@ -6,11 +6,21 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:25:43 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/16 11:53:48 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/22 12:33:08 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	env_variable(t_env *e)
+{
+	char	*s;
+
+	s = ft_itoa(e->exit_code);
+	e->mat_flag[e->word] = malloc(ft_strlen(s) + 1);
+	strcpy(e->mat_flag[e->word], s);
+	free(s);
+}
 
 void	alloc_flag_env(t_env *e, int i, int k)
 {
@@ -59,7 +69,7 @@ int	enviroment_control(t_env *e, int i, int k)
 	return (i);
 }
 
-void	env_variable(t_env *e)
+void	env_variable2(t_env *e)
 {
 	int	i;
 

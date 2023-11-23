@@ -15,27 +15,14 @@
 
 #include "minishell.h"
 
-/*
-** TODO
-	- Combinare pipe e redirections (NB: le redirections hanno priorita sui pipe)
-** TODO - gestire comandi a cui rimangono aperti i figli (cat | cat | ls,
-	dovrebbe stampre ls e chiudersi il comando dopo due enter)
-*/
 void	nuller(t_env *e)
 {
-	e->output = 0;
-	e->input = 0;
-	e->s = NULL;
-	if (e->cmd[0] == '\0')
-	{
-		e->v = NULL;
+	if (init_nuller(e) == 0)
 		return ;
-	}
-	splitme(e);
-	e->i = 0;
-	e->exit = 0;
 	while (e->v[e->i] != NULL && e->exit != 1)
 	{
+		if (check_validation(e) == 1)
+			break ;
 		if (invalid_cmd(e) == 1)
 			break ;
 		e->indx = 0;
@@ -77,6 +64,7 @@ void	cont_allocation(t_env *e)
 	e->mat_flag = NULL;
 	e->exit_code = 0;
 	e->p_i = 0;
+	e->exit = 0;
 	e->check = 0;
 	e->input = 0;
 	searchpath(e);
@@ -115,12 +103,12 @@ int	main(int c, char **argv, char **env)
 	{
 		singals(e);
 		free(e->cmd);
-		if (e->v != NULL)
-			free_table(e->v);
 		e->cmd = readline("#> ");
 		if (e->cmd == NULL)
 			exiting_d(e);
 		nuller(e);
+		if (e->v != NULL)
+			free_table(e->v);
 		if (e->s != NULL)
 			free(e->s);
 		if (e->cmd[0] != '\0' && e->red_flag == 0)

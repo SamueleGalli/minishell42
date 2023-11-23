@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:11:31 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/21 10:22:07 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/23 13:07:11 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,24 @@ void	multiple_redirect(t_env *e)
 {
 	e->in_red = 0;
 	e->out_red = 0;
-	while (e->v[e->i] != NULL)
+	e->true_red = 0;
+	while (e->v[e->i] != NULL && e->true_red == 0)
 	{
 		while (e->v[e->i][0] != '<' && e->v[e->i][0] != '>')
 			e->i++;
 		if ((e->v[e->i][1] != '>') && (search_mult_arrows(e, "< ") == 1 \
-	|| search_mult_arrows(e, "> ") == 1 || search_mult_arrows(e, "<") == 1 \
-	|| search_mult_arrows(e, ">") == 1))
+		|| search_mult_arrows(e, "> ") == 1 || search_mult_arrows(e, "<") == 1 \
+		|| search_mult_arrows(e, ">") == 1))
 			redirect_mult_single(e);
 		else if (search_mult_arrows(e, ">> ") == 1 || \
 	search_mult_arrows(e, ">>") == 1)
 			redirect_mult_double(e);
-		update_redir(e);
+		if (update_redir(e) == 0)
+			break ;
 	}
 	if (e->in_red != 0 && e->out_red != 0)
 		last_file(e);
-	else if (e->in_red != 0)
+	else if (e->in_red != 0 && e->true_red == 0)
 		last_file_in(e);
 	e->exit = 1;
 }

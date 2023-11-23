@@ -13,117 +13,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*funzioni garantite
-readline = Legge una riga di input dalla console inserita dall'utente.
---------------------------------------------------------------------
-rl_clear_history =  Cancella la cronologia degli input della riga di comando.
---------------------------------------------------------------------
-rl_on_new_line = Notifica la libreria readline che
-il cursore è su una nuova riga.
---------------------------------------------------------------------
-rl_replace_line = Sostituisce l'intera riga corrente con una nuova
-riga di testo.
---------------------------------------------------------------------
-rl_redisplay = Aggiorna lo schermo per riflettere le
-modifiche apportate alla riga di comando.
---------------------------------------------------------------------
-add_history = Aggiunge una riga di input alla cronologia
-degli input della riga di comando.
---------------------------------------------------------------------
-printf = Stampa a schermo.
---------------------------------------------------------------------
-malloc = Alloca memoria.
---------------------------------------------------------------------
-free = Libera memoria.
---------------------------------------------------------------------
-write = Scrive un numero di caratteri.
---------------------------------------------------------------------
-access = Verifica se un file ha determinati permessi di accesso.
---------------------------------------------------------------------
-open = Apre un file o crea un file descriptor.
---------------------------------------------------------------------
-read = Legge un certo numero di byte da un file descriptor.
---------------------------------------------------------------------
-close = Chiude un file descriptor.
---------------------------------------------------------------------
-fork = Crea un nuovo processo duplicando il processo corrente.
---------------------------------------------------------------------
-wait = Sospende l'esecuzione del processo
-chiamante fino al termine di un processo figlio.
---------------------------------------------------------------------
-waitpid = Sospende l'esecuzione
-del processo chiamante fino al termine di un processo specifico.
---------------------------------------------------------------------
-wait3, wait4 = Funzioni simili a waitpid, ma con opzioni aggiuntive.
---------------------------------------------------------------------
-signal = Imposta un gestore di segnale per un determinato segnale.
---------------------------------------------------------------------
-sigaction = Imposta un gestore di segnale più
-flessibile per un determinato segnale.
---------------------------------------------------------------------
-sigemptyset = Inizializza un insieme di segnali vuoto.
---------------------------------------------------------------------
-sigaddset = Aggiunge un segnale a un insieme di segnali.
---------------------------------------------------------------------
-kill = Invia un segnale a un processo o a un gruppo di processi.
---------------------------------------------------------------------
-exit = Termina immediatamente il processo corrente.
---------------------------------------------------------------------
-getcwd = Restituisce il percorso della directory di lavoro corrente.
---------------------------------------------------------------------
-chdir = Cambia la directory di lavoro corrente.
---------------------------------------------------------------------
-stat ,lstat ,fstat = Restituiscono informazioni su un file o una directory.
---------------------------------------------------------------------
-unlink = Rimuove un file o un link simbolico.
---------------------------------------------------------------------
-execve = Esegue un programma specificato da un percorso di file.
---------------------------------------------------------------------
-dup = duplica un file descriptor.
---------------------------------------------------------------------
-dup2 = duplica un file descriptor su un
-altro file descriptor specifico.
---------------------------------------------------------------------
-pipe = crea una coppia di file descriptor per la comunicazione tra processi.
---------------------------------------------------------------------
-opendir = apre una directory.
---------------------------------------------------------------------
-readdir = legge una voce dalla directory.
---------------------------------------------------------------------
-closedir = chiude una directory precedentemente aperta con opendir.
---------------------------------------------------------------------
-strerror = restituisce una stringa descrittiva per un numero di errore.
---------------------------------------------------------------------
-perror = stampa un messaggio di errore seguito da una
-stringa descrittiva per un numero di errore.
---------------------------------------------------------------------
-isatty = verifica se un file descriptor si riferisce a un terminale.
---------------------------------------------------------------------
-ttyname = restituisce il nome del terminale associato a un file descriptor.
---------------------------------------------------------------------
-ttyslot = restituisce lo slot del terminale associato a un file descriptor.
---------------------------------------------------------------------
-ioctl = esegue operazioni di controllo del dispositivo su un file descriptor.
---------------------------------------------------------------------
-getenv = ottiene il valore di una variabile d'ambiente.
---------------------------------------------------------------------
-tcsetattr = imposta i parametri del terminale.
---------------------------------------------------------------------
-tcgetattr = ottiene i parametri del terminale.
---------------------------------------------------------------------
-tgetent =  inizializza la libreria terminfo.
---------------------------------------------------------------------
-tgetflag = ottiene il valore di una flag terminfo.
---------------------------------------------------------------------
-tgetnum = ottiene il valore di una capacità numerica terminfo.
---------------------------------------------------------------------
-tgetstr = ottiene il valore di una capacità di stringa terminfo.
---------------------------------------------------------------------
-tgoto = costruisce una sequenza di escape terminfo
-per un determinato movimento del cursore.
---------------------------------------------------------------------
-tputs = invia una sequenza di escape terminfo alla console.
-*/
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -165,6 +54,8 @@ typedef struct s_env
 	int		indx;
 	int		iter;
 	int		flag;
+	int		true_red;
+	int		cat_pipe;
 	int		define_pipe;
 	int		numb;
 	int		valid;
@@ -207,6 +98,7 @@ int		valid_pipe(t_env *e);
 int		check_validation(t_env *e);
 int		l(int n);
 int		cont_invalid_cmd(t_env *e, int i);
+int		ft_check_digit(char *s);
 int		spacer(t_env *e);
 int		check_closure(char *s);
 int		check_signals_red(t_env *e, char *line);
@@ -217,6 +109,7 @@ int		strcom(char *s, int e);
 int		size_mat(char **t);
 int		search_pipe(t_env *e);
 int		ft_strlen_red(char *s);
+int		update_redir(t_env *e);
 int		check_builtin(t_env *e);
 int		search_arrows(t_env *e, char *s);
 int		index_v_arrows(t_env *e, char *s);
@@ -224,13 +117,17 @@ int		invalid_cmd(t_env *e);
 int		split_pipe(t_env *e);
 int		check_error_red(int pipe_fd[2]);
 int		venv(t_env *e, int i, int j);
+int		init_nuller(t_env *e);
 int		search_mult_arrows(t_env *e, char *s);
 int		path_valid(char *s, t_env *e);
+int		check_valid_red(t_env *e);
+int		check_valid_red2(t_env *e);
+int		do_redir(t_env *e);
+int		check_validation(t_env *e);
 
 void	check_file(t_env *e);
 void	single_write(t_env *e, char *fileoutput, int type);
 void	flag_env(t_env *e);
-void	do_redir(t_env *e);
 void	do_pipe(t_env *e);
 void	pipe_loop_redir(t_env *e);
 void	last_in(t_env *e);
@@ -242,6 +139,7 @@ void	update_in_out(t_env *e);
 void	last_file_in(t_env *e);
 void	red_pipe_fork(t_env *e);
 void	father_com(t_env *e);
+void	parent_loop_pipe(t_env *e);
 void	update_pipe(t_env *e);
 void	update_i(t_env *e);
 void	change_value(t_env *e, int i, char **tmp);
@@ -300,11 +198,11 @@ void	parent_pipe_red(t_env *e);
 void	redirect_double(t_env *e);
 void	redirect_single(t_env *e);
 void	env_variable(t_env *e);
+void	env_variable2(t_env *e);
 void	check_red_fork(t_env *e, char *filename, int type);
 void	fork_pid_zero(t_env *e, char *filename, int type);
 void	alloc_mat(char *t, char *u);
 void	check_export(t_env *e, int i, int j);
-void	update_redir(t_env *e);
 void	exiting_d(t_env *e);
 void	check_export(t_env *e, int i, int j);
 void	shortwhile(t_env *e);

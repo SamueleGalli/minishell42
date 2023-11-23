@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:07:09 by eraccane          #+#    #+#             */
-/*   Updated: 2023/11/10 13:04:49 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/23 13:27:52 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	single_minor_redirect(t_env *e)
 		e->exit = 1;
 		return ;
 	}
-	single_continuous(e, fd);
+	if (e->v[e->i][0] != '<')
+		single_continuous(e, fd);
 	e->exit = 1;
 	close(fd);
 }

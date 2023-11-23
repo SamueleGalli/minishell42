@@ -6,11 +6,25 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:17:38 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/17 11:05:11 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/23 11:28:18 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	parent_loop_pipe(t_env *e)
+{
+	close(e->pipefd[1]);
+	if (e->cat_pipe != 1)
+		dup2(e->pipefd[0], STDIN_FILENO);
+	close(e->pipefd[0]);
+	e->cat_pipe = 0;
+	waitpid(e->pid_pipe, &e->status, 0);
+	if (WIFEXITED(e->status))
+		e->exit_code = WEXITSTATUS(e->status);
+}
+
+//cat | cat | ls
 
 void	parent2(t_env *e)
 {
@@ -58,7 +72,8 @@ void	father_com(t_env *e)
 void	fork_loop(t_env *e)
 {
 	close(e->pipefd[0]);
-	dup2(e->pipefd[1], STDOUT_FILENO);
+	if (e->cat_pipe != 1)
+		dup2(e->pipefd[1], STDOUT_FILENO);
 	close(e->pipefd[1]);
 	if (check_builtin(e) == 0)
 	{
