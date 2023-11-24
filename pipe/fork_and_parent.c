@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:17:38 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/23 11:28:18 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/24 09:38:15 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	parent_loop_pipe(t_env *e)
 	if (e->cat_pipe != 1)
 		dup2(e->pipefd[0], STDIN_FILENO);
 	close(e->pipefd[0]);
+	if (e->cat_pipe == 1)
+		e->p_i = e->c_pipe;
 	e->cat_pipe = 0;
 	waitpid(e->pid_pipe, &e->status, 0);
 	if (WIFEXITED(e->status))
