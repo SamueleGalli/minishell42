@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:43:59 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/03 17:29:01 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/04 11:18:02 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	comparing(char *s, int i, char *s1, char *s2)
 		k++;
 		i++;
 	}
-	if (s1[k] == '\0')
+	if (s1[k] == '\0' && (s[i] == ':' || s[i] == '\0'))
 		return (1);
 	k = 0;
 	i = j;
@@ -33,7 +33,7 @@ int	comparing(char *s, int i, char *s1, char *s2)
 		k++;
 		i++;
 	}
-	if (s2[k] == '\0')
+	if (s2[k] == '\0' && (s[i] == ':' || s[i] == '\0'))
 		return (1);
 	return (0);
 }
