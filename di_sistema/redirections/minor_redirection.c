@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:25:41 by eraccane          #+#    #+#             */
-/*   Updated: 2023/11/23 11:45:44 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/04 12:52:51 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,12 @@ char	*update_buffer_red(char *line, char *buffer)
 	char	*buf;
 
 	all = NULL;
+	if (buffer != NULL)
+		all = (char *)malloc(sizeof(char ) * ft_strlen(buffer) + 1);
 	all = ft_strcpy(all, buffer);
 	buf = ft_strjoin_n(all, line);
 	free(buffer);
+	free(all);
 	return (buf);
 }
 
@@ -56,27 +59,29 @@ int	check_signals_red(t_env *e, char *line)
 	return (0);
 }
 
-int	check_error_red(int pipe_fd[2])
+char	*alloc_s(char *buf)
 {
-	if (pipe(pipe_fd) == -1)
+	int		i;
+	char	*t;
+
+	t = (char *)malloc(sizeof(char ) * ft_strlen(buf) + 1);
+	i = 0;
+	while (buf[i] != 0)
 	{
-		perror("pipe");
-		return (1);
+		t[i] = buf[i];
+		i++;
 	}
-	return (0);
+	t[i] = 0;
+	return (t);
 }
 
 void	redirect_double_arrows(t_env *e, char *buffer)
 {
-	int		pipe_fd[2];
 	pid_t	pid;
 	char	*s;
 
-	s = NULL;
-	s = ft_strcpy(s, buffer);
+	s = alloc_s(buffer);
 	free(buffer);
-	if (check_error_red(pipe_fd) == 1)
-		return ;
 	pid = fork();
-	continuing_minor_double(e, s, pipe_fd, pid);
+	continuing_minor_double(e, s, pid);
 }

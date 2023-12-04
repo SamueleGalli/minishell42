@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:20:33 by eraccane          #+#    #+#             */
-/*   Updated: 2023/11/23 13:25:19 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/04 11:48:35 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*find_filepath(t_env *e)
 	return (e->v[i]);
 }
 
-void	continuing_minor_double(t_env *e, char *s, int pipe_fd[2], pid_t pid)
+void	continuing_minor_double(t_env *e, char *s, pid_t pid)
 {
 	if (pid == -1)
 	{
@@ -46,23 +46,9 @@ void	continuing_minor_double(t_env *e, char *s, int pipe_fd[2], pid_t pid)
 		return ;
 	}
 	if (pid == 0)
-	{
-		close(pipe_fd[1]);
-		dup2(pipe_fd[0], STDIN_FILENO);
-		close(pipe_fd[0]);
-		if (e->v[0][0] != '<')
-		{
-			variabletype(e);
-			exiting(e, 1);
-		}
-	}
+		continue_heredoc(e, s);
 	else
-	{
-		close(pipe_fd[0]);
-		write(pipe_fd[1], s, ft_strlen(s));
-		close(pipe_fd[1]);
 		waitpid(pid, NULL, 0);
-	}
 	free(s);
 }
 

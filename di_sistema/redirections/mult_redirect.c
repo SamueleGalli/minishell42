@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:11:31 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/23 13:07:11 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/11/30 13:47:57 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	single_major_mult_redirect(t_env *e)
 		fd = open(filename, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 		if (fd < 0)
 		{
-			e->exit_code = 1;
+			e->exit = 1;
 			perror("open");
 			exiting(e, 0);
 			close(fd);

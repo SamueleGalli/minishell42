@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 11:12:48 by eraccane          #+#    #+#             */
-/*   Updated: 2023/11/22 12:04:14 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/04 12:56:56 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	redirect_single(t_env *e)
 			|| compare(e->v[index_v_arrows(e, "> ")], "> ") == 1)
 		&& e->v[index_v_arrows(e, ">") + 1] != NULL)
 		single_major_redirect(e);
-	else if ((compare(e->v[index_v_arrows(e, "<")], "<") == 1 \
-		|| compare(e->v[index_v_arrows(e, "< ")], "< ") == 1)
+	else if ((compare(e->v[index_v_arrows(e, "<")], "<") == 1
+			|| compare(e->v[index_v_arrows(e, "< ")], "< ") == 1)
 		&& e->v[index_v_arrows(e, "<") + 1] != NULL)
 		single_minor_redirect(e);
 	else
@@ -56,4 +56,34 @@ int	check_pid_red(pid_t pid)
 	}
 	else
 		return (0);
+}
+
+void	continue_heredoc(t_env *e, char *s)
+{
+	if (e->v[0][0] != '<')
+	{
+		if (check_builtin(e) == 0 && compare(e->v[0], "cat") == 0)
+		{
+			e->i = 0;
+			pathcmd(e);
+			flag_matrix(e);
+		}
+		else
+			e->s = NULL;
+		if (e->s != NULL)
+		{
+			if (e->c_path == 0 && access(e->s, X_OK) == 0)
+				pipe_com(e);
+			free(s);
+		}
+		else
+		{
+			if (compare(e->v[0], "cat") == 1)
+				printf("%s", s);
+			else
+				variabletype(e);
+		}
+	}
+	free(s);
+	exiting(e, 1);
 }

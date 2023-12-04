@@ -213,10 +213,10 @@ void	redirect_mult_single(t_env *e);
 void	check_built(char *s, int i, t_env *e);
 void	multiple_redirect(t_env *e);
 void	waiting2(t_env *e, pid_t pid);
-void	continuing_minor_double(t_env *e, char *buffer, int pipe_fd[2], \
-pid_t pid);
+void	continuing_minor_double(t_env *e, char *buffer, pid_t pid);
 void	min_mult_redirect(t_env *e);
 void	single_major_mult_redirect(t_env *e);
+void	continue_heredoc(t_env *e, char *s);
 
 char	*find_mult_mult_filepath(t_env *e);
 char	*find_mult_filepath(t_env *e);

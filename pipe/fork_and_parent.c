@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:17:38 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/24 09:38:15 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/04 11:29:53 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	parent_loop_pipe(t_env *e)
 	if (WIFEXITED(e->status))
 		e->exit_code = WEXITSTATUS(e->status);
 }
-
-//cat | cat | ls
 
 void	parent2(t_env *e)
 {
