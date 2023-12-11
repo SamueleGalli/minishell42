@@ -70,6 +70,7 @@ void	cont_allocation(t_env *e)
 	searchpath(e);
 	e->space = 0;
 	e->do_redir = 0;
+	e->finded_path = 0;
 	e->c_path = 0;
 	e->red_flag = 0;
 	e->check_input = -1;

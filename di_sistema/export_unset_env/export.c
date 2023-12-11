@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:37:55 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/03 17:34:31 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/11 14:12:39 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,9 @@ int	exporterror(t_env *e, int i, int j)
 
 void	espfun(t_env *e)
 {
+	if (e->v[e->i][0] == 'P' && e->v[e->i][1] == 'A' \
+	&& e->v[e->i][2] == 'T' && e->v[e->i][3] == 'H' && e->v[e->i][4] == '=')
+		e->finded_path = 1;
 	if (e->v[e->i][0] == ' ')
 		return ;
 	if (exporterror(e, 1, 0) == 1 || valid_element(e, 1, 0) == 1)

@@ -97,6 +97,8 @@ void	check_path(t_env *e)
 	int	i;
 
 	i = 0;
+	if (e->finded_path == 0)
+		return ;
 	while (e->env[i] != NULL)
 	{
 		if (path_valid(e->env[i], e) == 1)
@@ -104,4 +106,5 @@ void	check_path(t_env *e)
 		i++;
 	}
 	e->c_path = 1;
+	e->finded_path = 0;
 }

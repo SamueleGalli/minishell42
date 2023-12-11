@@ -48,6 +48,7 @@ typedef struct s_env
 	int		count;
 	int		pipe_flag;
 	int		j;
+	int		finded_path;
 	int		equal;
 	int		c_path;
 	int		word;

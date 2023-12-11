@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 11:44:45 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/07 13:57:06 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/11 14:07:54 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,6 @@ void	variabletype(t_env *e)
 	}
 	else if (compare(e->v[e->i], "env") == 1)
 	{
-		if (e->c_path == 1)
-		{
-			error(e);
-			return ;
-		}
 		envionment(e);
 		return ;
 	}
