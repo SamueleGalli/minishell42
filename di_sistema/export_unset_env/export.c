@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:37:55 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/11 14:12:39 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:40:00 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,18 @@ void	shortwhile(t_env *e)
 
 int	valid_element(t_env *e, int i, int j)
 {
+	int	j2;
+
+	j2 = 0;
+	while (e->v[i][j2])
+	{
+		if (e->v[i][j2] == '-')
+		{
+			e->exit_code = 1;
+			//printf(" not a valid identifier\n");
+		}
+		j2++;
+	}
 	if (e->v[i][j] >= '0' && e->v[i][j] <= '9')
 		return (1);
 	else
@@ -95,10 +107,9 @@ void	espfun(t_env *e)
 		e->finded_path = 1;
 	if (e->v[e->i][0] == ' ')
 		return ;
-	if (exporterror(e, 1, 0) == 1 || valid_element(e, 1, 0) == 1)
+	if (valid_element(e, 1, 0) == 1 || exporterror(e, 1, 0) == 1)
 	{
 		e->exit = 1;
-		printf("invalid element\n");
 		return ;
 	}
 	e->indx = 0;

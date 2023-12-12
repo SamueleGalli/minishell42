@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:06:25 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/15 10:27:19 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/12 13:27:10 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,7 @@ void	quote_check(t_env *e)
 void	writing_split(t_env *e)
 {
 	if (e->cmd[e->indx] == 39 || e->cmd[e->indx] == 34)
-	{
-		e->v[e->i][e->lenght++] = e->cmd[e->indx++];
-		while (e->cmd[e->indx] != 0 && e->cmd[e->indx] != 39
-			&& e->cmd[e->indx] != 34)
-			e->v[e->i][e->lenght++] = e->cmd[e->indx++];
-		if (e->count == 1)
-			e->v[e->i][e->lenght++] = ' ';
-		e->v[e->i][e->lenght++] = e->cmd[e->indx++];
-	}
+		alloc_quote(e);
 	else
 	{
 		if (e->cmd[e->indx] == '$')

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:16:08 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/22 11:13:51 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/12 11:50:33 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	mini_get_var(t_env *e, int i, int j)
 			i++;
 			e->indx++;
 		}
-		if (e->env[e->j][e->indx] == '=' && (e->v[j][i] == '\0' || \
-		e->v[j][i] == ' '))
+		if (e->env[e->j][e->indx] == '=' && (e->v[j][i] == '\0'
+				|| e->v[j][i] == ' '))
 		{
 			e->indx++;
 			print_str(e->env[e->j], e->indx);
@@ -44,7 +44,13 @@ void	writer(t_env *e, int j)
 	e->word = 0;
 	while (e->v[j][e->word] != 0)
 	{
-		if (e->v[j][e->word] == '$' && e->v[j][e->word + 1] != '\0')
+		if (e->v[j][e->word] == '$' && e->v[j][e->word + 1] != 0 && \
+		e->v[j][e->word + 1] == '?')
+		{
+			printf("%d", e->exit_code);
+			e->word += 1;
+		}
+		else if (e->v[j][e->word] == '$' && e->v[j][e->word + 1] != '\0')
 			get_var_quote(e, j, -1, e->word);
 		else
 		{
@@ -58,4 +64,17 @@ void	writer(t_env *e, int j)
 		}
 		e->word++;
 	}
+}
+
+void	bridge(t_env *e, int j)
+{
+	if (e->v[j][e->word] == '$' && e->v[j][e->word + 1] == '?')
+	{
+		printf("%d", e->exit_code);
+		e->word = e->word + 2;
+		return ;
+	}
+	e->word++;
+	e->numb = e->word;
+	get_var_quote(e, j, -1, 0);
 }

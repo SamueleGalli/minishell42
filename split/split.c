@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 10:50:39 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/23 12:56:54 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/12 13:34:11 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,7 @@ int	check_dimension(t_env *e)
 	e->j = e->indx - 1;
 	e->iter = e->indx;
 	if (e->cmd[e->iter] == 39 || e->cmd[e->iter] == 34)
-	{
-		e->iter++;
-		while (e->cmd[e->iter] != 34 && e->cmd[e->iter] != 39
-			&& e->cmd[e->iter] != 0)
-			e->iter++;
-		if (e->cmd[e->iter] == '\0')
-			return (0);
-		e->iter++;
-	}
+		cont_check_dimension(e);
 	else
 	{
 		while (e->cmd[e->iter] != ' ' && e->cmd[e->iter] != 0
@@ -43,22 +35,16 @@ int	splong(t_env *e)
 	e->word = 0;
 	if (e->cmd[e->j] == 39 || e->cmd[e->j] == 34)
 	{
-		e->j++;
-		e->word++;
-		while (e->cmd[e->j] != 39 && e->cmd[e->j] != 34 && e->cmd[e->j] != 0)
-		{
-			e->word++;
-			e->j++;
-		}
-		e->word++;
+		split_clousure(e);
+		e->iter++;
 	}
-	else
-	{
-		while (e->cmd[e->j] != 0 && e->cmd[e->j] != ' ')
+			else
 		{
-			e->word++;
-			e->j++;
-		}
+			while (e->cmd[e->j] != 0 && e->cmd[e->j] != ' ')
+			{
+				e->word++;
+				e->j++;
+					}
 	}
 	return (e->word);
 }

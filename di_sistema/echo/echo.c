@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 10:43:05 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/10 19:01:28 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/12 11:44:42 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,10 @@ void	check_quote(t_env *e, int j)
 	{
 		while (e->v[j][e->word] != 34)
 		{
-			if (e->v[j][e->word] == '$' && e->v[j][e->word + 1] != '\0' \
-		&& e->v[j][e->word + 1] != ' ' && e->v[j][e->word + 1] != 34)
-			{
-				e->word++;
-				e->numb = e->word;
-				get_var_quote(e, j, -1, 0);
-			}
+			if (e->v[j][e->word] != '\0' && e->v[j][e->word + 1] != '\0' \
+		&& e->v[j][e->word] == '$' && e->v[j][e->word + 1] != ' ' && \
+		e->v[j][e->word + 1] != 34)
+				bridge(e, j);
 			else
 				printf("%c", e->v[j][e->word++]);
 		}
@@ -91,11 +88,7 @@ void	mini_while(t_env *e)
 	while (e->v[i] != 0 && e->v[i][0] != '|' && e->v[i][0] != '<' && \
 	e->v[i][0] != '>')
 	{
-		if (compare(e->v[i], "$?") == 1)
-			printf("%d", e->exit_code);
-		if (e->v[i][0] == '$' && e->v[i][1] != '\0')
-			get_var(e, 1, i);
-		else if (e->v[i][0] == 34 || e->v[i][0] == 39)
+		if (e->v[i][0] == 34 || e->v[i][0] == 39)
 			check_quote(e, i);
 		else
 			writer(e, i);

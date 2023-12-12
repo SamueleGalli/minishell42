@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 11:44:45 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/11 14:07:54 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:42:14 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	directory(t_env *e)
 		if (chdir(e->v[e->i + 1]) == -1)
 		{
 			e->exit = 1;
+			e->exit_code = 1;
 			perror("cd");
 		}
 		return ;
@@ -58,6 +59,8 @@ void	variabletype(t_env *e)
 	}
 	else if (compare(e->v[e->i], "unset") == 1)
 	{
+		if (e->v[e->i + 1] == NULL)
+			return ;
 		check_env(e);
 		check_path(e);
 		return ;

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 11:22:00 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/23 13:14:10 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:22:28 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_check_digit(char *s)
 	i = 0;
 	while (s[i] != 0)
 	{
-		if (s[i] >= '0' && s[i] <= '9')
+		if ((s[i] >= '0' && s[i] <= '9') || s[i] == ' ')
 			i++;
 		else
 			return (0);
@@ -56,6 +56,22 @@ int	check_validation(t_env *e)
 		printf("command_not_found %c\n", e->v[0][1]);
 		e->exit_code = 127;
 		return (1);
+	}
+	return (0);
+}
+
+int	control_match(char *s)
+{
+	int		i;
+	char	c;
+
+	i = 0;
+	c = s[0];
+	while (s[i] != '\0')
+	{
+		if (s[i] == c)
+			return (1);
+		i++;
 	}
 	return (0);
 }

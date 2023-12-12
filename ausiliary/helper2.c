@@ -60,6 +60,8 @@ int	check_closure(char *s)
 	int	i;
 
 	i = 1;
+	if (control_match(s) == 1)
+		return (0);
 	while (s[i] != '\0' && s[i] != 34 && s[i] != 39)
 		i++;
 	if (s[i] == '\0')

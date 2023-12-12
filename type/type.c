@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 09:27:45 by marvin            #+#    #+#             */
-/*   Updated: 2023/11/22 12:12:12 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:40:53 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,20 @@ int	arrows_number(t_env *e)
 
 void	what_exit(t_env *e)
 {
-	if (e->v[e->i + 1] != NULL)
+	if (e->v[e->i + 1] != NULL && ft_check_digit(e->v[e->i + 1]) == 1)
 	{
-		if (ft_check_digit(e->v[e->i + 1]) == 1)
-			printf("exited with code: %s\n", e->v[e->i + 1]);
-		else
-			printf("exited with code: 2\n");
+		if (e->v[e->i + 2] != NULL)
+		{
+			e->exit_code = 1;
+			printf("too many arguments\n");
+			return ;
+		}
+		else if (ft_check_digit(e->v[e->i + 1]) == 1)
+			e->exit_code = ft_atoi(e->v[e->i + 1]);
 	}
-	exiting(e, 0);
+	else
+		e->exit_code = 2;
+	exiting(e, e->exit_code);
 }
 
 void	type_cont(t_env *e)

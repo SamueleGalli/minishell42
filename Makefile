@@ -70,6 +70,7 @@ SRC = 	main.c \
 		di_sistema/redirections/last_file_in.c \
 		split/split.c \
 		split/split2.c \
+		split/split3.c \
 		pipe/pipe.c \
 		pipe/fork_and_parent.c \
 		pipe/loop_pipe.c \

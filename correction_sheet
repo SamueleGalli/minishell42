@@ -1,1 +1,13 @@
-Problemi: - $? deve riportare l'ultimo error code - $var deve espandere sempre - ricontrollare pipe (cat | cat | cat | ls -> deve fare ls e 3 nl) - controllare redirection multiple - exit non impostava exit code - unset toglie il path da env ma effettivamente rimane - pipe e redirection mischiate - disabilitare ctr-c durante cat o wc ecc vuoti - echo -n funziona solo senza argomenti - non esegue gli altri eseguibili con path relativo - deve fare tipo -> export CMD="echo ciao"; se fai $CMD deve fare echo ciao - controllare norminette peccato sara' per la prossima!
+Problemi: 
+- $? deve riportare l'ultimo error code 
+- $var deve espandere sempre 
+- ricontrollare pipe (cat | cat | cat | ls -> deve fare ls e 3 nl) 
+- controllare redirection multiple - exit non impostava exit code 
+- unset toglie il path da env ma effettivamente rimane 
+- pipe e redirection mischiate 
+- disabilitare ctr-c durante cat o wc ecc vuoti 
+- echo -n funziona solo senza argomenti 
+- non esegue gli altri eseguibili con path relativo 
+- deve fare tipo -> export CMD="echo ciao"; se fai $CMD deve fare echo ciao 
+- controllare norminette peccato sara' per la prossima!
+- expandere le variabili DOPO SPLIT
