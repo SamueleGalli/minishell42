@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 14:55:37 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/08 19:08:51 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/14 12:44:58 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,4 @@ int	check_closure(char *s)
 	else if (s[i] != s[0])
 		return (1);
 	return (0);
-}
-
-void	update_eword(t_env *e, int j)
-{
-	while (e->v[j][e->word] != 32 && e->v[j][e->word] != 34 &&
-			e->v[j][e->word] != '$')
-		e->word++;
 }

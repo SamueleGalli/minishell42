@@ -6,20 +6,32 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 11:22:00 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/12 12:22:28 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/13 11:43:04 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_check_digit(char *s)
+int	ft_check_digit(char *s, t_env *e)
 {
 	int	i;
 
 	i = 0;
 	while (s[i] != 0)
 	{
-		if ((s[i] >= '0' && s[i] <= '9') || s[i] == ' ')
+		if (s[i] == '-')
+		{
+			e->sign = -1;
+			i++;
+		}
+		else if (s[i] == '+')
+		{
+			e->sign = 1;
+			i++;
+		}
+		else if (s[i] == '\"')
+			i++;
+		else if ((s[i] >= '0' && s[i] <= '9') || s[i] == ' ')
 			i++;
 		else
 			return (0);

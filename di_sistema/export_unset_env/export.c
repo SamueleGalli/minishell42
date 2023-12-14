@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:37:55 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/12 12:40:00 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/14 11:37:30 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,23 @@ int	valid_element(t_env *e, int i, int j)
 	int	j2;
 
 	j2 = 0;
+	if (e->v[i][0] == '=' || (e->v[i][j] >= '0' && e->v[i][j] <= '9'))
+	{
+		printf("bash: export: `%s': not a valid identifier\n", e->v[i]);
+		e->exit_code = 1;
+		return (1);
+	}
 	while (e->v[i][j2])
 	{
 		if (e->v[i][j2] == '-')
 		{
 			e->exit_code = 1;
-			//printf(" not a valid identifier\n");
+			printf("bash: export: `%s': not a valid identifier\n", e->v[i]);
+			return (1);
 		}
 		j2++;
 	}
-	if (e->v[i][j] >= '0' && e->v[i][j] <= '9')
-		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 int	exporterror(t_env *e, int i, int j)
@@ -102,21 +106,25 @@ int	exporterror(t_env *e, int i, int j)
 
 void	espfun(t_env *e)
 {
-	if (e->v[e->i][0] == 'P' && e->v[e->i][1] == 'A' \
-	&& e->v[e->i][2] == 'T' && e->v[e->i][3] == 'H' && e->v[e->i][4] == '=')
+	if (e->v[e->i] == NULL)
+		return ;
+	if (e->v[e->i][0] == 'P' && e->v[e->i][1] == 'A' && e->v[e->i][2] == 'T'
+		&& e->v[e->i][3] == 'H' && e->v[e->i][4] == '=')
 		e->finded_path = 1;
 	if (e->v[e->i][0] == ' ')
 		return ;
-	if (valid_element(e, 1, 0) == 1 || exporterror(e, 1, 0) == 1)
+	while (e->v[e->i] != NULL)
 	{
-		e->exit = 1;
-		return ;
+		e->indx = 0;
+		e->iter = 0;
+		e->equal = 0;
+		if (valid_element(e, e->i, 0) == 1 || exporterror(e, e->i, 0) == 1)
+		{
+			e->exit = 1;
+			return ;
+		}
+		cont_espfun(e);
 	}
-	e->indx = 0;
-	e->iter = 0;
-	e->i = 1;
-	e->equal = 0;
-	check_export(e, 0, 0);
-	if (e->env != NULL)
-		new_export(e);
 }
+
+//export ciao="ti vedo"

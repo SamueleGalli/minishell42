@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 10:50:39 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/12 13:34:11 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/14 09:59:40 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	splong(t_env *e)
 		split_clousure(e);
 		e->iter++;
 	}
-			else
+	else
+	{
+		while (e->cmd[e->j] != 0 && e->cmd[e->j] != ' ')
 		{
-			while (e->cmd[e->j] != 0 && e->cmd[e->j] != ' ')
-			{
-				e->word++;
-				e->j++;
-					}
+			e->word++;
+			e->j++;
+		}
 	}
 	return (e->word);
 }

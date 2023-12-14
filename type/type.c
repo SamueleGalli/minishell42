@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 09:27:45 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/12 12:40:53 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/14 10:00:00 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	arrows_number(t_env *e)
 	red_num = 0;
 	while (e->v[i] != NULL)
 	{
-		if (e->v[i][0] == '<' || e->v[i][0] == '>' || e->v[i][1] == '>' \
-		|| e->v[i][1] == '<')
+		if (e->v[i][0] == '<' || e->v[i][0] == '>' || e->v[i][1] == '>'
+			|| e->v[i][1] == '<')
 			red_num++;
 		i++;
 	}
@@ -31,19 +31,27 @@ int	arrows_number(t_env *e)
 
 void	what_exit(t_env *e)
 {
-	if (e->v[e->i + 1] != NULL && ft_check_digit(e->v[e->i + 1]) == 1)
+	if (e->v[e->i + 1] != NULL && ft_check_digit(e->v[e->i + 1], e) == 1)
 	{
-		if (e->v[e->i + 2] != NULL)
+		if (e->v[e->i + 2] != NULL && e->v[e->i + 1][0] != '-' && e->v[e->i
+			+ 1][0] != '+')
 		{
 			e->exit_code = 1;
-			printf("too many arguments\n");
+			printf("exit\nbash: exit: too many arguments\n");
 			return ;
 		}
-		else if (ft_check_digit(e->v[e->i + 1]) == 1)
+		else if (ft_check_digit(e->v[e->i + 1], e) == 1 && e->v[e->i \
+		+ 1][0] != '-' && e->v[e->i + 1][0] != '+')
 			e->exit_code = ft_atoi(e->v[e->i + 1]);
 	}
 	else
+	{
+		if (ft_check_digit(e->v[e->i + 1], e) == 0)
+			printf("exit\nbash: exit: %s: numeric argument required\n",
+				e->v[e->i + 1]);
 		e->exit_code = 2;
+	}
+	cont_what_exit(e);
 	exiting(e, e->exit_code);
 }
 

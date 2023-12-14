@@ -6,11 +6,64 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:32:41 by sgalli            #+#    #+#             */
-/*   Updated: 2023/10/09 15:31:23 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/14 11:20:38 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+/*export valid="     ..     "
+export mult=1 tant="2"
+export valid='     ..     '*/
+
+int	len_exp(char *str, t_env *e)
+{
+	int	i;
+	int	k;
+
+	k = 1;
+	i = ft_strlen(str);
+	if (e->v[e->i + 1] != NULL)
+	{
+		e->i++;
+		if (e->v[e->i][0] != 0)
+		{
+			if (e->v[e->i][0] == '\'' || e->v[e->i][0] == '\"')
+			{
+				while (e->v[e->i][k] && e->v[e->i][k] != '\'' \
+				&& e->v[e->i][k] != '\"')
+				{
+					i++;
+					k++;
+				}
+			}
+		}
+	}
+	return (i);
+}
+
+void	alloc_mat_esp(char *d, t_env *e)
+{
+	int	i;
+	int	j;
+
+	j = 1;
+	i = 0;
+	--e->i;
+	while (e->v[e->i][i] != '\0')
+	{
+		d[i] = e->v[e->i][i];
+		i++;
+	}
+	if (e->v[e->i + 1] != NULL && (e->v[e->i + 1][0] == '\'' || e->v[e->i
+			+ 1][0] == '\"'))
+	{
+		while (e->v[e->i + 1] && e->v[e->i + 1][j] != '\'' && e->v[e->i
+			+ 1][j] != '\"')
+			d[i++] = e->v[e->i + 1][j++];
+	}
+	d[i] = '\0';
+}
 
 char	**new_tmp(t_env *e, char **tmp)
 {
@@ -21,15 +74,13 @@ char	**new_tmp(t_env *e, char **tmp)
 	j = 0;
 	while (e->env[j] != NULL)
 	{
-		tmp[i] = (char *)malloc(sizeof(char) * \
-		(ft_strlen(e->env[j]) + 1));
+		tmp[i] = (char *)malloc(sizeof(char) * (ft_strlen(e->env[j]) + 1));
 		alloc_mat(tmp[i], e->env[j]);
 		i++;
 		j++;
 	}
-	tmp[i] = (char *)malloc(sizeof(char) * \
-		(ft_strlen(e->v[e->i]) + 1));
-	alloc_mat(tmp[i], e->v[e->i]);
+	tmp[i] = (char *)malloc(sizeof(char) * (len_exp(e->v[e->i], e) + 1));
+	alloc_mat_esp(tmp[i], e);
 	i++;
 	tmp[i] = NULL;
 	return (tmp);
@@ -65,8 +116,7 @@ void	change_value(t_env *e, int i, char **tmp)
 		apic_change(e, i, tmp);
 	else
 	{
-		tmp[i] = (char *)malloc(sizeof(char) * \
-		(ft_strlen(e->v[e->i]) + 1));
+		tmp[i] = (char *)malloc(sizeof(char) * (ft_strlen(e->v[e->i]) + 1));
 		alloc_mat(tmp[i], e->v[e->i]);
 	}
 }

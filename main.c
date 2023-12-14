@@ -19,7 +19,7 @@ void	nuller(t_env *e)
 {
 	if (init_nuller(e) == 0)
 		return ;
-	while (e->v[e->i] != NULL && e->exit != 1)
+	while (e->v[e->i] != 0 && e->exit != 1)
 	{
 		if (check_validation(e) == 1)
 			break ;
@@ -66,6 +66,7 @@ void	cont_allocation(t_env *e)
 	e->p_i = 0;
 	e->exit = 0;
 	e->check = 0;
+	e->sign = 0;
 	e->input = 0;
 	searchpath(e);
 	e->space = 0;

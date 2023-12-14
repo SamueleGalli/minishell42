@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:16:08 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/12 11:50:33 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/14 13:00:04 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	mini_get_var(t_env *e, int i, int j)
 void	writer(t_env *e, int j)
 {
 	e->word = 0;
-	while (e->v[j][e->word] != 0)
+	while (e->v[j] != NULL && e->v[j][e->word] != 0)
 	{
-		if (e->v[j][e->word] == '$' && e->v[j][e->word + 1] != 0 && \
-		e->v[j][e->word + 1] == '?')
+		if (e->v[j][e->word] == '$' && e->v[j][e->word + 1] != 0
+			&& e->v[j][e->word + 1] == '?')
 		{
 			printf("%d", e->exit_code);
 			e->word += 1;
@@ -62,7 +62,7 @@ void	writer(t_env *e, int j)
 					printf("%c", e->v[j][e->word]);
 			}
 		}
-		e->word++;
+		j++;
 	}
 }
 
@@ -76,5 +76,31 @@ void	bridge(t_env *e, int j)
 	}
 	e->word++;
 	e->numb = e->word;
-	get_var_quote(e, j, -1, 0);
+	var_quote(e, j, -1, 0);
+}
+
+int	short_get_var(t_env *e, int i, int j, int iter)
+{
+	while (e->v[j][e->word + 1] == e->env[iter][i] && e->v[j][e->word
+		+ 1] != ' ' && e->v[j][e->word + 1] != 34)
+	{
+		e->word++;
+		i++;
+	}
+	return (i);
+}
+
+void	printf_env(t_env *e, int iter)
+{
+	int	i;
+
+	i = 0;
+	while (e->env[iter][i] != '\0' && e->env[iter][i] != '=')
+		i++;
+	if (e->env[iter][i] == '=')
+	{
+		i++;
+		while (e->env[iter][i] != 0)
+			printf("%c", e->env[iter][i++]);
+	}
 }

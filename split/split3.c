@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:56:05 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/12 13:36:29 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/14 09:59:47 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,4 @@ void	expand_variable(t_env *e)
 			e->v[e->i][e->lenght++] = e->cmd[e->indx++];
 	if (e->count == 1)
 		e->v[e->i][e->lenght++] = ' ';
-	}
+}

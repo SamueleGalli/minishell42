@@ -11,6 +11,8 @@ SRC = 	main.c \
 		ausiliary/helper4.c \
 		ausiliary/helper5.c \
 		ausiliary/helper6.c \
+		ausiliary/helper7.c \
+		ausiliary/helper8.c \
 		libft/ft_atoi.c \
 		libft/ft_bzero.c \
 		libft/ft_calloc.c \
