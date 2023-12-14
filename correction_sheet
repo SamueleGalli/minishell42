@@ -13,3 +13,4 @@ Problemi:
 - $ prima comando o built-in
 - export hello loop
 - echo risultati sbagliati alcuni
+- export ciao="1   2   3  4  5   6" errore valgrind
