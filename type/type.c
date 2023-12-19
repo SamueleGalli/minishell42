@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 09:27:45 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/14 10:00:00 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/19 12:23:57 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	what_exit(t_env *e)
 	}
 	else
 	{
-		if (ft_check_digit(e->v[e->i + 1], e) == 0)
+		if (e->v[e->i + 1] != 0 && ft_check_digit(e->v[e->i + 1], e) == 0)
 			printf("exit\nbash: exit: %s: numeric argument required\n",
 				e->v[e->i + 1]);
 		e->exit_code = 2;

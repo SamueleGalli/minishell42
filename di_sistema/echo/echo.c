@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 10:43:05 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/14 13:04:40 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/19 12:48:20 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ void	check_quote(t_env *e, int j)
 			if (e->v[j][e->word] != '\0' && e->v[j][e->word + 1] != '\0' \
 		&& e->v[j][e->word] == '$' && e->v[j][e->word + 1] != ' ' && \
 		e->v[j][e->word + 1] != 34)
-			{
 				bridge(e, j);
-				return ;
-			}
 			else
 				printf("%c", e->v[j][e->word++]);
 		}
@@ -89,7 +86,11 @@ void	mini_while(t_env *e)
 	e->v[i][0] != '>')
 	{
 		if (e->v[i][0] == 34 || e->v[i][0] == 39)
+		{
 			check_quote(e, i);
+			if (e->v[i + 1] != NULL)
+				printf(" ");
+		}
 		else
 			writer(e, i);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:37:55 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/14 11:37:30 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/19 12:45:40 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	espfun(t_env *e)
 		e->finded_path = 1;
 	if (e->v[e->i][0] == ' ')
 		return ;
+	e->exit_code = 0;
 	while (e->v[e->i] != NULL)
 	{
 		e->indx = 0;
@@ -120,11 +121,15 @@ void	espfun(t_env *e)
 		e->equal = 0;
 		if (valid_element(e, e->i, 0) == 1 || exporterror(e, e->i, 0) == 1)
 		{
+			if (e->v[e->i + 1] != NULL && (e->v[e->i + 1][0] == 34 || \
+			e->v[e->i + 1][0] == 39))
+				e->i++;
+			e->i++;
 			e->exit = 1;
-			return ;
 		}
-		cont_espfun(e);
+		else
+			cont_espfun(e);
 	}
 }
-
+//export a=dawdawa b=    b c-="   c " d-='  d  '
 //export ciao="ti vedo"

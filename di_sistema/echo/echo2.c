@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:16:08 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/14 13:00:04 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/19 12:55:33 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,18 @@ void	writer(t_env *e, int j)
 			&& e->v[j][e->word + 1] == '?')
 		{
 			printf("%d", e->exit_code);
-			e->word += 1;
+			e->word += 2;
 		}
 		else if (e->v[j][e->word] == '$' && e->v[j][e->word + 1] != '\0')
 			get_var_quote(e, j, -1, e->word);
 		else
 		{
-			if (e->v[j + 1] != NULL)
-				printf("%c", e->v[j][e->word]);
-			else
-			{
-				if (e->v[j][e->word] != ' ')
-					printf("%c", e->v[j][e->word]);
-			}
+			if (e->v[j][e->word] == '$' && (e->v[j][e->word + 1] == 0 \
+			|| e->v[j][e->word + 1] == ' '))
+				printf("%c", e->v[j][e->word++]);
+			while (e->v[j][e->word] != 0 && e->v[j][e->word] != '$')
+				printf("%c", e->v[j][e->word++]);
 		}
-		j++;
 	}
 }
 
@@ -76,7 +73,7 @@ void	bridge(t_env *e, int j)
 	}
 	e->word++;
 	e->numb = e->word;
-	var_quote(e, j, -1, 0);
+	apice_var_quote(e, j, -1, 0);
 }
 
 int	short_get_var(t_env *e, int i, int j, int iter)

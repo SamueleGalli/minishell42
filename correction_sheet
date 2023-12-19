@@ -9,8 +9,5 @@ Problemi:
 - echo -n funziona solo senza argomenti 
 - non esegue gli altri eseguibili con path relativo 
 - deve fare tipo -> export CMD="echo ciao"; se fai $CMD deve fare echo ciao 
-- controllare norminette peccato sara' per la prossima!
-- $ prima comando o built-in
-- export hello loop
-- echo risultati sbagliati alcuni
-- export ciao="1   2   3  4  5   6" errore valgrind
+- $ prima comando
+- da unset in poi compreso unset

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 16:59:12 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/14 11:17:12 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/19 12:32:51 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	new_export(t_env *e)
 		e->env[e->r] = NULL;
 	}
 }
+//export a=a b=b c="c" d='d'
 
 void	cont_espfun(t_env *e)
 {

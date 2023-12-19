@@ -1,6 +1,0 @@
-comando tster minishell 
-sgalli python3 src/__main__.py /nfs/homes/sgalli/sgoinfre/progetti/minishell
-sgalli casa python3 src/__main__.py /home/sgalli/From_Windows/minishell42
-dovete per eseguire il tester sostituire 
-/home/sgalli/From_Windows/minishell42
-con il pwd in cui vi trovate

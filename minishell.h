@@ -150,6 +150,7 @@ void	father_com(t_env *e);
 void	split_clousure(t_env *e);
 void	parent_loop_pipe(t_env *e);
 void	update_pipe(t_env *e);
+void	apice_var_quote(t_env *e, int j, int iter, int i);
 void	update_i(t_env *e);
 void	change_value(t_env *e, int i, char **tmp);
 void	count_pipe(t_env *e);
