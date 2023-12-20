@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 11:44:45 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/13 12:52:53 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/20 12:07:13 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,21 @@ void	directory(t_env *e)
 {
 	if (compare(e->v[e->i], "cd") == 1 && e->v[e->i + 1] != NULL)
 	{
-		if (e->v[e->i + 1][0] == '$')
+		if (e->v[e->i + 1][0] == '~')
+			go_root(e, 0);
+		else if (e->v[e->i + 2] != 0)
+		{
+			e->exit_code = 1;
+			printf("bash: cd: too many arguments\n");
+		}
+		else if (e->v[e->i + 1][0] == '$')
 			cd_dollar(e, 0, 0);
-		else if (chdir(e->v[e->i + 1]) == -1 && e->v[e->i + 2] == 0)
+		else if (chdir(e->v[e->i + 1]) == -1)
 		{
 			e->exit = 1;
 			e->exit_code = 1;
-			perror("cd");
+			printf("bash: cd: %s: No such file or directory\n", e->v[e->i + 1]);
 		}
-		else
-			printf("bash: cd: too many arguments1\n");
 		return ;
 	}
 	else if (compare(e->v[e->i], "cd") == 1)

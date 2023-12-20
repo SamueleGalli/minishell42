@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:32:57 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/03 17:36:46 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/20 12:11:44 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,23 @@ void	check_env(t_env *e)
 	e->i++;
 	e->r = 0;
 	e->indx = 0;
-	while (e->env[e->r] != NULL)
+	while (e->env[e->r] != NULL && e->v[e->i] != 0)
 	{
-		while (e->env[e->r][e->indx] == e->v[e->i][e->indx] && \
-		e->env[e->r][e->indx] != '=')
-		{
+		while (e->env[e->r][e->indx] != 0 && e->v[e->i][e->indx] != 0 \
+		&& e->env[e->r][e->indx] == e->v[e->i][e->indx])
 			e->indx++;
-		}
-		if (e->v[e->i][e->indx] == '=')
-		{
-			printf("invalid unset\n");
-			return ;
-		}
-		if (e->env[e->r][e->indx] == '=' && e->v[e->i][e->indx] == 0)
+		if (e->env[e->r][e->indx] == '=')
 		{
 			update_env(e);
-			return ;
+			e->r = 0;
+			e->indx = 0;
+			e->i++;
 		}
-		e->indx = 0;
-		e->r++;
+		else
+		{
+			e->r++;
+			e->indx = 0;
+		}
 	}
 }
+//export a=a b=' daw ad wd' c=c t="dawdaw"

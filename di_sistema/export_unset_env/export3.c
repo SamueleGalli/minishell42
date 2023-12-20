@@ -6,15 +6,11 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:32:41 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/19 12:19:20 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/20 10:31:19 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-/*export valid="     ..     "
-export mult=1 tant="2"
-export valid='     ..     '*/
 
 int	len_exp(char *str, t_env *e)
 {
@@ -69,16 +65,21 @@ char	**new_tmp(t_env *e, char **tmp)
 	j = 0;
 	while (e->env[j] != NULL)
 	{
-		tmp[i] = (char *)malloc(sizeof(char) * (ft_strlen(e->env[j]) + 1));
-		alloc_mat(tmp[i], e->env[j]);
-		i++;
-		j++;
+		if (j == e->count_exp)
+		{
+			update_env_v(e, 0, i, tmp);
+			j++;
+			i++;
+		}
+		else
+		{
+			tmp[i] = (char *)malloc(sizeof(char) * (ft_strlen(e->env[j]) + 1));
+			alloc_mat(tmp[i], e->env[j]);
+			i++;
+			j++;
+		}
 	}
-	tmp[i] = (char *)malloc(sizeof(char) * (len_exp(e->v[e->i], e) + 1));
-	alloc_mat_esp(tmp[i], e);
-	i++;
-	tmp[i] = NULL;
-	return (tmp);
+	return (cont_new_tmp(e, tmp, i));
 }
 
 void	apic_change(t_env *e, int i, char **tmp)

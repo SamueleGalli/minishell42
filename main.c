@@ -58,7 +58,6 @@ void	cont_allocation(t_env *e)
 {
 	e->start_red = 0;
 	e->ex = 0;
-	e->equal = 0;
 	e->stdin = dup(STDIN_FILENO);
 	e->stdout = dup(STDOUT_FILENO);
 	e->mat_flag = NULL;

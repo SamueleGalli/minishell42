@@ -6,80 +6,72 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 16:59:12 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/19 12:32:51 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/20 12:12:38 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	continuing_check(t_env *e, int i, int j, int j2)
+int	apice_dimension(t_env *e, int k)
 {
-	if (e->v[e->i][j] == ' ' && e->env[i][j2] == '\0')
-		e->equal = 1;
-	if (e->v[e->i][j] == ' ' && e->env[i][j2] == ' ')
+	int	i;
+	int	c;
+
+	c = 0;
+	i = e->i + 1;
+	k++;
+	while (e->v[i][k] && e->v[i][k] != '\'' && e->v[i][k] != '\"')
 	{
-		e->equal = 1;
-		return ;
+		k++;
+		c++;
 	}
-	if (e->v[e->i][j] == 34 || e->v[e->i][j] == 39)
-		j++;
-	while (e->env[i][j2] == e->v[e->i][j] && e->v[e->i][j] != 0
-		&& e->env[i][j2] != 0)
-	{
-		j2++;
-		j++;
-	}
-	if (e->v[e->i][j] == 34 || e->v[e->i][j] == 39)
-		j++;
-	if (e->v[e->i][j] == 0 && e->env[i][j2] == 0)
-		e->equal = 1;
-	else
-	{
-		e->ex = i;
-		e->equal = 2;
-	}
+	return (c);
 }
 
-void	check_export(t_env *e, int i, int j)
+void	update_env_v(t_env *e, int k, int i, char **tmp)
 {
+	int	apice;
+
+	apice = 0;
+	if (e->v[e->i + 1] != 0 && (e->v[e->i + 1][0] == '\'' || \
+	e->v[e->i + 1][0] == '\"'))
+		apice = apice_dimension(e, k);
+	tmp[i] = (char *)malloc(sizeof(char) * (ft_strlen(e->v[e->i]) + apice + 1));
+	apice = 0;
+	while (e->v[e->i][k])
+		tmp[i][apice++] = e->v[e->i][k++];
+	if (e->v[e->i + 1] && (e->v[e->i + 1][0] == '\'' || \
+	e->v[e->i + 1][0] == '\"'))
+	{
+		k = 1;
+		while (e->v[e->i + 1][k] && e->v[e->i + 1][k] != '\'' && \
+		e->v[e->i + 1][k] != '\"')
+			tmp[i][apice++] = e->v[e->i + 1][k++];
+	}
+	tmp[i][apice] = '\0';
+}
+
+void	check_similar(t_env *e)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
 	while (e->env[i] != NULL)
 	{
-		while (e->env[i][j] == e->v[e->i][j] && e->v[e->i][j] != '='
-			&& e->env[i][j] != '=')
+		while (e->env[i][j] && e->v[e->i][j] && \
+		e->env[i][j] != '=' && e->v[e->i][j] != '=' && \
+		e->env[i][j] == e->v[e->i][j])
 			j++;
-		if (e->env[i][j] == '=' && e->v[e->i][j] == '=')
+		if (e->env[i][j] == '=')
 		{
-			j++;
-			if (e->v[e->i][j] == 0 && e->v[e->i + 1] != NULL)
-			{
-				e->i++;
-				continuing_check(e, i, 0, j);
-			}
-			else
-				continuing_check(e, i, j, j);
+			e->count_exp = i;
+			return ;
 		}
 		j = 0;
 		i++;
 	}
-}
-
-void	not_equal(t_env *e)
-{
-	char	**tmp;
-
-	tmp = (char **)malloc(sizeof(char *) * size_mat(e->env));
-	tmp = alloc_tmp(e, tmp);
-	free_table(e->env);
-	e->env = (char **)malloc(sizeof(char *) * (size_mat(tmp) + 1));
-	while (tmp[e->r] != NULL)
-	{
-		e->env[e->r] = (char *)malloc(sizeof(char) * (ft_strlen(tmp[e->r])
-					+ 1));
-		alloc_mat(e->env[e->r], tmp[e->r]);
-		e->r++;
-	}
-	e->env[e->r] = NULL;
-	free_table(tmp);
 }
 
 void	new_export(t_env *e)
@@ -87,53 +79,33 @@ void	new_export(t_env *e)
 	char	**tmp;
 
 	e->r = 0;
-	if (e->equal == 1)
-		return ;
-	else if (e->equal == 2)
-		not_equal(e);
-	else
+	check_similar(e);
+	tmp = (char **)malloc(sizeof(char *) * (size_mat(e->env) + 1));
+	tmp = new_tmp(e, tmp);
+	free_table(e->env);
+	e->env = (char **)malloc(sizeof(char *) * size_mat(tmp));
+	while (tmp[e->r] != NULL)
 	{
-		tmp = (char **)malloc(sizeof(char *) * (size_mat(e->env) + 1));
-		tmp = new_tmp(e, tmp);
-		free_table(e->env);
-		e->env = (char **)malloc(sizeof(char *) * size_mat(tmp));
-		while (tmp[e->r] != NULL)
-		{
-			e->env[e->r] = (char *)malloc(sizeof(char) * (ft_strlen(tmp[e->r])
-						+ 1));
-			alloc_mat(e->env[e->r], tmp[e->r]);
-			e->r++;
-		}
-		free_table(tmp);
-		e->env[e->r] = NULL;
+		e->env[e->r] = (char *)malloc(sizeof(char) * (ft_strlen(tmp[e->r])
+					+ 1));
+		alloc_mat(e->env[e->r], tmp[e->r]);
+		e->r++;
 	}
+	free_table(tmp);
+	e->env[e->r] = NULL;
 }
-//export a=a b=b c="c" d='d'
 
 void	cont_espfun(t_env *e)
 {
-	if (e->v[e->i + 1] != 0)
+	if (e->v[e->i + 1] != 0 && (e->v[e->i + 1][0] == 34 \
+	|| e->v[e->i + 1][0] == 39))
 	{
-		if (e->v[e->i + 1][0] == 34 || e->v[e->i + 1][0] == 39)
-		{
-			check_export(e, 0, 0);
-			if (e->env != NULL)
-				new_export(e);
-			e->i += 2;
-		}
-		else
-		{
-			check_export(e, 0, 0);
-			if (e->env != NULL)
-				new_export(e);
-			e->i++;
-		}
+		new_export(e);
+		e->i += 2;
 	}
 	else
 	{
-		check_export(e, 0, 0);
-		if (e->env != NULL)
-			new_export(e);
+		new_export(e);
 		e->i++;
 	}
 }

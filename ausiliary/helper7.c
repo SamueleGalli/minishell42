@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 11:28:41 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/14 10:12:43 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/20 12:11:27 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ int	expanding_cd_dollar(t_env *e, int i, int j)
 int	cont_cd_dollar(t_env *e, int i, int j)
 {
 	e->expand = j + 1;
-	if (e->env[i + 1] != NULL)
-		i++;
 	while (e->env[i][j] != 0 && e->env[i][j] == ' ')
 		j++;
 	while (e->env[i][j] != 0 && e->env[i][j] != ' ')
@@ -115,6 +113,11 @@ void	cd_dollar(t_env *e, int i, int j)
 {
 	int	s;
 
+	if (e->v[e->i + 1][1] == '?')
+	{
+		printf("bash: cd: %d: No such file or directory\n", e->exit_code);
+		return ;
+	}
 	while (e->env[i])
 	{
 		s = j + 1;

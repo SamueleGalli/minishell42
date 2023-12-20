@@ -13,6 +13,7 @@ SRC = 	main.c \
 		ausiliary/helper6.c \
 		ausiliary/helper7.c \
 		ausiliary/helper8.c \
+		ausiliary/helper9.c \
 		libft/ft_atoi.c \
 		libft/ft_bzero.c \
 		libft/ft_calloc.c \
@@ -57,6 +58,7 @@ SRC = 	main.c \
 		di_sistema/export_unset_env/export.c \
 		di_sistema/export_unset_env/export2.c \
 		di_sistema/export_unset_env/export3.c \
+		di_sistema/export_unset_env/export4.c \
 		di_sistema/execve/commands.c \
 		di_sistema/execve/flags.c \
 		di_sistema/execve/flag2.c \
