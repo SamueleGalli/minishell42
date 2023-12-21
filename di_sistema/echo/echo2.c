@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:16:08 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/19 12:55:33 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/21 09:57:47 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	writer(t_env *e, int j)
 			e->word += 2;
 		}
 		else if (e->v[j][e->word] == '$' && e->v[j][e->word + 1] != '\0')
-			get_var_quote(e, j, -1, e->word);
+		{
+			if (get_var_quote(e, j, -1, e->word) == 1)
+				return ;
+		}
 		else
 		{
 			if (e->v[j][e->word] == '$' && (e->v[j][e->word + 1] == 0 \

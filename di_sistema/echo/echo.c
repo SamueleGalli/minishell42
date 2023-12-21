@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 10:43:05 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/19 12:48:20 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/21 09:59:59 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	get_var(t_env *e, int i, int j)
 	}
 }
 
-void	get_var_quote(t_env *e, int j, int iter, int i)
+int	get_var_quote(t_env *e, int j, int iter, int i)
 {
 	while (e->env[++iter] != NULL)
 	{
@@ -41,7 +41,7 @@ void	get_var_quote(t_env *e, int j, int iter, int i)
 			printf_env(e, iter);
 			if (e->v[j + 1] != NULL)
 				printf(" ");
-			return ;
+			return (0);
 		}
 		else
 		{
@@ -49,6 +49,7 @@ void	get_var_quote(t_env *e, int j, int iter, int i)
 			i = 0;
 		}
 	}
+	return (1);
 }
 
 void	check_quote(t_env *e, int j)

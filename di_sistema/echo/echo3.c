@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 11:50:47 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/19 12:55:23 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/21 10:02:33 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,7 @@ void	apice_var_quote(t_env *e, int j, int iter, int i)
 			i = 0;
 		}
 	}
+	while (e->v[j][e->word] != 0 && e->v[j][e->word] != ' ' \
+	&& e->v[j][e->word] != 34)
+		e->word++;
 }
