@@ -10,3 +10,5 @@ Problemi:
 - non esegue gli altri eseguibili con path relativo 
 - deve fare tipo -> export CMD="echo ciao"; se fai $CMD deve fare echo ciao 
 - $ prima comando
+- controlla ">>>"  e "<<<>><>><" bash: syntax error near unexpected token `>>' in  helper9.c e 10.c
+- exit_code di invalid_syntax

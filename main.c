@@ -23,11 +23,12 @@ void	nuller(t_env *e)
 	{
 		if (check_validation(e) == 1)
 			break ;
-		if (invalid_cmd(e) == 1)
-			break ;
-		e->indx = 0;
-		typing(e);
-		update_i(e);
+		else
+		{
+			e->indx = 0;
+			typing(e);
+			update_i(e);
+		}
 	}
 	e->stdin = dup(STDIN_FILENO);
 	e->stdout = dup(STDOUT_FILENO);

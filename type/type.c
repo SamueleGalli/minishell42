@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 09:27:45 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/19 12:23:57 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/21 11:46:15 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	what_exit(t_env *e)
 	else
 	{
 		if (e->v[e->i + 1] != 0 && ft_check_digit(e->v[e->i + 1], e) == 0)
-			printf("exit\nbash: exit: %s: numeric argument required\n",
+				printf("exit\nbash: exit: %s: numeric argument required\n",
 				e->v[e->i + 1]);
 		e->exit_code = 2;
 	}
@@ -82,9 +82,7 @@ void	type_cont(t_env *e)
 
 void	typing(t_env *e)
 {
-	if (valid_pipe(e) == 1)
-		return ;
-	else if (search_pipe(e) == 1)
+	if (search_pipe(e) == 1)
 	{
 		count_pipe(e);
 		if (search_arrows(e, "< ") == 1 || search_arrows(e, "> ") == 1

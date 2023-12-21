@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 12:31:57 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/14 11:40:07 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/21 12:00:38 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	error(t_env *e)
 		e->exit = 1;
 		return ;
 	}
-	printf("command: %s not found\n", e->v[e->i]);
+	printf("%s: command not found\n", e->v[e->i]);
 	e->exit_code = 127;
 	e->exit = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:23:00 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/22 10:54:33 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/21 11:49:43 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,33 +74,4 @@ int	ft_strnum(int i)
 		c++;
 	}
 	return (c);
-}
-
-int	invalid_cmd(t_env *e)
-{
-	int	i;
-
-	i = 0;
-	if (cont_invalid_cmd(e, i) == 1)
-		return (1);
-	while (e->v[i] != NULL && e->v[i][0] != '\0' && \
-	e->v[i][0] != '|' && e->v[i][0] != '<' \
-	&& e->v[i][0] != '>' && compare(e->v[i], "<<") == 0 && \
-	compare(e->v[i], ">>") == 0)
-		i++;
-	if (e->v[i] == NULL)
-		return (0);
-	i++;
-	if (e->v[i] == NULL)
-		return (0);
-	while (e->v[i][0] == '|' || e->v[i][0] == '<' || \
-	e->v[i][0] == '>' || compare(e->v[i], "<<") == 1 || \
-	compare(e->v[i], ">>") == 1)
-	{
-		printf("invalid syntax ");
-		print_str(e->v[i], 0);
-		printf("\n");
-		return (1);
-	}
-	return (0);
 }

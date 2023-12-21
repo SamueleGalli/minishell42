@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 11:22:00 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/13 11:43:04 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/21 13:04:58 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,32 @@ int	init_nuller(t_env *e)
 	return (1);
 }
 
+int	cont_check_validation(t_env *e)
+{
+	if (e->v[1] == 0 && (e->v[0][0] == '>' || e->v[0][0] == '<'))
+	{
+		printf("bash: syntax error near unexpected token `newline'\n");
+		e->exit_code = 2;
+		return (1);
+	}
+	else if (check_simil(e->v[1][0]) == 1)
+	{
+		
+	}
+		return (check_while_null(e, 0));
+	return (0);
+}
+
 int	check_validation(t_env *e)
 {
-	if (e->v[0][1] == ' ')
+	if (e->v[0][0] == '|')
+	{
+		printf("bash: syntax error near unexpected token `|'\n");
+		e->exit = 1;
+		e->exit_code = 2;
+		return (1);
+	}
+	else if (e->v[0][1] == ' ')
 	{
 		printf("command_not_found %c\n", e->v[0][1]);
 		e->exit_code = 127;
@@ -69,6 +92,8 @@ int	check_validation(t_env *e)
 		e->exit_code = 127;
 		return (1);
 	}
+	else
+		return (cont_check_validation(e));
 	return (0);
 }
 
