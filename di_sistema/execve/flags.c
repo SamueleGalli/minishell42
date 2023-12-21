@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 15:06:10 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/16 12:00:27 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/21 11:29:55 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ void	check_flags(t_env *e)
 	e->count = 0;
 	while (e->v[e->indx] != NULL)
 	{
-		if (e->v[e->indx][0] == '|' || e->v[e->indx][0] == '<'
+		if (e->v[e->indx][0] == '$' && (e->v[e->indx][1] == ' ' || \
+		e->v[e->indx][1] == 0))
+			e->indx++;
+		else if (e->v[e->indx][0] == '|' || e->v[e->indx][0] == '<'
 			|| e->v[e->indx][0] == '>')
 			break ;
 		else if (strcom(e->v[e->indx], e->exit_code) == 0)

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:25:43 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/22 12:33:08 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/21 11:31:12 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ void	env_variable2(t_env *e)
 	int	i;
 
 	i = 0;
+	if (e->v[e->indx][1] == ' ' || e->v[e->indx][1] == 0)
+	{
+		e->indx++;
+		return ;
+	}
 	while (e->env[i] != NULL)
 		i = enviroment_control(e, i, 0);
 }

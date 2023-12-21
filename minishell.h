@@ -56,7 +56,6 @@ typedef struct s_env
 	int		iter;
 	int		flag;
 	int		true_red;
-	int		cat_pipe;
 	int		define_pipe;
 	int		numb;
 	int		valid;

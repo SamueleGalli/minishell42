@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:17:38 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/04 11:29:53 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/21 11:12:19 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,8 @@
 void	parent_loop_pipe(t_env *e)
 {
 	close(e->pipefd[1]);
-	if (e->cat_pipe != 1)
-		dup2(e->pipefd[0], STDIN_FILENO);
+	dup2(e->pipefd[0], STDIN_FILENO);
 	close(e->pipefd[0]);
-	if (e->cat_pipe == 1)
-		e->p_i = e->c_pipe;
-	e->cat_pipe = 0;
-	waitpid(e->pid_pipe, &e->status, 0);
-	if (WIFEXITED(e->status))
-		e->exit_code = WEXITSTATUS(e->status);
-}
-
-void	parent2(t_env *e)
-{
-	if (check_builtin(e) == 0)
-	{
-		pathcmd(e);
-		flag_matrix(e);
-	}
-	else
-		e->s = NULL;
-	if (e->s != NULL)
-	{
-		if (e->c_path == 0 && access(e->s, X_OK) == 0)
-			father_com(e);
-	}
-	else
-		variabletype(e);
-	close(e->pipefd[0]);
-	close(e->pipefd[1]);
-	dup2(e->stdout, STDOUT_FILENO);
-	close(e->stdout);
-	dup2(e->stdin, STDIN_FILENO);
-	close(e->stdin);
 }
 
 void	father_com(t_env *e)
@@ -71,9 +40,12 @@ void	father_com(t_env *e)
 
 void	fork_loop(t_env *e)
 {
+	signal(SIGINT, SIG_IGN);
 	close(e->pipefd[0]);
-	if (e->cat_pipe != 1)
+	if (e->p_i != e->c_pipe)
 		dup2(e->pipefd[1], STDOUT_FILENO);
+	else
+		dup2(e->stdout, e->pipefd[1]);
 	close(e->pipefd[1]);
 	if (check_builtin(e) == 0)
 	{
