@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 09:27:45 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/21 11:46:15 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/22 13:00:13 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,17 @@ void	what_exit(t_env *e)
 			printf("exit\nbash: exit: too many arguments\n");
 			return ;
 		}
-		else if (ft_check_digit(e->v[e->i + 1], e) == 1 && e->v[e->i \
-		+ 1][0] != '-' && e->v[e->i + 1][0] != '+')
+		else if (ft_check_digit(e->v[e->i + 1], e) == 1 && \
+		e->v[e->i + 1][0] != '-' && e->v[e->i + 1][0] != '+')
 			e->exit_code = ft_atoi(e->v[e->i + 1]);
 	}
 	else
 	{
 		if (e->v[e->i + 1] != 0 && ft_check_digit(e->v[e->i + 1], e) == 0)
-				printf("exit\nbash: exit: %s: numeric argument required\n",
+		{
+			printf("exit\nbash: exit: %s: numeric argument required\n",
 				e->v[e->i + 1]);
+		}
 		e->exit_code = 2;
 	}
 	cont_what_exit(e);

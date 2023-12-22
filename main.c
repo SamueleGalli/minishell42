@@ -21,9 +21,7 @@ void	nuller(t_env *e)
 		return ;
 	while (e->v[e->i] != 0 && e->exit != 1)
 	{
-		if (compare(e->v[e->i], "echo") == 0 && \
-		compare(e->v[e->i], "echo ") == 0)
-			check_validation(e);
+		check_validation(e);
 		if (e->is_valid == 1)
 		{
 			e->is_valid = 0;

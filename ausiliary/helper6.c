@@ -6,15 +6,15 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 11:22:00 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/22 12:05:38 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/22 12:59:28 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int ft_check_digit(char *s, t_env *e)
+int	ft_check_digit(char *s, t_env *e)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != 0)
@@ -39,7 +39,7 @@ int ft_check_digit(char *s, t_env *e)
 	return (1);
 }
 
-int init_nuller(t_env *e)
+int	init_nuller(t_env *e)
 {
 	e->output = 0;
 	e->input = 0;
@@ -55,7 +55,7 @@ int init_nuller(t_env *e)
 	return (1);
 }
 
-void cont_check_validation(t_env *e)
+void	cont_check_validation(t_env *e)
 {
 	if (e->v[e->i_copy + 1] == 0 && there_is_red(e->v[e->i_copy]) == 1)
 	{
@@ -67,29 +67,34 @@ void cont_check_validation(t_env *e)
 	else
 	{
 		if (check_red(e->v[e->i_copy]) == 1)
+		{
 			if (ft_strlen(e->v[e->i_copy]) >= 3 && (mutiple_equal(e) == 1))
 			{
 				e->exit_code = 2;
 				e->is_valid = 1;
 				return ;
 			}
+		}
 	}
 	check_while_null(e);
 }
 
-void check_validation(t_env *e)
+void	check_validation(t_env *e)
 {
 	e->i_copy = 0;
 	if (single_error(e) == 1)
 	{
-		e->is_valid = 1;	
+		e->is_valid = 1;
 		return ;
 	}
 	while (e->v[e->i_copy] != 0 && e->is_valid == 0)
 	{
-		if ((e->v[e->i_copy][0] == '\'' || e->v[e->i_copy][0] == '\"') && \
-		(e->v[e->i_copy][1] == '>' || e->v[e->i_copy][1] == '<' ||\
-		e->v[e->i_copy][1] == '|'))
+		if (compare(e->v[e->i_copy], "echo") == 1 || compare(e->v[e->i_copy],
+				"echo ") == 1)
+			check_echo(e);
+		else if ((e->v[e->i_copy][0] == '\'' || e->v[e->i_copy][0] == '\"')
+				&& (e->v[e->i_copy][1] == '>' || e->v[e->i_copy][1] == '<'
+				|| e->v[e->i_copy][1] == '|'))
 		{
 			print_no_quote(e->v[e->i_copy]);
 			printf(": command not found\n");
@@ -103,10 +108,10 @@ void check_validation(t_env *e)
 	return ;
 }
 
-int control_match(char *s)
+int	control_match(char *s)
 {
-	int i;
-	char c;
+	int		i;
+	char	c;
 
 	i = 0;
 	c = s[0];

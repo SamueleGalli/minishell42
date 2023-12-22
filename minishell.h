@@ -134,6 +134,7 @@ int		len_exp(char *str, t_env *e);
 int		len_tilde(char *s, int i);
 int		mutiple_equal(t_env *e);
 
+void	check_echo(t_env *e);
 void	check_while_null(t_env *e);
 void	check_validation(t_env *e);
 void	print_no_quote(char *s);
