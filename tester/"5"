@@ -1,6 +1,7 @@
 "5"
-bash_outfiles
+README.md
 bash.supp
+bash_outfiles
 bonus
 bonus_bonus
 builtins
@@ -13,9 +14,8 @@ mini_outfiles
 os_specific
 outfiles
 pipes
-README.md
 redirects
 syntax
-tester
 test_files
+tester
 wildcards

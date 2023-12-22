@@ -21,8 +21,14 @@ void	nuller(t_env *e)
 		return ;
 	while (e->v[e->i] != 0 && e->exit != 1)
 	{
-		if (check_validation(e) == 1)
+		if (compare(e->v[e->i], "echo") == 0 && \
+		compare(e->v[e->i], "echo ") == 0)
+			check_validation(e);
+		if (e->is_valid == 1)
+		{
+			e->is_valid = 0;
 			break ;
+		}
 		else
 		{
 			e->indx = 0;
@@ -68,8 +74,10 @@ void	cont_allocation(t_env *e)
 	e->check = 0;
 	e->sign = 0;
 	e->input = 0;
+	e->i_copy = 0;
 	searchpath(e);
 	e->space = 0;
+	e->is_valid = 0;
 	e->do_redir = 0;
 	e->finded_path = 0;
 	e->c_path = 0;

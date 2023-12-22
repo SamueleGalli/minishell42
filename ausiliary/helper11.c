@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper11.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/22 10:57:12 by sgalli            #+#    #+#             */
+/*   Updated: 2023/12/22 11:35:41 by sgalli           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
+
+int check_red(char *s)
+{
+    int i;
+
+    i = 0;
+
+    if (s[i] == '>' || s[i] == '<')
+        return (1);
+    return (0);
+}
+
+int last_check_val(t_env *e, int j)
+{
+    if ((e->v[e->i_copy][j] == 0 && e->v[e->i_copy][j - 1] == '>') || e->v[e->i_copy][j] == '>')
+	{
+        e->exit = 1;
+        e->exit_code = 2;
+		printf("bash: syntax error near unexpected token `>'\n");
+		return (1);
+	}
+    return (0);
+}
