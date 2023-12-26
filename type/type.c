@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 09:27:45 by marvin            #+#    #+#             */
-/*   Updated: 2023/12/22 13:00:13 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/26 12:02:59 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	arrows_number(t_env *e)
 
 void	what_exit(t_env *e)
 {
+	printf("exit\n");
+	check_max_min(e);
 	if (e->v[e->i + 1] != NULL && ft_check_digit(e->v[e->i + 1], e) == 1)
 	{
 		if (e->v[e->i + 2] != NULL && e->v[e->i + 1][0] != '-' && e->v[e->i
@@ -54,7 +56,6 @@ void	what_exit(t_env *e)
 		e->exit_code = 2;
 	}
 	cont_what_exit(e);
-	exiting(e, e->exit_code);
 }
 
 void	type_cont(t_env *e)

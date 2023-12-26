@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 15:06:10 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/21 11:29:55 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/26 11:15:36 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,22 @@ void	flag_continue(t_env *e)
 
 	i = 0;
 	e->iter = 0;
-	while (e->v[e->indx][i] != '\0' && e->v[e->indx][i] != ' ')
+	if (e->v[e->indx][i] != 34 && e->v[e->indx][i] != 39)
 	{
-		if (e->v[e->indx][i] != 34 && e->v[e->indx][i] != 39
-			&& e->v[e->indx][i] != '>' && e->v[e->indx][i] != '<')
+		while (e->v[e->indx][i] != '\0' && e->v[e->indx][i] != ' ')
+		{
+			if (e->v[e->indx][i] != 34 && e->v[e->indx][i] != 39
+				&& e->v[e->indx][i] != '>' && e->v[e->indx][i] != '<')
+				e->mat_flag[e->word][e->iter++] = e->v[e->indx][i++];
+			else
+				i++;
+		}
+	}
+	else
+	{
+		i++;
+		while (e->v[e->indx][i] != '\0' && e->v[e->indx][i] != e->v[e->indx][0])
 			e->mat_flag[e->word][e->iter++] = e->v[e->indx][i++];
-		else
-			i++;
 	}
 	e->mat_flag[e->word][e->iter] = '\0';
 }

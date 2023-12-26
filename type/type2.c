@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 11:44:45 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/20 12:07:13 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/26 12:28:46 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,15 @@ void	directory(t_env *e)
 
 void	variabletype(t_env *e)
 {
-	if (compare(e->v[e->i], "export") == 1 && e->v[e->i + 1] != NULL)
+	if (e->v[e->i + 1] != NULL && next_valid(e->v[e->i + 1], e) == 1)
 	{
 		e->i++;
 		espfun(e);
 		check_path(e);
 		return ;
 	}
+	else if (next_valid(e->v[e->i + 1], e) == 0)
+		single_export(e);
 	else if (compare(e->v[e->i], "unset") == 1)
 	{
 		if (e->v[e->i + 1] == NULL)
