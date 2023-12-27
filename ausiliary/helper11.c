@@ -6,21 +6,11 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 10:57:12 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/26 12:33:20 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/27 12:29:49 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	check_red(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s[i] == '>' || s[i] == '<')
-		return (1);
-	return (0);
-}
 
 int	last_check_val(t_env *e, int j)
 {
@@ -33,14 +23,6 @@ int	last_check_val(t_env *e, int j)
 		return (1);
 	}
 	return (0);
-}
-
-void	check_echo(t_env *e)
-{
-	while (e->v[e->i_copy] != 0 && e->v[e->i_copy][0] != '>'
-		&& e->v[e->i_copy][0] != '<' && e->v[e->i_copy][0] != '|')
-		e->i_copy++;
-	e->i_copy--;
 }
 
 void	single_export(t_env *e)

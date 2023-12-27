@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 11:22:00 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/22 12:59:28 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/27 13:33:14 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,21 @@ int	init_nuller(t_env *e)
 
 void	cont_check_validation(t_env *e)
 {
-	if (e->v[e->i_copy + 1] == 0 && there_is_red(e->v[e->i_copy]) == 1)
+	if (valid_redp(e, e->i_copy) == 0)
+		dimension_validation(e);
+	if ((e->v[e->i_copy][0] == '<' && e->v[e->i_copy][1] == '<' && \
+	e->v[e->i_copy][2] == '<') || ((e->v[e->i_copy][0] == '>' || \
+	e->v[e->i_copy][0] == '<') && e->v[e->i_copy][1] == 0 \
+	&& e->v[e->i_copy + 1] == 0))
 	{
+		if (e->exit == 1 || e->is_valid == 1)
+			return ;
 		printf("bash: syntax error near unexpected token `newline'\n");
-		e->exit_code = 2;
+		e->exit = 1;
 		e->is_valid = 1;
+		e->exit_code = 2;
 		return ;
 	}
-	else
-	{
-		if (check_red(e->v[e->i_copy]) == 1)
-		{
-			if (ft_strlen(e->v[e->i_copy]) >= 3 && (mutiple_equal(e) == 1))
-			{
-				e->exit_code = 2;
-				e->is_valid = 1;
-				return ;
-			}
-		}
-	}
-	check_while_null(e);
 }
 
 void	check_validation(t_env *e)
@@ -89,20 +84,15 @@ void	check_validation(t_env *e)
 	}
 	while (e->v[e->i_copy] != 0 && e->is_valid == 0)
 	{
-		if (compare(e->v[e->i_copy], "echo") == 1 || compare(e->v[e->i_copy],
-				"echo ") == 1)
-			check_echo(e);
-		else if ((e->v[e->i_copy][0] == '\'' || e->v[e->i_copy][0] == '\"')
-				&& (e->v[e->i_copy][1] == '>' || e->v[e->i_copy][1] == '<'
-				|| e->v[e->i_copy][1] == '|'))
-		{
-			print_no_quote(e->v[e->i_copy]);
-			printf(": command not found\n");
-			e->exit_code = 127;
-			e->is_valid = 1;
-		}
-		else
+		if (e->v[e->i_copy][0] != 34 || e->v[e->i_copy][0] != 39)
 			cont_check_validation(e);
+		if (e->exit == 0 && e->v[e->i_copy + 1] == 0 && \
+		(e->v[e->i_copy][0] == '|' \
+		|| e->v[e->i_copy][0] == '<' || e->v[e->i_copy][0] == '>'))
+		{
+			if (cont_last_check(e) == 1)
+				return ;
+		}
 		e->i_copy++;
 	}
 	return ;

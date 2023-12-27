@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 10:50:39 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/14 09:59:40 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/27 10:42:38 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int	splong(t_env *e)
 {
 	e->j = e->indx;
 	e->word = 0;
-	if (e->cmd[e->j] == 39 || e->cmd[e->j] == 34)
+	if (e->cmd[e->j] == '>' || e->cmd[e->j] == '<' || e->cmd[e->j] == '|')
+		splong_red(e);
+	else if (e->cmd[e->j] == 39 || e->cmd[e->j] == 34)
 	{
 		split_clousure(e);
 		e->iter++;
@@ -72,6 +74,9 @@ int	spacer(t_env *e)
 		if (e->cmd[e->indx] != 0 && (e->cmd[e->indx] == 34
 				|| e->cmd[e->indx] == 39))
 			quote_check(e);
+		else if (e->cmd[e->indx] == '|' || e->cmd[e->indx] == '<' || \
+		e->cmd[e->indx] == '>')
+			check_red_other(e);
 		else
 			word(e);
 	}

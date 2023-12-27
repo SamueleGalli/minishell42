@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:06:25 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/12 13:27:10 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/27 10:56:05 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ void	word(t_env *e)
 	while (e->cmd[e->indx] != ' ' && e->cmd[e->indx] != 0
 		&& e->cmd[e->indx] != 39 && e->cmd[e->indx] != 34
 		&& e->cmd[e->indx] != '$')
-	{
 		e->indx++;
-	}
 }
 
 void	quote_check(t_env *e)
@@ -69,6 +67,9 @@ void	writing_split(t_env *e)
 {
 	if (e->cmd[e->indx] == 39 || e->cmd[e->indx] == 34)
 		alloc_quote(e);
+	else if (e->cmd[e->indx] == '|' || e->cmd[e->indx] == '<' || \
+	e->cmd[e->indx] == '>')
+		write_redir(e);
 	else
 	{
 		if (e->cmd[e->indx] == '$')
@@ -93,7 +94,8 @@ void	cont_splitme(t_env *e)
 			e->indx++;
 		if (e->cmd[e->indx] == '\0')
 			break ;
-		if ((e->cmd[e->indx] == 39 || e->cmd[e->indx] == 34) && e->cmd[e->indx \
+		else if ((e->cmd[e->indx] == 39 || \
+		e->cmd[e->indx] == 34) && e->cmd[e->indx \
 			+ 1] == e->cmd[e->indx])
 			e->indx += 2;
 		else

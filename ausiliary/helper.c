@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 12:31:57 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/21 12:00:38 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/27 13:08:32 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,6 @@ void	update_i(t_env *e)
 
 void	error(t_env *e)
 {
-	if (e->v[e->i][0] == '.' && e->v[e->i][1] == '/')
-	{
-		printf("%s: permission denied\n", e->v[e->i]);
-		e->exit_code = 126;
-		e->exit = 1;
-		return ;
-	}
 	printf("%s: command not found\n", e->v[e->i]);
 	e->exit_code = 127;
 	e->exit = 1;
