@@ -6,14 +6,14 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 09:26:37 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/22 10:34:06 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/28 12:40:49 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//scrivi l'output della pipe nel file1
-//ls / | grep c | cat > file1
+// scrivi l'output della pipe nel file1
+// ls / | grep c | cat > file1
 
 void	write_red(t_env *e)
 {
@@ -44,7 +44,9 @@ void	forking_in(t_env *e, char *fileoutput, int type)
 		fdout = open(fileoutput, O_WRONLY | O_APPEND | O_CREAT, 0666);
 	if (fdout == -1)
 	{
-		perror("open");
+		if (fileoutput != NULL)
+			free(fileoutput);
+		printf("bash: %s: No such file or directory\n", fileoutput);
 		exiting(e, 1);
 	}
 	if (fileoutput != NULL)
@@ -72,7 +74,11 @@ void	single_write(t_env *e, char *fileoutput, int type)
 		forking_in(e, fileoutput, type);
 	else
 	{
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &e->status, 0);
+		if (WIFEXITED(e->status) == 0)
+			e->exit_code = 2;
+		else
+			e->exit_code = WEXITSTATUS(e->status);
 		close(e->pipefd[0]);
 		close(e->pipefd[1]);
 	}

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:11:31 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/30 13:47:57 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/28 12:39:41 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	single_major_mult_redirect(t_env *e)
 		if (fd < 0)
 		{
 			e->exit = 1;
-			perror("open");
+			printf("bash: %s: No such file or directory\n", filename);
 			exiting(e, 0);
 			close(fd);
 		}
@@ -91,7 +91,7 @@ void	redirect_mult_double(t_env *e)
 		if (fd < 0)
 		{
 			e->exit_code = 1;
-			perror("open");
+			printf("bash: %s: No such file or directory\n", filename);
 			exiting(e, 0);
 		}
 		close(fd);

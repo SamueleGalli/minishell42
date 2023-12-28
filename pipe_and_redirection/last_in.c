@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:44:15 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/14 12:37:39 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/28 12:39:41 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	forking_in(t_env *e, char *fileoutput, int type)
 	if (e->fd_output < 0)
 	{
 		e->exit_code = 1;
-		perror("open");
+		printf("bash: %s: No such file or directory\n", filename);
 		return ;
 	}
 	dup2(e->fd_output, 1);

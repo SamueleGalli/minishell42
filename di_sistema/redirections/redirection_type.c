@@ -6,9 +6,11 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:07:09 by eraccane          #+#    #+#             */
-/*   Updated: 2023/12/04 12:47:05 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/28 12:46:42 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//cat < main.c minishell.h override.supp
 
 #include "../../minishell.h"
 
@@ -17,17 +19,24 @@ void	single_minor_redirect(t_env *e)
 	int		fd;
 	char	*filename;
 
+	e->i += 2;
+	if (multi_file(e) >= 2 && e->v[0][0] != '>' && e->v[0][0] != '<')
+	{
+		while_multiple_file(e, 0);
+		return ;
+	}
 	filename = find_filepath_minor(e);
 	fd = open(filename, O_RDONLY);
-	free(filename);
 	if (fd < 0)
 	{
 		e->exit_code = 1;
-		perror("open");
+		printf("bash: %s: No such file or directory\n", filename);
 		e->exit = 1;
+		free(filename);
 		return ;
 	}
-	if (e->v[e->i][0] != '<')
+	free(filename);
+	if (e->v[0][0] != '<' && e->v[0][0] != '>')
 		single_continuous(e, fd);
 	e->exit = 1;
 	close(fd);
@@ -45,7 +54,7 @@ void	single_major_redirect(t_env *e)
 		if (fd < 0)
 		{
 			e->exit_code = 1;
-			perror("open");
+			printf("bash: %s: No such file or directory\n", filename);
 			exiting(e, 0);
 		}
 		close(fd);
@@ -93,7 +102,7 @@ void	double_major_redirect(t_env *e)
 		if (fd < 0)
 		{
 			e->exit_code = 1;
-			perror("open");
+			printf("bash: %s: No such file or directory\n", filename);
 			exiting(e, 0);
 		}
 		close(fd);

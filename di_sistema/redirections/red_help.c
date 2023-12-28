@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 11:45:48 by eraccane          #+#    #+#             */
-/*   Updated: 2023/11/20 13:26:39 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/28 12:39:41 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	fork_pid_zero(t_env *e, char *filename, int type)
 	if (fd < 0)
 	{
 		e->exit_code = 1;
-		perror("open");
+		printf("bash: %s: No such file or directory\n", filename);
 		exiting(e, 0);
 	}
 	execve_red(e, fd);
@@ -99,14 +99,16 @@ char	*find_filepath_minor(t_env *e)
 {
 	int		i;
 	char	*str;
+	int		size;
+	char	*s;
 
+	s = e->v[index_v_arrows(e, "<") + 1];
 	i = 0;
-	str = (char *)malloc(sizeof(char) * ft_strlen(e->v[index_v_arrows(e, "<")
-				+ 1]) + 1);
-	while (e->v[index_v_arrows(e, "<") + 1][i] != 0 && \
-	e->v[index_v_arrows(e, "<") + 1][i] != ' ')
+	size = ft_strlen(s);
+	str = (char *)malloc(sizeof(char) * (size + 1));
+	while (s[i] != 0 && s[i] != ' ')
 	{
-		str[i] = e->v[index_v_arrows(e, "<") + 1][i];
+		str[i] = s[i];
 		i++;
 	}
 	if (i == 0)

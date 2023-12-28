@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:34:08 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/21 10:05:25 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/28 12:41:03 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	pid_red(t_env *e, char *file)
 		fd = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	if (fd == -1)
 	{
-		perror("open");
+		printf("bash: %s: No such file or directory\n", file);
 		exiting(e, 1);
 	}
 	if (file != NULL)

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:03:49 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/20 12:10:06 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/28 12:40:37 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	fork_reading(t_env *e, char *fileinput)
 	if (fdin < 0)
 	{
 		e->exit_code = 1;
-		perror("open");
+		printf("bash: %s: No such file or directory\n", fileinput);
 		return ;
 	}
 	dup2(fdin, 0);

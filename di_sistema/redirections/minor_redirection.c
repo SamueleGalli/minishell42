@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:25:41 by eraccane          #+#    #+#             */
-/*   Updated: 2023/12/04 12:52:51 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/28 12:17:21 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	single_continuous(t_env *e, int fd)
 {
 	pid_t	pid;
 
+	e->i = 0;
 	if (check_builtin(e) == 0)
 	{
 		pathcmd(e);

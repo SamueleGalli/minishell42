@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 16:23:17 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/23 13:06:22 by sgalli           ###   ########.fr       */
+/*   Updated: 2023/12/28 12:46:23 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	min_mult_redirect(t_env *e)
 	{
 		e->exit_code = 1;
 		e->exit = 1;
-		perror("open");
+		printf("bash: %s: No such file or directory\n", filename);
 		e->true_red = 1;
 		return ;
 	}

@@ -134,7 +134,10 @@ int		mutiple_equal(t_env *e);
 int		is_pipredir(char *s);
 int		cont_last_check(t_env *e);
 int		valid_redp(t_env *e, int i);
+int		multi_file(t_env *e);
+int		len_red(t_env *e);
 
+void	cont_mult_file(t_env *e, int fd, char *filename);
 void	dimension_validation(t_env *e);
 void	splong_red(t_env *e);
 void	check_max_min(t_env *e);
@@ -169,6 +172,7 @@ void	change_value(t_env *e, int i, char **tmp);
 void	count_pipe(t_env *e);
 void	tilde_or_not(t_env *e, char *tmp);
 void	check_path(t_env *e);
+void	while_multiple_file(t_env *e, int fd);
 void	other_redir(t_env	*e);
 void	pipe_com(t_env *e);
 void	cont_what_exit(t_env *e);
