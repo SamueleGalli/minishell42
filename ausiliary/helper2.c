@@ -5,68 +5,81 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/12 14:55:37 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/14 12:44:58 by sgalli           ###   ########.fr       */
+/*   Created: 2024/01/02 15:55:17 by sgalli            #+#    #+#             */
+/*   Updated: 2024/01/02 16:29:31 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	free_table(char **s)
+int	ft_check_digit(char *s, t_env *e)
 {
 	int	i;
 
 	i = 0;
-	if (s == NULL || s[0] == NULL)
-		return ;
-	else
+	while (s[i] != 0)
 	{
-		while (s[i] != NULL)
-			free(s[i++]);
-		free(s);
+		if (s[i] == '-')
+		{
+			e->sign = -1;
+			i++;
+		}
+		else if (s[i] == '+')
+		{
+			e->sign = 1;
+			i++;
+		}
+		else if (s[i] == '\"')
+			i++;
+		else if ((s[i] >= '0' && s[i] <= '9') || s[i] == ' ')
+			i++;
+		else
+			return (0);
 	}
+	return (1);
 }
 
-void	exiting(t_env *e, int i)
-{
-	if (e->p != NULL)
-		free(e->p);
-	if (e->s != NULL)
-		free(e->s);
-	if (e->path != NULL)
-		free(e->path);
-	if (e->mat_flag != NULL)
-		free_table(e->mat_flag);
-	if (e->v != NULL)
-		free_table(e->v);
-	if (e->env != NULL)
-		free_table(e->env);
-	if (e->cmd != NULL)
-		free(e->cmd);
-	free(e);
-	exit(i);
-}
-
-void	print_str(char *s, int i)
-{
-	if (s == NULL)
-		return ;
-	while (s[i] != '\0')
-		printf("%c", s[i++]);
-}
-
-int	check_closure(char *s)
+char	*mini_strcat(char *d, const char *s)
 {
 	int	i;
+	int	k;
 
-	i = 1;
-	if (control_match(s) == 1)
+	k = 0;
+	i = strcom(d, 0);
+	while (s[k] != '\0' && s[k] != ' ')
+	{
+		if (s[k] == 34 || s[k] == 39 || s[k] == '<' || s[k] == '>')
+			k++;
+		else
+			d[i++] = s[k++];
+	}
+	d[i] = '\0';
+	return (d);
+}
+
+int	strcom(char *s, int e)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	if (s == NULL)
 		return (0);
-	while (s[i] != '\0' && s[i] != 34 && s[i] != 39)
-		i++;
-	if (s[i] == '\0')
-		return (1);
-	else if (s[i] != s[0])
-		return (1);
-	return (0);
+	if (s[0] != '\0' && s[1] != '\0')
+	{
+		if (s[0] == '$' && s[1] == '?')
+			return (ft_strnum(e));
+	}
+	while (s[j] != 0)
+	{
+		if (s[j] == 34 || s[j] == 39)
+			j++;
+		else
+		{
+			i++;
+			j++;
+		}
+	}
+	return (i);
 }

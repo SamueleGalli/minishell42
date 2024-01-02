@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 12:31:57 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/27 13:08:32 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/02 15:52:27 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,19 @@ int	empty(t_env *e)
 		j++;
 	}
 	return (0);
+}
+
+int	ft_strnum(int i)
+{
+	int	c;
+
+	c = 0;
+	if (i == 0)
+		return (1);
+	while (i != 0)
+	{
+		i = i / 10;
+		c++;
+	}
+	return (c);
 }

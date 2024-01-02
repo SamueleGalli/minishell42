@@ -7,18 +7,19 @@ SRC = 	main.c \
 		type/type2.c \
 		ausiliary/helper.c \
 		ausiliary/helper2.c \
-		ausiliary/helper3.c \
-		ausiliary/helper4.c \
-		ausiliary/helper5.c \
-		ausiliary/helper6.c \
-		ausiliary/helper7.c \
-		ausiliary/helper8.c \
-		ausiliary/helper9.c \
-		ausiliary/helper10.c \
-		ausiliary/helper11.c \
-		ausiliary/helper12.c \
-		ausiliary/helper13.c \
-		ausiliary/helper14.c \
+		path/path.c \
+		path/contiue_path.c \
+		split/split.c \
+		split/split2.c \
+		split/split3.c \
+		syntax/check_error.c \
+		syntax/check_error2.c \
+		other/alloc.c \
+		other/check_builtin.c \
+		other/env.c \
+		other/free.c \
+		other/quote.c \
+		other/size.c \
 		libft/ft_atoi.c \
 		libft/ft_bzero.c \
 		libft/ft_calloc.c \
@@ -56,9 +57,13 @@ SRC = 	main.c \
 		libft/ft_strcpy.c \
 		libft/ft_strcat.c \
 		di_sistema/signal/signal.c \
+		di_sistema/exit/exit.c \
+		di_sistema/cd/cd.c \
+		di_sistema/cd/cd2.c \
 		di_sistema/echo/echo.c \
 		di_sistema/echo/echo2.c \
 		di_sistema/echo/echo3.c \
+		di_sistema/echo/echo4.c \
 		di_sistema/export_unset_env/unset_env.c \
 		di_sistema/export_unset_env/export.c \
 		di_sistema/export_unset_env/export2.c \
@@ -68,33 +73,34 @@ SRC = 	main.c \
 		di_sistema/execve/flags.c \
 		di_sistema/execve/flag2.c \
 		di_sistema/execve/flag_env.c \
-		di_sistema/redirections/redirections.c \
-		di_sistema/redirections/red_help.c \
-		di_sistema/redirections/red_help_2.c \
-		di_sistema/redirections/red_help3.c \
-		di_sistema/redirections/red_help4.c \
-		di_sistema/redirections/redirection_type.c \
-		di_sistema/redirections/minor_redirection.c \
-		di_sistema/redirections/mult_redirect.c \
-		di_sistema/redirections/check_red.c \
-		di_sistema/redirections/last_file_in.c \
-		split/split.c \
-		split/split2.c \
-		split/split3.c \
-		pipe/pipe.c \
-		pipe/fork_and_parent.c \
-		pipe/loop_pipe.c \
-		pipe/check_pipe.c \
-		path/path.c \
-		path/contiue_path.c \
-		pipe_and_redirection/do_pipe.c \
-		pipe_and_redirection/do_pipe2.c \
-		pipe_and_redirection/check_pipe_or_redirection.c \
-		pipe_and_redirection/do_red.c \
-		pipe_and_redirection/parent_fork_pipe.c \
-		pipe_and_redirection/pipe_file.c \
-		pipe_and_redirection/excve_redir.c \
-		pipe_and_redirection/in_pipe.c \
+		pipe_red/redirections/read_file.c \
+		pipe_red/redirections/cont_min_red.c \
+		pipe_red/redirections/find_file_cont.c \
+		pipe_red/redirections/find_file.c \
+		pipe_red/redirections/find_red_type.c \
+		pipe_red/redirections/find_red_type2.c \
+		pipe_red/redirections/help_redirection.c \
+		pipe_red/redirections/heredoc2.c \
+		pipe_red/redirections/heredoc.c \
+		pipe_red/redirections/major_execution.c \
+		pipe_red/redirections/major_red.c \
+		pipe_red/redirections/minor_red.c \
+		pipe_red/redirections/print_in_file.c \
+		pipe_red/redirections/multiple_file_red.c \
+		pipe_red/redirections/pipe_and_red_check.c \
+		pipe_red/redirections/update_red.c \
+		pipe_red/pipe_and_redirection/do_pipe.c \
+		pipe_red/pipe_and_redirection/do_pipe2.c \
+		pipe_red/pipe_and_redirection/check_pipe_or_redirection.c \
+		pipe_red/pipe_and_redirection/do_red.c \
+		pipe_red/pipe_and_redirection/parent_fork_pipe.c \
+		pipe_red/pipe_and_redirection/pipe_file.c \
+		pipe_red/pipe_and_redirection/excve_redir.c \
+		pipe_red/pipe_and_redirection/in_pipe.c \
+		pipe_red/pipe/pipe.c \
+		pipe_red/pipe/fork_and_parent.c \
+		pipe_red/pipe/loop_pipe.c \
+		pipe_red/pipe/check_pipe.c \
 
 OBJ = $(SRC:.c=.o)
 

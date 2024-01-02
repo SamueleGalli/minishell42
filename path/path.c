@@ -81,7 +81,7 @@ void	pathcmd(t_env *e)
 		return ;
 	if (e->s != NULL)
 		free(e->s);
-	if (e->v[e->i][0] == 47)
+	if (e->v[e->i][0] == 47 || e->v[e->i][0] == '.')
 	{
 		e->s = malloc(ft_strlen(e->v[e->i]) + 1);
 		ft_strcpy(e->s, e->v[e->i]);

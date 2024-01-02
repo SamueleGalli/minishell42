@@ -15,6 +15,22 @@
 
 #include "minishell.h"
 
+int	init_nuller(t_env *e)
+{
+	e->output = 0;
+	e->input = 0;
+	e->s = NULL;
+	if (e->cmd[0] == '\0')
+	{
+		e->v = NULL;
+		return (0);
+	}
+	splitme(e);
+	e->i = 0;
+	e->exit = 0;
+	return (1);
+}
+
 void	nuller(t_env *e)
 {
 	if (init_nuller(e) == 0)
@@ -39,26 +55,6 @@ void	nuller(t_env *e)
 	e->i = 0;
 }
 
-void	copy_env(t_env *e, char **env)
-{
-	int	i;
-
-	i = 0;
-	e->env = (char **)malloc(sizeof(char *) * size_mat(env));
-	while (env[i] != NULL)
-	{
-		if (env[i][0] == 'P' && env[i][1] == 'A')
-		{
-			e->path = (char *)malloc(sizeof(char) * (ft_strlen(env[i]) + 1));
-			alloc_mat(e->path, env[i]);
-		}
-		e->env[i] = (char *)malloc(sizeof(char) * (ft_strlen(env[i]) + 1));
-		alloc_mat(e->env[i], env[i]);
-		i++;
-	}
-	e->env[i] = NULL;
-}
-
 void	cont_allocation(t_env *e)
 {
 	e->start_red = 0;
@@ -80,6 +76,7 @@ void	cont_allocation(t_env *e)
 	e->finded_path = 0;
 	e->c_path = 0;
 	e->red_flag = 0;
+	e->out_red = 0;
 	e->check_input = -1;
 }
 
