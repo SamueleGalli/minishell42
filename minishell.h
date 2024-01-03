@@ -2,14 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
-	+:+     */
-/*   By: eraccane <marvin@42.fr>                    +#+  +:+      
-	+#+        */
-/*                                                +#+#+#+#+#+  
-	+#+           */
-/*   Created: 2023/09/16 09:40:01 by eraccane          #+#    #+#             */
-/*   Updated: 2023/09/16 09:40:01 by eraccane         ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/03 11:43:14 by sgalli            #+#    #+#             */
+/*   Updated: 2024/01/03 11:43:14 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +251,7 @@ void	continue_heredoc(t_env *e, char *s);
 void	update_env_v(t_env *e, int k, int i, char **tmp);
 void	alloc_mat_esp(char *d, t_env *e);
 
+char	*filepath(char *str, int i, int j, t_env *e);
 char	*format(char *s);
 char	*find_mult_mult_filepath(t_env *e);
 char	*find_mult_filepath(t_env *e);

@@ -6,11 +6,9 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:07:09 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/02 16:55:12 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/03 11:38:10 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//cat < main.c minishell.h override.supp
 
 #include "../../minishell.h"
 

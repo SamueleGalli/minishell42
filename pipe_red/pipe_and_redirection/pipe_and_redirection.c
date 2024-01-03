@@ -6,13 +6,11 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:33:21 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/02 16:19:11 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/03 11:39:46 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-//echo 42 < file1 | cat | wc -l
 
 int	pipe_or_redir(t_env *e)
 {

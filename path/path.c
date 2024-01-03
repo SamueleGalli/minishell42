@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.c                    		                    :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 10:25:44 by sgalli            #+#    #+#             */
-/*   Updated: 2023/09/07 12:37:32 by sgalli           ###   ########.fr       */
+/*   Created: 2024/01/03 11:41:01 by sgalli            #+#    #+#             */
+/*   Updated: 2024/01/03 11:41:03 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ int	path_find(char *str)
 	return (0);
 }
 
-/*
-** NOTE - possibile utilizzare ft_strcmp per vedere se le prime 4 lettere 
-** sono PATH senza fare lettera per lettera il controllo (vedere funzione sopra)
-** NOTE - cambiata ricerca del PATH con funzione dichiarata sopra, sembra
-*/
-
 void	searchpath(t_env *e)
 {
 	int		i;
@@ -67,14 +61,6 @@ void	searchpath(t_env *e)
 	}
 }
 
-/*
-access X_OK da 0 se se il percorso assoluto esiste
-se esiste lo alloco in p senno alloco singolarmente cartella e comando
-assegno a v[o] il percorso corrente
-lo eseguo usando execve
-se da errore mette un errore comunemente usato per perror
-se alloco dinamicamente con malloc la memoria a p la libero
-*/
 void	pathcmd(t_env *e)
 {
 	if (e->c_path == 1)

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 11:44:45 by sgalli            #+#    #+#             */
-/*   Updated: 2023/12/26 12:28:46 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/03 11:43:29 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	directory(t_env *e)
 			e->exit_code = 1;
 			printf("bash: cd: %s: No such file or directory\n", e->v[e->i + 1]);
 		}
+		else
+			e->exit_code = 0;
 		return ;
 	}
 	else if (compare(e->v[e->i], "cd") == 1)

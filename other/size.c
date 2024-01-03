@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 12:22:39 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/02 16:30:04 by sgalli           ###   ########.fr       */
+/*   Created: 2024/01/03 11:36:35 by sgalli            #+#    #+#             */
+/*   Updated: 2024/01/03 11:36:37 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,19 @@ int	size_mat(char **t)
 int	ft_strlen_red(char *s)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	if (s == NULL)
 		return (0);
-	while (s[i] != '\0')
+	if (s[i] == 34 || s[i] == 39)
 		i++;
+	while (s[i] != '\0' && s[i] != 34 && s[i] != 39)
+	{
+		i++;
+		j++;
+	}
 	return (i);
 }
 

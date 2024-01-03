@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:06:17 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/02 16:19:14 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/03 11:39:40 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	pipe_single(t_env *e)
 	exiting(e, 0);
 }
 
-void	define_redir(t_env *e)
+/*void	define_redir(t_env *e)
 {
 	if (e->define_pipe == 0)
 	{
@@ -114,4 +114,4 @@ void	define_redir(t_env *e)
 		else
 			parent_process(e);
 	}
-}
+}*/

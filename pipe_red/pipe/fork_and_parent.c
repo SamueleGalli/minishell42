@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:17:38 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/02 16:18:13 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/03 11:40:32 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	father_com(t_env *e)
 		perror("execve");
 		exiting(e, 1);
 	}
-	waitpid(e->pid, NULL, 0);
+	waitpid(e->pid, &e->status, 0);
+	e->exit_code = WEXITSTATUS(e->status);
 }
 
 void	check_error(t_env *e)

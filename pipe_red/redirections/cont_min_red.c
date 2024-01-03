@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 16:34:56 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/02 16:55:24 by sgalli           ###   ########.fr       */
+/*   Created: 2024/01/03 11:37:14 by sgalli            #+#    #+#             */
+/*   Updated: 2024/01/03 11:37:15 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ void	fork_cotinue(t_env *e, pid_t pid, int fd)
 	{
 		dup2(fd, STDIN_FILENO);
 		close(fd);
+		if (check_builtin(e) == 0)
+		{
+			execve(e->s, e->mat_flag, e->env);
+			perror("execve");
+			exiting(e, 1);
+		}
 		variabletype(e);
 		exiting(e, 0);
 	}
@@ -75,8 +81,6 @@ void	single_minor_redirect(t_env *e)
 	filename = NULL;
 	if (prev_minor_red(e, fd, filename) == 0)
 		return ;
-	if (e->v[0][0] != '<' && e->v[0][0] != '>')
-		single_continuous(e, fd);
 	e->exit = 1;
 	close(fd);
 }

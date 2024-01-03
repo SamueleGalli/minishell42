@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 11:38:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/02 16:25:41 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/03 11:38:16 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ int	len_red(t_env *e)
 	while (e->v[e->i][i] == ' ')
 		i++;
 	while (e->v[e->i][i] != 0 && e->v[e->i][i] != ' ')
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -97,7 +95,7 @@ int	prev_minor_red(t_env *e, int fd, char *filename)
 {
 	e->i += 2;
 	if (multi_file(e) >= 2 && e->v[0][0] != '>' && e->v[0][0] != '<' \
-	&& compare(e->v[0], "echo") == 0)
+	&& compare(e->v[0], "cat") == 1)
 	{
 		while_multiple_file(e, 0);
 		return (0);
@@ -113,5 +111,7 @@ int	prev_minor_red(t_env *e, int fd, char *filename)
 		return (0);
 	}
 	free(filename);
+	if (e->v[0][0] != '<' && e->v[0][0] != '>')
+		single_continuous(e, fd);
 	return (1);
 }
