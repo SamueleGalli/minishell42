@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:32:48 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:39:10 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/08 10:08:24 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	update_in_out(t_env *e)
 
 int	check_valid_red(t_env *e)
 {
-	while (e->v[e->i] != NULL)
+	while (e->v[e->i] != NULL && e->v[e->i][0] != '|')
 	{
 		if (e->v[e->i][0] == '<' || e->v[e->i][0] == '>'
 			|| e->v[e->i][0] == '|')
@@ -75,6 +75,8 @@ int	check_valid_red2(t_env *e)
 
 int	update_redir(t_env *e)
 {
+	if (e->v[e->i] == NULL)
+		return (1);
 	update_in_out(e);
 	if (e->v[e->i][0] == '<' && e->v[e->i][0] == '>' \
 	&& (e->v[e->i] != NULL))

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 09:27:45 by marvin            #+#    #+#             */
-/*   Updated: 2024/01/03 11:43:23 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/05 13:00:37 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,44 +60,16 @@ void	what_exit(t_env *e)
 
 void	type_cont(t_env *e)
 {
-	if (arrows_number(e) > 1)
-	{
-		multiple_redirect(e);
-		return ;
-	}
 	if (compare(e->v[e->i], "exit") == 1 && e->exit != 1)
 		what_exit(e);
-	else if (search_arrows(e, "< ") == 1 || search_arrows(e, "> ") == 1
-		|| search_arrows(e, "<") == 1 || search_arrows(e, ">") == 1)
-	{
-		redirect_single(e);
-		return ;
-	}
-	else if (search_arrows(e, "<< ") == 1 || search_arrows(e, ">> ") == 1
-		|| search_arrows(e, "<<") == 1 || search_arrows(e, ">>") == 1)
-	{
-		redirect_double(e);
-		return ;
-	}
 	else if (e->v != NULL && e->exit != 1)
 		variabletype(e);
 }
 
 void	typing(t_env *e)
 {
-	if (search_pipe(e) == 1)
-	{
-		count_pipe(e);
-		if (search_arrows(e, "< ") == 1 || search_arrows(e, "> ") == 1
-			|| search_arrows(e, "<") == 1 || search_arrows(e, ">") == 1
-			|| search_arrows(e, "<< ") == 1 || search_arrows(e, ">> ") == 1
-			|| search_arrows(e, "<<") == 1 || search_arrows(e, ">>") == 1)
-			pipe_and_redirection(e);
-		else
-			piping(e);
-		e->exit = 1;
-		return ;
-	}
+	if (is_pipe_red(e) == 1)
+		pipe_and_redirection(e);
 	else
 		type_cont(e);
 	return ;

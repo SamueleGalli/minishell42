@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:45:51 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:37:27 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/05 12:50:18 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,14 @@ char	*find_mult_mult_filepath(t_env *e)
 
 char	*find_filepath_minor_mult(t_env *e)
 {
-	int		i;
 	char	*str;
 	int		j;
 	int		d;
 
-	i = e->i;
 	j = 0;
 	d = ft_strlen_red(alloc_file(e, '<')) + 1;
 	str = (char *)malloc(sizeof(char) * d);
-	return (filepath(str, i, j, e));
+	return (filepath(str, j, e));
 }
 
 char	*find_filepath_minor(t_env *e)

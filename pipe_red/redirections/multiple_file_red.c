@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 11:45:20 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:38:22 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/08 11:19:01 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,23 @@
 int	multi_file(t_env *e)
 {
 	int	out;
+	int	i;
 
 	out = 0;
-	while (e->v[e->i] != 0 && e->v[e->i][0] != '<' && e->v[e->i][0] != '>'
-		&& e->v[e->i][0] != '|')
+	i = e->i;
+	i++;
+	while (e->v[i] != 0 && e->v[i][0] != '>'
+		&& e->v[i][0] != '|')
 	{
+		if (e->v[i][0] == '<')
+		{
+			if (e->v[i + 1] != NULL)
+			{
+				i ++;
+			}
+		}
 		out++;
-		e->i++;
+		i++;
 	}
 	return (out);
 }
@@ -97,14 +107,15 @@ void	while_multiple_file(t_env *e, int fd)
 {
 	char	*filename;
 
-	e->i = 3;
-	if (check_first(e, fd, --e->i) == 1)
+	e->i++;
+	filename = NULL;
+	if (e->v[e->i + 1][0] == '<')
+	{
+		mult_check_file(e, fd, filename);
+		return ;
+	}
+	if (check_first(e, fd, e->i) == 1)
 		return ;
 	e->i++;
-	while (e->v[e->i] != NULL)
-	{
-		filename = file_loop(e);
-		cont_mult_file(e, fd, filename);
-		e->i++;
-	}
+	cont_while_mult_file(e, fd, filename, 0);
 }

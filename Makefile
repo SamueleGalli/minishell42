@@ -87,20 +87,20 @@ SRC = 	main.c \
 		pipe_red/redirections/minor_red.c \
 		pipe_red/redirections/print_in_file.c \
 		pipe_red/redirections/multiple_file_red.c \
+		pipe_red/redirections/multiple_file_red2.c \
 		pipe_red/redirections/pipe_and_red_check.c \
 		pipe_red/redirections/update_red.c \
-		pipe_red/pipe_and_redirection/do_pipe.c \
-		pipe_red/pipe_and_redirection/do_pipe2.c \
+		pipe_red/pipe/do_pipe.c \
+		pipe_red/pipe/do_pipe2.c \
+		pipe_red/pipe/check_pipe.c \
+		pipe_red/pipe/pipe_file.c \
+		pipe_red/pipe/in_pipe.c \
+		pipe_red/pipe/pipe.c \
+		pipe_red/pipe/parent_fork_pipe.c \
 		pipe_red/pipe_and_redirection/check_pipe_or_redirection.c \
 		pipe_red/pipe_and_redirection/do_red.c \
-		pipe_red/pipe_and_redirection/parent_fork_pipe.c \
-		pipe_red/pipe_and_redirection/pipe_file.c \
 		pipe_red/pipe_and_redirection/excve_redir.c \
-		pipe_red/pipe_and_redirection/in_pipe.c \
-		pipe_red/pipe/pipe.c \
-		pipe_red/pipe/fork_and_parent.c \
-		pipe_red/pipe/loop_pipe.c \
-		pipe_red/pipe/check_pipe.c \
+		pipe_red/pipe_and_redirection/cont_min_red_mult.c \
 
 OBJ = $(SRC:.c=.o)
 

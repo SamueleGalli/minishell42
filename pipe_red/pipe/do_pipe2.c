@@ -6,11 +6,11 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:06:17 by sgalli            #+#    #+#             */
-/*   Updated: 2023/11/22 10:48:30 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/08 13:06:37 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	other_redir(t_env *e)
 {
@@ -67,8 +67,28 @@ void	red_pipe_fork(t_env *e)
 		parent_process(e);
 }
 
+int	find_red_pipe(t_env *e)
+{
+	int	i;
+
+	i = e->i;
+	while (e->v[i] != NULL)
+	{
+		if (e->v[i][0] == '>' || e->v[i][0] == '<')
+		{
+			return (1);
+			e->i_tmp = e->i;
+			e->i = i;
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	define_redir(t_env *e)
 {
+	if (find_red_pipe(e) == 1)
+		red_type(e);
 	other_redir(e);
 	if (e->define_pipe == 0)
 	{

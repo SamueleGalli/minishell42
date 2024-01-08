@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:11:31 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:37:34 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/08 12:41:00 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,6 @@ void	redirect_mult_single(t_env *e)
 	else if (search_mult_arrows(e, "< ") == 1 \
 	|| search_mult_arrows(e, "<") == 1)
 		min_mult_redirect(e);
-	else
-	{
-		e->exit = 1;
-		errno = EINVAL;
-		perror("minishell: warning");
-	}
 }
 
 void	redirect_mult_double(t_env *e)

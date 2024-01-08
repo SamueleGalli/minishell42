@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 11:12:48 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/03 11:37:38 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/05 11:02:28 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,6 @@ void	redirect_single(t_env *e)
 			|| compare(e->v[index_v_arrows(e, "> ")], "> ") == 1) \
 		&& e->v[index_v_arrows(e, ">") + 1] != NULL)
 		single_major_redirect(e);
-	else if ((compare(e->v[index_v_arrows(e, "<")], "<") == 1 \
-				|| compare(e->v[index_v_arrows(e, "< ")], "< ") == 1) \
-			&& e->v[index_v_arrows(e, "<") + 1] != NULL)
-		single_minor_redirect(e);
 	else
 	{
 		e->exit = 1;

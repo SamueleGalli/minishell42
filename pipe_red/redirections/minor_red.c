@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 11:38:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:38:16 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/08 13:05:09 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,23 @@ int	len_red(t_env *e)
 
 void	cont_mult_file(t_env *e, int fd, char *filename)
 {
-	int	i;
-
-	i = e->i;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	e->i = e->i_tmp;
+	if (check_builtin(e) == 0)
 	{
-		e->exit_code = 1;
-		printf("bash: %s: No such file or directory\n", filename);
-		if (filename != NULL)
-			free(filename);
-		e->exit = 1;
-		return ;
+		fd = open(filename, O_RDONLY);
+		if (fd < 0)
+		{
+			e->exit_code = 1;
+			printf("bash: %s: No such file or directory\n", filename);
+			if (filename != NULL)
+				free(filename);
+			e->exit = 1;
+			return ;
+		}
 	}
 	if (filename != NULL)
 		free(filename);
 	single_continuous(e, fd);
-	e->i = i;
 }
 
 void	print_red(t_env *e)
@@ -64,6 +64,11 @@ void	print_red(t_env *e)
 				print_no_quote(e->v[i++]);
 		}
 	}
+	else
+		return ;
+	if (e->v[i] != NULL)
+		return ;
+	printf("\n");
 }
 
 char	*final_while(char *str, int i, char *s)
@@ -93,14 +98,12 @@ char	*final_while(char *str, int i, char *s)
 
 int	prev_minor_red(t_env *e, int fd, char *filename)
 {
-	e->i += 2;
-	if (multi_file(e) >= 2 && e->v[0][0] != '>' && e->v[0][0] != '<' \
-	&& compare(e->v[0], "cat") == 1)
+	if (multi_file(e) >= 2 && min_com(e) == 1)
 	{
 		while_multiple_file(e, 0);
 		return (0);
 	}
-	filename = find_filepath_minor(e);
+	filename = find_filepath_minor_mult(e);
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
@@ -111,7 +114,13 @@ int	prev_minor_red(t_env *e, int fd, char *filename)
 		return (0);
 	}
 	free(filename);
-	if (e->v[0][0] != '<' && e->v[0][0] != '>')
+	if (check_next_redp(e) == 1)
+	{
 		single_continuous(e, fd);
+		while (e->v[e->i] && e->v[e->i][0] != '|' && e->v[e->i][0] != '>')
+			e->i++;
+	}
 	return (1);
 }
+
+//echo <"./test_files/infile_big" | cat <"./test_files/infile"

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 11:43:06 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:43:06 by sgalli           ###   ########.fr       */
+/*   Created: 2024/01/05 09:56:59 by sgalli            #+#    #+#             */
+/*   Updated: 2024/01/05 09:56:59 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	init_nuller(t_env *e)
 {
+	e->pi_re = 0;
 	e->output = 0;
 	e->input = 0;
 	e->s = NULL;
@@ -60,9 +61,9 @@ void	cont_allocation(t_env *e)
 	e->stdout = dup(STDOUT_FILENO);
 	e->mat_flag = NULL;
 	e->exit_code = 0;
-	e->p_i = 0;
 	e->exit = 0;
 	e->check = 0;
+	e->i_tmp = 0;
 	e->sign = 0;
 	e->input = 0;
 	e->i_copy = 0;

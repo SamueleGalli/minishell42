@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 17:38:05 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:39:23 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/05 10:15:27 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_pipefd(t_env *e)
 {
-	if (e->p_i == 0)
+	if (e->i == 0)
 	{
 		dup2(e->pipefd[0], STDIN_FILENO);
 		close(e->pipefd[0]);

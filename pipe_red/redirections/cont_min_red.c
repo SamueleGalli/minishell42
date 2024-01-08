@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:37:14 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:37:15 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/08 12:03:17 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@ void	single_continuous(t_env *e, int fd)
 {
 	pid_t	pid;
 
-	e->i = 0;
-	if (check_builtin(e) == 0)
-	{
-		pathcmd(e);
-		flag_matrix(e);
-	}
 	pid = fork();
 	if (pid == -1)
 	{
@@ -36,10 +30,12 @@ void	fork_cotinue(t_env *e, pid_t pid, int fd)
 {
 	if (pid == 0)
 	{
+		e->i = e->i_tmp;
 		dup2(fd, STDIN_FILENO);
-		close(fd);
 		if (check_builtin(e) == 0)
 		{
+			pathcmd(e);
+			flag_matrix(e);
 			execve(e->s, e->mat_flag, e->env);
 			perror("execve");
 			exiting(e, 1);
@@ -48,7 +44,10 @@ void	fork_cotinue(t_env *e, pid_t pid, int fd)
 		exiting(e, 0);
 	}
 	else
-		waitpid(pid, NULL, 0);
+		waitpid(pid, &e->status, 0);
+	if (e->status != 0)
+		e->exit_code = WEXITSTATUS(e->status);
+	close(fd);
 }
 
 void	single_major_redirect(t_env *e)
@@ -72,7 +71,7 @@ void	single_major_redirect(t_env *e)
 		check_red_fork(e, filename, 1);
 }
 
-void	single_minor_redirect(t_env *e)
+void	min_mult_redirect(t_env *e)
 {
 	int		fd;
 	char	*filename;
@@ -81,27 +80,5 @@ void	single_minor_redirect(t_env *e)
 	filename = NULL;
 	if (prev_minor_red(e, fd, filename) == 0)
 		return ;
-	e->exit = 1;
-	close(fd);
-}
-
-void	min_mult_redirect(t_env *e)
-{
-	int		fd;
-	char	*filename;
-
-	e->in_red = e->i;
-	filename = find_filepath_minor_mult(e);
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-	{
-		e->exit_code = 1;
-		e->exit = 1;
-		printf("bash: %s: No such file or directory\n", filename);
-		free(filename);
-		e->true_red = 1;
-		return ;
-	}
-	free(filename);
 	close(fd);
 }

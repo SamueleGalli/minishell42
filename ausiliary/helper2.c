@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:58 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:36:59 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/05 13:00:49 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,18 @@ int	strcom(char *s, int e)
 		}
 	}
 	return (i);
+}
+
+int	is_pipe_red(t_env *e)
+{
+	int	i;
+
+	i = 0;
+	while (e->v[i] != NULL)
+	{
+		if (e->v[i][0] == '>' || e->v[i][0] == '<' || e->v[i][0] == '|')
+			return (1);
+		i++;
+	}
+	return (0);
 }

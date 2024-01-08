@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 10:43:05 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:41:26 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/08 13:03:49 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void	mini_while(t_env *e)
 			writer(e, i);
 		i++;
 	}
-	print_red(e);
+	if (e->pi_re == 1)
+		print_red(e);
 	e->exit_code = 0;
 }
 
@@ -114,7 +115,7 @@ void	writeme(t_env *e)
 		{
 			e->i++;
 			mini_while(e);
-			if (compare(e->v[e->i], "-n") != 1 && e->v[e->i] != NULL)
+			if (e->pi_re == 0)
 				printf("\n");
 		}
 		return ;

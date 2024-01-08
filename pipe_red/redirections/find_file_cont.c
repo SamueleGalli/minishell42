@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:35:11 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:37:21 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/08 10:14:26 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,24 @@ char	*find_mult_filepath(t_env *e)
 	return (e->v[i]);
 }
 
-char	*filepath(char *str, int i, int j, t_env *e)
+char	*filepath(char *str, int j, t_env *e)
 {
 	int	d;
 
-	while (e->v[i] != NULL)
-	{
-		if (e->v[e->i][0] == '<')
-		{
-			i++;
-			break ;
-		}
-		i++;
-	}
 	d = 0;
-	if (e->v[i][0] == '\'' || e->v[i][0] == '\"')
+	if (e->v[e->i][0] == '\'' || e->v[e->i][0] == '\"')
+	{
 		j++;
-	while (e->v[i][j] != 0 && \
-	e->v[i][j + 1] != ' ' && e->v[i][j] != '\'' && \
-	e->v[i][j] != '\"')
-		str[d++] = e->v[i][j++];
+		while (e->v[e->i][0] != 0 && \
+		e->v[e->i][j] != e->v[e->i][0])
+			str[d++] = e->v[e->i][j++];
+	}
+	else
+	{
+		while (e->v[e->i][j] != 0 && \
+		e->v[e->i][j + 1] != ' ')
+			str[d++] = e->v[e->i][j++];
+	}
 	str[d] = '\0';
 	return (str);
 }
