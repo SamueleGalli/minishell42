@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:37:14 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/08 12:03:17 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/09 12:31:51 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ void	single_continuous(t_env *e, int fd)
 	fork_cotinue(e, pid, fd);
 }
 
+void	print_in_pipe(t_env *e)
+{
+	close(e->pipefd[0]);
+	dup2(e->pipefd[1], STDOUT_FILENO);
+	close(e->pipefd[1]);
+}
+
 void	fork_cotinue(t_env *e, pid_t pid, int fd)
 {
 	if (pid == 0)
@@ -34,6 +41,8 @@ void	fork_cotinue(t_env *e, pid_t pid, int fd)
 		dup2(fd, STDIN_FILENO);
 		if (check_builtin(e) == 0)
 		{
+			if (e->output == -1 && e->input > -1 && e->piping == 1)
+				print_in_pipe(e);
 			pathcmd(e);
 			flag_matrix(e);
 			execve(e->s, e->mat_flag, e->env);

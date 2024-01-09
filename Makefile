@@ -91,13 +91,14 @@ SRC = 	main.c \
 		pipe_red/redirections/pipe_and_red_check.c \
 		pipe_red/redirections/update_red.c \
 		pipe_red/pipe/do_pipe.c \
-		pipe_red/pipe/do_pipe2.c \
+		pipe_red/pipe/execute_pipe.c \
 		pipe_red/pipe/check_pipe.c \
 		pipe_red/pipe/pipe_file.c \
 		pipe_red/pipe/in_pipe.c \
 		pipe_red/pipe/pipe.c \
 		pipe_red/pipe/parent_fork_pipe.c \
-		pipe_red/pipe_and_redirection/check_pipe_or_redirection.c \
+		pipe_red/pipe_and_redirection/pipe_and_redirection.c \
+		pipe_red/pipe_and_redirection/help_pipe_and_redirect.c \
 		pipe_red/pipe_and_redirection/do_red.c \
 		pipe_red/pipe_and_redirection/excve_redir.c \
 		pipe_red/pipe_and_redirection/cont_min_red_mult.c \

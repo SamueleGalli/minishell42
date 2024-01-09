@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 11:38:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/08 13:05:09 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/09 12:05:45 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,6 @@ void	cont_mult_file(t_env *e, int fd, char *filename)
 	if (filename != NULL)
 		free(filename);
 	single_continuous(e, fd);
-}
-
-void	print_red(t_env *e)
-{
-	int	i;
-
-	i = e->i;
-	while (e->v[i] != 0 && e->v[i][0] != '>' && e->v[i][0] != '<')
-		i++;
-	if (e->v[i] != 0 && e->v[i][0] == '<' && e->out_red == 0)
-	{
-		if (i > e->i)
-			printf(" ");
-		i += 2;
-		if (e->v[i] != NULL)
-		{
-			while (e->v[i] != NULL && e->v[i][0] != '|' && e->v[i][0] != '>'
-				&& e->v[i][0] != '<')
-				print_no_quote(e->v[i++]);
-		}
-	}
-	else
-		return ;
-	if (e->v[i] != NULL)
-		return ;
-	printf("\n");
 }
 
 char	*final_while(char *str, int i, char *s)

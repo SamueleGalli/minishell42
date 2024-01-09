@@ -6,11 +6,40 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:07:19 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:42:16 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/09 11:28:43 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	what_exit(t_env *e)
+{
+	printf("exit\n");
+	check_max_min(e);
+	if (e->v[e->i + 1] != NULL && ft_check_digit(e->v[e->i + 1], e) == 1)
+	{
+		if (e->v[e->i + 2] != NULL && e->v[e->i + 1][0] != '-' && e->v[e->i
+			+ 1][0] != '+')
+		{
+			e->exit_code = 1;
+			printf("exit\nbash: exit: too many arguments\n");
+			return ;
+		}
+		else if (ft_check_digit(e->v[e->i + 1], e) == 1 && \
+		e->v[e->i + 1][0] != '-' && e->v[e->i + 1][0] != '+')
+			e->exit_code = ft_atoi(e->v[e->i + 1]);
+	}
+	else
+	{
+		if (e->v[e->i + 1] != 0 && ft_check_digit(e->v[e->i + 1], e) == 0)
+		{
+			printf("exit\nbash: exit: %s: numeric argument required\n",
+				e->v[e->i + 1]);
+		}
+		e->exit_code = 2;
+	}
+	cont_what_exit(e);
+}
 
 void	check_max_min(t_env *e)
 {
@@ -29,6 +58,8 @@ void	check_max_min(t_env *e)
 			exiting(e, 2);
 		}
 	}
+	if (e->v[e->i + 1] == NULL)
+		exiting(e, 0);
 }
 
 char	*format(char *s)

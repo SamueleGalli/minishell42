@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:30:26 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/05 10:18:43 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/09 12:41:49 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,50 @@
 
 void	update_pipe(t_env *e)
 {
-	if (e->v[e->i] != NULL)
+	int	i;
+
+	i = e->i;
+	while (e->v[i] != NULL && e->v[i][0] != '|')
+		i++;
+	if (e->v[i] != NULL && e->v[i][0] == '|')
+		i++;
+	e->i_tmp = i;
+	e->i = i;
+}
+
+int	exits_pipe(t_env *e)
+{
+	int	i;
+
+	i = e->i;
+	e->c_pipe = 0;
+	while (e->v[i] != NULL)
 	{
-		while (e->v[e->i] != NULL && e->v[e->i][0] != '|' \
-		&& e->v[e->i][0] != '<' && e->v[e->i][0] != '>')
-			e->i++;
-		if (e->v[e->i] == NULL)
-			return ;
-		if (e->v[e->i][0] == '<' || e->v[e->i][0] == '>')
-			return ;
-		if (e->v[e->i] != NULL)
-			e->i++;
+		if (e->v[i][0] == '|')
+			e->c_pipe++;
+		i++;
 	}
+	if (e->c_pipe > 0)
+		return (1);
+	return (0);
+}
+
+void	control_pipe(t_env *e)
+{
+	e->tmp_i = 0;
+	e->check = e->i;
+	if (e->v[e->i][0] == '|')
+		e->i++;
+}
+
+int	which_pipe(t_env *e)
+{
+	int	i;
+
+	i = e->i;
+	while (e->v[i] != NULL && e->v[i][0] != '|')
+		i++;
+	if (e->v[i] == NULL)
+		return (1);
+	return (0);
 }

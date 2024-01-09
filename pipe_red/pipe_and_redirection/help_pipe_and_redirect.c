@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_pipe_or_redirection.c                        :+:      :+:    :+:   */
+/*   help_pipe_and_redirect.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/05 16:33:21 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/08 13:06:43 by sgalli           ###   ########.fr       */
+/*   Created: 2024/01/09 09:50:43 by sgalli            #+#    #+#             */
+/*   Updated: 2024/01/09 12:41:07 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 int	check_type(t_env *e)
 {
-	if (e->v[e->i] == NULL)
+	if (e->v[e->check] == NULL)
 		return (0);
-	else if (e->v[e->i][0] == '<')
+	else if (e->v[e->check][0] == '<')
 	{
 		e->start_red = e->check;
 		e->input = e->check;
 		return (1);
 	}
-	else if (e->v[e->i][0] == '|')
+	else if (e->v[e->check][0] == '|')
 	{
-		e->i = e->check;
-		e->check = 0;
+		e->piping = 1;
 		return (2);
 	}
-	else if (e->v[e->i][0] == '>')
+	else if (e->v[e->check][0] == '>')
 	{
 		e->start_red = e->check;
 		e->output = e->check;
@@ -42,33 +41,8 @@ int	pipe_or_redir(t_env *e)
 	e->output = -1;
 	e->input = -1;
 	e->check = e->i;
-	while (e->v[e->i] != NULL && e->v[e->i][0] != '|' && e->v[e->i][0] != '<' \
-	&& e->v[e->i][0] != '>')
-		e->i++;
+	while (e->v[e->check] != NULL && e->v[e->check][0] != '|' \
+	&& e->v[e->check][0] != '<' && e->v[e->check][0] != '>')
+		e->check++;
 	return (check_type(e));
-}
-
-void	pipe_and_redirection(t_env *e)
-{
-	e->check_input = -1;
-	e->in_red = 0;
-	e->out_red = 0;
-	while (e->v[e->i] != NULL)
-	{
-		e->pi_re = 1;
-		if (pipe_or_redir(e) == 1)
-		{
-			if (do_redir(e) == 0)
-				return ;
-		}
-		else
-			do_pipe(e);
-	}
-	dup2(e->stdin, STDIN_FILENO);
-	close(e->stdin);
-	dup2(e->stdout, STDOUT_FILENO);
-	close(e->stdout);
-	e->pi_re = 0;
-	e->start_red = 0;
-	e->i_tmp = 0;
 }
