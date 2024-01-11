@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 11:38:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/09 12:05:45 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/11 11:06:57 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,10 @@ int	prev_minor_red(t_env *e, int fd, char *filename)
 		return (0);
 	}
 	free(filename);
-	if (check_next_redp(e) == 1)
-	{
-		single_continuous(e, fd);
-		while (e->v[e->i] && e->v[e->i][0] != '|' && e->v[e->i][0] != '>')
-			e->i++;
-	}
+	check_next_redp(e);
+	single_continuous(e, fd);
+	while (e->v[e->i] && e->v[e->i][0] != '|' && e->v[e->i][0] != '>')
+		e->i++;
+	close(fd);
 	return (1);
 }
-
-//echo <"./test_files/infile_big" | cat <"./test_files/infile"

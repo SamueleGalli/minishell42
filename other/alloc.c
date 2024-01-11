@@ -6,11 +6,28 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/05 12:46:50 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/10 11:16:40 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char	*alloc_s(char *buf)
+
+{
+	int		i;
+	char	*t;
+
+	t = (char *)malloc(sizeof(char ) * ft_strlen(buf) + 1);
+	i = 0;
+	while (buf[i] != 0)
+	{
+		t[i] = buf[i];
+		i++;
+	}
+	t[i] = 0;
+	return (t);
+}
 
 char	**alloc_tmp(t_env *e, char **tmp)
 {

@@ -6,11 +6,22 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:37:14 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/09 12:31:51 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/11 11:57:13 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	min_mult_redirect(t_env *e)
+{
+	int		fd;
+	char	*filename;
+
+	fd = 0;
+	filename = NULL;
+	if (prev_minor_red(e, fd, filename) == 0)
+		return ;
+}
 
 void	single_continuous(t_env *e, int fd)
 {
@@ -33,61 +44,39 @@ void	print_in_pipe(t_env *e)
 	close(e->pipefd[1]);
 }
 
+void	fork_red_pipe(t_env *e, int fd)
+{
+	e->i = e->i_tmp;
+	dup2(fd, STDIN_FILENO);
+	close(fd);
+	if (check_builtin(e) == 0)
+	{
+		if (e->output == -1 && e->input > -1 && e->piping == 1)
+			print_in_pipe(e);
+		pathcmd(e);
+		flag_matrix(e);
+		execve(e->s, e->mat_flag, e->env);
+		perror("execve");
+		exiting(e, e->exit_code);
+	}
+	dup2(fd, STDIN_FILENO);
+	close(fd);
+	variabletype(e);
+	exiting(e, e->exit_code);
+}
+
 void	fork_cotinue(t_env *e, pid_t pid, int fd)
 {
 	if (pid == 0)
-	{
-		e->i = e->i_tmp;
-		dup2(fd, STDIN_FILENO);
-		if (check_builtin(e) == 0)
-		{
-			if (e->output == -1 && e->input > -1 && e->piping == 1)
-				print_in_pipe(e);
-			pathcmd(e);
-			flag_matrix(e);
-			execve(e->s, e->mat_flag, e->env);
-			perror("execve");
-			exiting(e, 1);
-		}
-		variabletype(e);
-		exiting(e, 0);
-	}
-	else
-		waitpid(pid, &e->status, 0);
+		fork_red_pipe(e, fd);
+	e->n_fork++;
+	waitpid(pid, &e->status, 0);
 	if (e->status != 0)
 		e->exit_code = WEXITSTATUS(e->status);
-	close(fd);
-}
-
-void	single_major_redirect(t_env *e)
-{
-	char	*filename;
-	int		fd;
-
-	filename = find_filepath(e);
-	if (compare(e->v[0], ">") == 1 || compare(e->v[0], "> ") == 1)
+	if (e->piping == 1)
 	{
-		fd = open(filename, O_WRONLY | O_TRUNC | O_CREAT, 0666);
-		if (fd < 0)
-		{
-			e->exit_code = 1;
-			printf("bash: %s: No such file or directory\n", filename);
-			exiting(e, 0);
-		}
-		close(fd);
+		close(e->pipefd[1]);
+		dup2(e->pipefd[0], STDIN_FILENO);
+		close(e->pipefd[0]);
 	}
-	else
-		check_red_fork(e, filename, 1);
-}
-
-void	min_mult_redirect(t_env *e)
-{
-	int		fd;
-	char	*filename;
-
-	fd = 0;
-	filename = NULL;
-	if (prev_minor_red(e, fd, filename) == 0)
-		return ;
-	close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:20:33 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/09 12:11:35 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/10 10:21:36 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,23 @@ int	search_mult_arrows(t_env *e, char *s)
 	return (0);
 }
 
-int	check_next_redp(t_env *e)
+void	check_next_redp(t_env *e)
 {
 	int	i;
 
 	i = e->i;
 	while (e->v[i] != NULL)
 	{
-		if (e->v[i][0] == '>' || e->v[i][0] == '<')
-			return (0);
+		if (e->v[i][0] == '>')
+		{
+			e->piping = 0;
+			return ;
+		}
 		if (e->v[i][0] == '|')
-			return (0);
+		{
+			e->piping = 1;
+			return ;
+		}
 		i++;
 	}
-	return (1);
 }

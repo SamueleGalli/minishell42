@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 15:57:12 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:43:39 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/11 11:53:50 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,20 @@ int	valid_redp(t_env *e, int i)
 				return (0);
 		}
 		else
-			return (1);
+			return (0);
 	}
 	return (3);
+}
+
+void	pipe_error(t_env *e)
+{
+	if (e->v[e->i_copy] != NULL && e->v[e->i_copy + 1] != NULL && \
+	e->v[e->i_copy][0] == '|' && (e->v[e->i_copy + 1][0] == '\'' || \
+	e->v[e->i_copy + 1][0] == '\"'))
+	{
+		printf("command not found\n");
+		e->exit_code = 127;
+		e->is_valid = 1;
+		return ;
+	}
 }

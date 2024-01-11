@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:33:21 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/09 12:28:23 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/11 11:18:53 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	pipe_and_redirection(t_env *e)
 	e->in_red = 0;
 	e->out_red = 0;
 	e->pi_re = 1;
+	e->n_fork = 0;
 	if (exits_pipe(e) == 1)
 		pipe_red_start(e);
 	else

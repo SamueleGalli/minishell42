@@ -6,37 +6,11 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:11:31 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/09 12:31:27 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/11 11:26:43 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	single_major_mult_redirect(t_env *e)
-{
-	char	*filename;
-	int		fd;
-
-	filename = find_mult_filepath(e);
-	if (e->v[e->i + 1] == NULL)
-	{
-		printf("error nothing after >\n");
-		return ;
-	}
-	if (compare(e->v[e->i], ">") == 1 || compare(e->v[e->i], "> ") == 1)
-	{
-		fd = open(filename, O_WRONLY | O_TRUNC | O_CREAT, 0666);
-		if (fd < 0)
-		{
-			e->exit = 1;
-			printf("bash: %s: No such file or directory\n", filename);
-			exiting(e, 0);
-			close(fd);
-		}
-	}
-	else
-		check_red_fork(e, filename, 1);
-}
 
 void	redirect_mult_single(t_env *e)
 {
@@ -56,27 +30,6 @@ void	red_type(t_env *e)
 	else if (search_mult_arrows(e, ">> ") == 1 || search_mult_arrows(e, \
 	">>") == 1)
 		redirect_mult_double(e);
-}
-
-void	redirect_mult_double(t_env *e)
-{
-	char	*filename;
-	int		fd;
-
-	filename = find_mult_mult_filepath(e);
-	if (compare(e->v[e->i], ">>") == 1 || compare(e->v[e->i], ">> ") == 1)
-	{
-		fd = open(filename, O_WRONLY | O_APPEND | O_CREAT, 0666);
-		if (fd < 0)
-		{
-			e->exit_code = 1;
-			printf("bash: %s: No such file or directory\n", filename);
-			exiting(e, 0);
-		}
-		close(fd);
-	}
-	else
-		check_red_fork(e, filename, 2);
 }
 
 char	*find_lasth_filepath(t_env *e)
