@@ -63,7 +63,6 @@ SRC = 	main.c \
 		di_sistema/echo/echo.c \
 		di_sistema/echo/echo2.c \
 		di_sistema/echo/echo3.c \
-		di_sistema/echo/echo4.c \
 		di_sistema/export_unset_env/unset_env.c \
 		di_sistema/export_unset_env/export.c \
 		di_sistema/export_unset_env/export2.c \
@@ -78,7 +77,6 @@ SRC = 	main.c \
 		pipe_red/redirections/find_file_cont.c \
 		pipe_red/redirections/find_file.c \
 		pipe_red/redirections/find_red_type.c \
-		pipe_red/redirections/find_red_type2.c \
 		pipe_red/redirections/help_redirection.c \
 		pipe_red/redirections/heredoc2.c \
 		pipe_red/redirections/heredoc.c \

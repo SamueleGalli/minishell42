@@ -6,28 +6,11 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:35:11 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/08 10:14:26 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/12 12:08:58 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-char	*find_mult_filepath(t_env *e)
-{
-	int		i;
-
-	i = e->i;
-	while (e->v[i] != NULL)
-	{
-		if (compare(e->v[i], ">") == 1)
-		{
-			i++;
-			break ;
-		}
-		i++;
-	}
-	return (e->v[i]);
-}
 
 char	*filepath(char *str, int j, t_env *e)
 {
@@ -43,10 +26,46 @@ char	*filepath(char *str, int j, t_env *e)
 	}
 	else
 	{
-		while (e->v[e->i][j] != 0 && \
-		e->v[e->i][j + 1] != ' ')
+		while (e->v[e->i][j] != 0 && e->v[e->i][j] != ' ')
 			str[d++] = e->v[e->i][j++];
 	}
 	str[d] = '\0';
 	return (str);
+}
+
+void	error_fd(t_env *e)
+{
+	e->exit_code = 1;
+	printf("bash: %s: No such file or directory\n", e->filename);
+	if (e->filename != NULL)
+		free(e->filename);
+	exiting(e, 0);
+}
+
+int	loop_file(t_env *e, int fd, int type)
+{
+	fd = 0;
+	while (e->v[e->i] != NULL)
+	{
+		if (type == 1)
+			fd = open(e->filename, O_WRONLY | O_TRUNC | O_CREAT, 0666);
+		else if (type == 2)
+			fd = open(e->filename, O_WRONLY | O_APPEND | O_CREAT, 0666);
+		if (fd < 0)
+			error_fd(e);
+		if (e->v[e->i + 1] != NULL && e->v[e->i + 1][0] == '>')
+		{
+			e->i = e->i + 1;
+			if (e->v[e->i][1] == '>')
+				type = 2;
+			else
+				type = 1;
+			if (e->filename != NULL)
+				free(e->filename);
+			e->filename = find_filepath_major(e);
+		}
+		else
+			return (fd);
+	}
+	return (fd);
 }
