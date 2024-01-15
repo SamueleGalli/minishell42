@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:33:21 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/12 09:54:30 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/15 12:37:41 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	pipe_red_start(t_env *e)
 	{
 		do_pipe(e);
 		e->piping = 0;
+		if (e->v[e->i] != NULL && (e->v[e->i][0] == '<' || \
+		e->v[e->i][0] != '>'))
+			e->tmp_i = e->i;
 	}
 	while (waitpid(-1, &e->status, 0) > 0)
 	{

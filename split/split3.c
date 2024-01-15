@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:56:05 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:43:53 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/15 11:19:08 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,15 @@ void	split_clousure(t_env *e)
 {
 	e->j++;
 	e->word++;
-	if (e->cmd[e->j - 1] == 39)
+	if (e->cmd[e->j - 1] == 39 || e->cmd[e->j - 1] == 34)
 	{
-		while (e->cmd[e->j] != 0 && e->cmd[e->j] != 39)
+		while (e->cmd[e->j] != 0)
 		{
-			e->word++;
-			e->j++;
-		}
-		e->word++;
-	}
-	else if (e->cmd[e->j - 1] == 34)
-	{
-		while (e->cmd[e->j] != 0 && e->cmd[e->j] != 34)
-		{
-			e->word++;
+			if ((e->cmd[e->j] == 39 || e->cmd[e->j] == 34) \
+			&& e->cmd[e->j + 1] == ' ')
+				break ;
+			if (e->cmd[e->j] != 39 || e->cmd[e->j] != 34)
+				e->word++;
 			e->j++;
 		}
 		e->word++;
@@ -42,15 +37,18 @@ void	alloc_quote(t_env *e)
 
 	i = e->lenght;
 	e->v[e->i][e->lenght++] = e->cmd[e->indx++];
-	if (e->v[e->i][i] == 39)
+	if (e->v[e->i][i] == 39 || e->v[e->i][i] == 34)
 	{
-		while (e->cmd[e->indx] != 0 && e->cmd[e->indx] != 39)
-			e->v[e->i][e->lenght++] = e->cmd[e->indx++];
-	}
-	else
-	{
-		while (e->cmd[e->indx] != 0 && e->cmd[e->indx] != 34)
-			e->v[e->i][e->lenght++] = e->cmd[e->indx++];
+		while (e->cmd[e->indx] != 0)
+		{
+			if ((e->cmd[e->indx] == 34 || e->cmd[e->indx] == 39) && \
+			(e->cmd[e->indx + 1] == 0 || e->cmd[e->indx + 1] == ' '))
+				break ;
+			if (e->cmd[e->indx] == 39 || e->cmd[e->indx] == 34)
+				e->indx++;
+			else
+				e->v[e->i][e->lenght++] = e->cmd[e->indx++];
+		}
 	}
 	if (e->count == 1)
 		e->v[e->i][e->lenght++] = ' ';

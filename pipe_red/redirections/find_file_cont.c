@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:35:11 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/12 12:08:58 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/15 11:53:29 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ char	*filepath(char *str, int j, t_env *e)
 	else
 	{
 		while (e->v[e->i][j] != 0 && e->v[e->i][j] != ' ')
-			str[d++] = e->v[e->i][j++];
+		{
+			if (e->v[e->i][j] == '\'' || e->v[e->i][j] == '\"')
+				j++;
+			else
+				str[d++] = e->v[e->i][j++];
+		}
 	}
 	str[d] = '\0';
 	return (str);
@@ -36,10 +41,10 @@ char	*filepath(char *str, int j, t_env *e)
 void	error_fd(t_env *e)
 {
 	e->exit_code = 1;
-	printf("bash: %s: No such file or directory\n", e->filename);
+	perror("open");
 	if (e->filename != NULL)
 		free(e->filename);
-	exiting(e, 0);
+	exiting(e, 1);
 }
 
 int	loop_file(t_env *e, int fd, int type)

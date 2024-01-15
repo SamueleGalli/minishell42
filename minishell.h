@@ -92,7 +92,6 @@ typedef struct s_env
 	int		red_flag;
 	int		pipefd[2];
 	pid_t	pid;
-	pid_t	child;
 	pid_t	pid_pipe;
 }	t_env;
 

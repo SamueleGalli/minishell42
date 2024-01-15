@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:07:09 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/12 12:03:00 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/15 12:08:13 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,11 @@ void	fork_pid_zero(t_env *e)
 
 void	waiting2(t_env *e, pid_t pid)
 {
-	e->child = waitpid(pid, &e->status, 0);
-	if (e->child == -1)
-	{
-		perror("waitpid");
-		exiting(e, 1);
-	}
+	waitpid(pid, &e->status, 0);
+	if (WIFEXITED(e->status) == 0)
+		e->exit_code = 2;
 	else
-	{
-		if (WIFEXITED(e->status) == 0)
-			e->exit_code = 2;
-		else
-			e->exit_code = WEXITSTATUS(e->status);
-	}
+		e->exit_code = WEXITSTATUS(e->status);
 }
 
 void	check_red_fork(t_env *e)
@@ -89,7 +81,8 @@ void	check_red_fork(t_env *e)
 void	redirect_mult_double(t_env *e)
 {
 	e->filename = find_filepath_major(e);
-	check_red_fork(e);
+	if (e->exit_code == 0)
+		check_red_fork(e);
 	if (e->filename != NULL)
 		free(e->filename);
 }

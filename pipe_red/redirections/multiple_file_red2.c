@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 10:46:51 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/08 11:19:28 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/15 10:04:55 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	mult_check_file(t_env *e, int fd, char *filename)
 		if (fd < 0)
 		{
 			e->exit_code = 1;
-			printf("bash: %s: No such file or directory\n", filename);
+			perror("open");
 			while (e->v[e->i] != NULL && e->v[e->i][0] != '>' && \
 			e->v[e->i][0] != '|')
 				e->i++;

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:06:25 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:43:49 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/15 11:18:56 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,13 @@ void	quote_check(t_env *e)
 	{
 		e->word++;
 		e->indx++;
-		while (e->cmd[e->indx] != 39 && e->cmd[e->indx] != 34
-			&& e->cmd[e->indx] != 0)
+		while (e->cmd[e->indx] != 0)
+		{
+			if ((e->cmd[e->indx] == 34 || e->cmd[e->indx] == 39) && \
+			e->cmd[e->indx + 1] == ' ')
+				break ;
 			e->indx++;
+		}
 		if (e->cmd[e->indx] == '\0')
 			return ;
 		e->indx++;

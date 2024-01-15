@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 11:38:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/11 11:06:57 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/15 10:14:17 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	prev_minor_red(t_env *e, int fd, char *filename)
 	if (fd < 0)
 	{
 		e->exit_code = 1;
-		printf("bash: %s: No such file or directory\n", filename);
+		perror("open");
 		e->exit = 1;
 		free(filename);
 		return (0);

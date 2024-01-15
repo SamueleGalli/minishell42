@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:33:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:41:59 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/15 12:05:10 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,12 @@
 
 void	waiting(t_env *e)
 {
-	e->child = waitpid(e->pid, &e->status, 0);
-	if (e->child == -1)
-	{
-		perror("waitpid");
-		exiting(e, 1);
-	}
+	waitpid(e->pid, &e->status, 0);
+	e->exit = 1;
+	if (WIFEXITED(e->status) == 0)
+		e->exit_code = 2;
 	else
-	{
-		e->exit = 1;
-		if (WIFEXITED(e->status) == 0)
-			e->exit_code = 2;
-		else
-			e->exit_code = WEXITSTATUS(e->status);
-	}
+		e->exit_code = WEXITSTATUS(e->status);
 }
 
 void	com_flag(t_env *e)

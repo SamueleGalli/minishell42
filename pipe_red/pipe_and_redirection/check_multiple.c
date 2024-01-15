@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:26:37 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:40:23 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/15 10:08:26 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	check_multiple(t_env *e)
 	}
 	return (1);
 }
-//echo 42 < file1 | cat | wc -l
-//devo eseguore la pipe usando il valore prima del <
 
 void	in_pipe(t_env *e)
 {

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:37:55 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:42:21 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/15 10:08:04 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,3 @@ void	espfun(t_env *e)
 			cont_espfun(e);
 	}
 }
-//export a=a b=' daw ad wd' c=c t="  da w dwd awd "  
-//export a=a b=' daw ad wd' c=c t=
-//export ciao="wad"
-//export ciao='wad'
-//export ciao= awawd

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 11:45:20 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/08 11:19:01 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/15 10:07:55 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,40 +59,20 @@ char	*file_loop(t_env *e)
 	return (s);
 }
 
-void	loop_error_min(t_env *e, int fd, char *file, int i)
-{
-	e->i = i;
-	while (e->v[e->i] != 0 && e->v[e->i][0] != '<' && e->v[e->i][0] != '>' \
-	&& e->v[e->i][0] != '|')
-	{
-		file = file_loop(e);
-		fd = open(file, O_RDONLY);
-		if (fd < 0)
-		{
-			printf("%s", file);
-			if (file != NULL)
-				free(file);
-		}
-		fd = 0;
-		e->i++;
-	}
-	printf(": No such file or directory\n");
-}
-
 int	check_first(t_env *e, int fd, int i)
 {
 	char	*file;
 
+	i = i + 1 - 1;
 	file = file_loop(e);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
 		e->exit_code = 1;
-		printf("bash: %s", file);
+		perror("open");
 		if (file != NULL)
 			free(file);
 		e->exit = 1;
-		loop_error_min(e, fd, file, ++i);
 		return (1);
 	}
 	else
