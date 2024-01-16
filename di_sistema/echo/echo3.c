@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 11:50:47 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/12 10:21:07 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/16 12:21:49 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,25 +81,15 @@ int	check_closure(char *s)
 	return (0);
 }
 
-void	print_red(t_env *e)
+void	print_red(t_env *e, int exist)
 {
 	int	i;
 
 	i = e->i;
 	while (e->v[i] != 0 && e->v[i][0] != '>' && e->v[i][0] != '<')
 		i++;
-	if (e->v[i] != 0 && e->v[i][0] == '<' && e->out_red == 0)
-	{
-		if (i > e->i)
-			printf(" ");
-		i += 2;
-		if (e->v[i] != NULL)
-		{
-			while (e->v[i] != NULL && e->v[i][0] != '|' && e->v[i][0] != '>'
-				&& e->v[i][0] != '<')
-				print_no_quote(e->v[i++]);
-		}
-	}
+	if (e->v[i] != 0 && (e->v[i][0] == '<' || e->v[i][0] == '>'))
+		i = cont_print_red(e, i, exist);
 	else
 	{
 		printf("\n");

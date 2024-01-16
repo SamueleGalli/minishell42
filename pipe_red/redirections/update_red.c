@@ -6,32 +6,11 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:32:48 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/08 10:08:24 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/16 11:22:04 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	update_in_out(t_env *e)
-{
-	int	i;
-
-	i = e->i;
-	while (e->v[i] != NULL)
-	{
-		if (e->v[i][0] == '<')
-		{
-			e->in_red = i;
-			break ;
-		}
-		else if (e->v[i][0] == '>')
-		{
-			e->out_red = i;
-			break ;
-		}
-		i++;
-	}
-}
 
 int	check_valid_red(t_env *e)
 {
@@ -77,7 +56,6 @@ int	update_redir(t_env *e)
 {
 	if (e->v[e->i] == NULL)
 		return (1);
-	update_in_out(e);
 	if (e->v[e->i][0] == '<' && e->v[e->i][0] == '>' \
 	&& (e->v[e->i] != NULL))
 		e->i++;

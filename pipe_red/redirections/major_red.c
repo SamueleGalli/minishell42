@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:07:09 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/15 12:08:13 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/16 13:08:13 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	execve_red(t_env *e)
 		}
 	}
 	variabletype(e);
-	after_file_exe(e);
 	exiting(e, 0);
 }
 
@@ -52,6 +51,7 @@ void	fork_pid_zero(t_env *e)
 
 void	waiting2(t_env *e, pid_t pid)
 {
+	e->c_wait = 1;
 	waitpid(pid, &e->status, 0);
 	if (WIFEXITED(e->status) == 0)
 		e->exit_code = 2;

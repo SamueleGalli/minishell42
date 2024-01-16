@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/12 10:18:00 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/16 12:00:57 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	alloc_mat(char *d, char *s)
 
 char	*alloc_file(t_env *e, char s)
 {
-	if (e->v[e->i][0] == '>')
+	if (e->v[e->i] != NULL && e->v[e->i][0] == '>')
 	{
 		e->i++;
 		return (e->v[e->i]);
@@ -82,6 +82,8 @@ char	*alloc_file(t_env *e, char s)
 			|| e->v[e->i + 1][0] == '|')
 				return (e->v[e->i]);
 		}
+		else if (e->v[e->i][0] == '<' || e->v[e->i][0] == '|')
+			return (0);
 		e->i++;
 	}
 	return (0);

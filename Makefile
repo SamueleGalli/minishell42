@@ -63,6 +63,7 @@ SRC = 	main.c \
 		di_sistema/echo/echo.c \
 		di_sistema/echo/echo2.c \
 		di_sistema/echo/echo3.c \
+		di_sistema/echo/echo4.c \
 		di_sistema/export_unset_env/unset_env.c \
 		di_sistema/export_unset_env/export.c \
 		di_sistema/export_unset_env/export2.c \
@@ -72,7 +73,6 @@ SRC = 	main.c \
 		di_sistema/execve/flags.c \
 		di_sistema/execve/flag2.c \
 		di_sistema/execve/flag_env.c \
-		pipe_red/redirections/read_file.c \
 		pipe_red/redirections/cont_min_red.c \
 		pipe_red/redirections/find_file_cont.c \
 		pipe_red/redirections/find_file.c \
@@ -80,10 +80,8 @@ SRC = 	main.c \
 		pipe_red/redirections/help_redirection.c \
 		pipe_red/redirections/heredoc2.c \
 		pipe_red/redirections/heredoc.c \
-		pipe_red/redirections/major_execution.c \
 		pipe_red/redirections/major_red.c \
 		pipe_red/redirections/minor_red.c \
-		pipe_red/redirections/print_in_file.c \
 		pipe_red/redirections/multiple_file_red.c \
 		pipe_red/redirections/multiple_file_red2.c \
 		pipe_red/redirections/pipe_and_red_check.c \
@@ -91,7 +89,6 @@ SRC = 	main.c \
 		pipe_red/pipe/do_pipe.c \
 		pipe_red/pipe/execute_pipe.c \
 		pipe_red/pipe/check_pipe.c \
-		pipe_red/pipe/pipe_file.c \
 		pipe_red/pipe/in_pipe.c \
 		pipe_red/pipe/pipe.c \
 		pipe_red/pipe/parent_fork_pipe.c \

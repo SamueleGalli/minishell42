@@ -6,22 +6,11 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:37:14 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/11 11:57:13 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/16 12:58:05 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	min_mult_redirect(t_env *e)
-{
-	int		fd;
-	char	*filename;
-
-	fd = 0;
-	filename = NULL;
-	if (prev_minor_red(e, fd, filename) == 0)
-		return ;
-}
 
 void	single_continuous(t_env *e, int fd)
 {
@@ -44,11 +33,41 @@ void	print_in_pipe(t_env *e)
 	close(e->pipefd[1]);
 }
 
+void	check_out(t_env *e)
+{
+	int	i;
+	int	fd;
+
+	fd = 0;
+	i = e->i;
+	e->filename = find_filepath_major(e);
+	if (e->filename != NULL)
+	{
+		if (e->v[i][1] != '\0' && e->v[i][0] == '>')
+			fd = open(e->filename, O_WRONLY | O_APPEND | O_CREAT, 0666);
+		else
+			fd = open(e->filename, O_WRONLY | O_TRUNC | O_CREAT, 0666);
+		if (fd < 0)
+		{
+			perror("open");
+			e->exit = 1;
+			free(e->filename);
+			exiting(e, 1);
+		}
+		free(e->filename);
+		dup2(fd, STDOUT_FILENO);
+		close (fd);
+	}
+	else
+		free(e->filename);
+}
+
 void	fork_red_pipe(t_env *e, int fd)
 {
-	e->i = e->i_tmp;
 	dup2(fd, STDIN_FILENO);
 	close(fd);
+	check_out(e);
+	e->i = e->i_tmp;
 	if (check_builtin(e) == 0)
 	{
 		if (e->output == -1 && e->input > -1 && e->piping == 1)

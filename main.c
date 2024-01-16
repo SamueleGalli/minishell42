@@ -64,6 +64,7 @@ void	cont_allocation(t_env *e)
 	e->exit = 0;
 	e->check = 0;
 	e->i_tmp = 0;
+	e->piping = 0;
 	e->sign = 0;
 	e->input = 0;
 	e->i_copy = 0;

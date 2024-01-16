@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 11:25:35 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/15 11:50:29 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/16 11:23:48 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,9 @@ void	check_last_check(t_env *e)
 	}
 }
 
-void	initialize_red(t_env *e)
-{
-	e->in_red = 0;
-	e->check_input = -1;
-	e->out_red = 0;
-}
-
 int	do_redir(t_env *e)
 {
-	initialize_red(e);
+	e->check_input = -1;
 	while (e->v[e->i] != NULL && e->v[e->i][0] != '|')
 	{
 		while (e->v[e->i][0] != '<' && e->v[e->i][0] != '>')
@@ -57,7 +50,5 @@ int	do_redir(t_env *e)
 		if (e->v[e->i] != NULL && e->v[e->i][0] == '|')
 			e->i_tmp++;
 	}
-	if (e->in_red > 0 && e->out_red > 0)
-		last_file(e);
 	return (1);
 }

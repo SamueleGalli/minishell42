@@ -6,13 +6,13 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:27 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:36:29 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/16 12:45:39 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_no_quote(char *s)
+void	print_no_quote(char *s, int exist)
 {
 	int	i;
 
@@ -20,7 +20,11 @@ void	print_no_quote(char *s)
 	if (s[i] == '\'' || s[i] == '\"')
 		i++;
 	while (s[i] != 0 && s[i] != '\'' && s[i] != '\"')
+	{
 		printf("%c", s[i++]);
+		if (exist == 1 && s[i] == ' ')
+			i++;
+	}
 }
 
 void	var_quote(t_env *e, int j, int iter, int i)
