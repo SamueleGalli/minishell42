@@ -74,7 +74,6 @@ SRC = 	main.c \
 		di_sistema/execve/flag2.c \
 		di_sistema/execve/flag_env.c \
 		pipe_red/redirections/cont_min_red.c \
-		pipe_red/redirections/find_file_cont.c \
 		pipe_red/redirections/find_file.c \
 		pipe_red/redirections/find_red_type.c \
 		pipe_red/redirections/help_redirection.c \

@@ -6,33 +6,35 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:45:51 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/16 11:58:39 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/17 10:42:42 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	error_fd(t_env *e)
+int	opening_file(t_env *e, int fd, int type)
 {
-	e->exit_code = 1;
-	perror("open");
-	if (e->filename != NULL)
-		free(e->filename);
-	exiting(e, 1);
+	if (type == 1)
+		fd = open(e->filename, O_WRONLY | O_TRUNC | O_CREAT, 0666);
+	else if (type == 2)
+		fd = open(e->filename, O_WRONLY | O_APPEND | O_CREAT, 0666);
+	if (fd < 0)
+	{
+		e->exit_code = 1;
+		perror("open");
+		if (e->filename != NULL)
+			free(e->filename);
+		exiting(e, 1);
+	}
+	return (fd);
 }
 
 int	loop_file(t_env *e, int fd, int type)
 {
-	fd = 0;
 	while (e->v[e->i] != NULL)
 	{
-		if (type == 1)
-			fd = open(e->filename, O_WRONLY | O_TRUNC | O_CREAT, 0666);
-		else if (type == 2)
-			fd = open(e->filename, O_WRONLY | O_APPEND | O_CREAT, 0666);
-		if (fd < 0)
-			error_fd(e);
-		if (e->v[e->i + 1] != NULL && e->v[e->i + 1][0] == '>')
+		fd = opening_file(e, fd, type);
+		if (e->v[e->i + 1] != NULL && check_last_major(e) == 1)
 		{
 			e->i = e->i + 1;
 			if (e->v[e->i][1] == '>')

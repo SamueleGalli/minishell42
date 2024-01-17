@@ -116,6 +116,7 @@ int		next_valid(char *s, t_env *e);
 int		update_redir(t_env *e);
 int		single_error(t_env *e);
 int		check_builtin(t_env *e);
+int		check_last_major(t_env *e);
 int		search_arrows(t_env *e, char *s);
 int		index_v_arrows(t_env *e, char *s);
 int		split_pipe(t_env *e);

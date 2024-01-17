@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:11:31 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/12 11:33:20 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/17 11:57:53 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,19 @@ char	*find_lasth_filepath(t_env *e)
 		str[d++] = e->v[i][j++];
 	str[d] = '\0';
 	return (str);
+}
+
+int	check_last_major(t_env *e)
+{
+	while (e->v[e->i] != NULL && e->v[e->i][0] != '|' && \
+	e->v[e->i][0] != '<')
+	{
+		if (e->v[e->i][0] == '>')
+		{
+			e->i--;
+			return (1);
+		}
+		e->i++;
+	}
+	return (0);
 }
