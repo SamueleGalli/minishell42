@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:16:08 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:41:31 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/18 10:54:53 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,6 @@ void	bridge(t_env *e, int j)
 	e->word++;
 	e->numb = e->word;
 	apice_var_quote(e, j, -1, 0);
-}
-
-int	short_get_var(t_env *e, int i, int j, int iter)
-{
-	while (e->v[j][e->word + 1] == e->env[iter][i] && e->v[j][e->word
-		+ 1] != ' ' && e->v[j][e->word + 1] != 34)
-	{
-		e->word++;
-		i++;
-	}
-	return (i);
 }
 
 void	printf_env(t_env *e, int iter)

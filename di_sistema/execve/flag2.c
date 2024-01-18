@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:25:01 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:42:07 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/18 10:55:43 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,58 +26,6 @@ int	num_env(t_env *e, char *s, int j, int j2)
 		i++;
 	}
 	return (i);
-}
-
-int	venv(t_env *e, int i, int j)
-{
-	int	k;
-
-	k = 1;
-	while (e->env[++i] != NULL)
-	{
-		if (e->v[e->indx][k] == e->env[i][j] && e->env[i][j] != ' ')
-		{
-			while (e->v[e->indx][k] == e->env[i][j] \
-			&& e->v[e->indx][k] != ' ' && e->v[e->indx][k] != 34)
-			{
-				k++;
-				j++;
-			}
-			if (e->env[i][j] == '=' && e->v[e->indx][k] == '\0')
-				return (num_env(e, e->env[i], j, i));
-			else
-			{
-				k = 1;
-				j = 0;
-			}
-		}
-	}
-	return (0);
-}
-
-void	flag_env(t_env *e)
-{
-	int	k;
-	int	i;
-	int	j;
-
-	i = venv(e, -1, 0);
-	if (i == 0)
-		return ;
-	j = 0;
-	k = e->flag_i;
-	while (e->env[e->i_env][k] != '\0')
-	{
-		j++;
-		k++;
-	}
-	k = 0;
-	e->mat_flag[e->word] = (char *)malloc(sizeof(char) * i + 1);
-	while (e->env[e->i_env][e->flag_i] != '\0')
-		e->mat_flag[e->word][k++] = e->env[e->i_env][e->flag_i++];
-	e->mat_flag[e->word][k] = '\0';
-	e->flag_i = 0;
-	e->i_env = 0;
 }
 
 void	flag_while(t_env *e)

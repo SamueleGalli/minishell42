@@ -26,6 +26,8 @@ int	init_nuller(t_env *e)
 	splitme(e);
 	e->i = 0;
 	e->exit = 0;
+	if (e->v[0][0] == '$')
+		expand_first(e);
 	return (1);
 }
 
@@ -75,7 +77,6 @@ void	cont_allocation(t_env *e)
 	e->finded_path = 0;
 	e->c_path = 0;
 	e->red_flag = 0;
-	e->out_red = 0;
 	e->check_input = -1;
 }
 
@@ -90,7 +91,6 @@ void	alloc_e(int c, char **argv, char **env, t_env *e)
 	(void)argv;
 	e->i = 0;
 	e->r = 0;
-	e->valid = 0;
 	e->status = 0;
 	cont_allocation(e);
 }

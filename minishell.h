@@ -5,6 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/18 10:36:07 by sgalli            #+#    #+#             */
+/*   Updated: 2024/01/18 10:36:07 by sgalli           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/18 10:35:58 by sgalli            #+#    #+#             */
+/*   Updated: 2024/01/18 10:35:58 by sgalli           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:43:14 by sgalli            #+#    #+#             */
 /*   Updated: 2024/01/03 11:43:14 by sgalli           ###   ########.fr       */
 /*                                                                            */
@@ -42,28 +66,20 @@ typedef struct s_env
 	char	*path;
 	int		r;
 	int		i;
-	int		n_fork;
 	int		piping;
 	int		i2;
 	int		c_wait;
 	int		count;
-	int		pipe_flag;
 	int		j;
 	int		is_valid;
 	int		sign;
 	int		finded_path;
 	int		c_path;
 	int		word;
-	int		ex_com;
 	int		indx;
 	int		pi_re;
 	int		iter;
-	int		flag;
-	int		true_red;
-	int		define_pipe;
 	int		numb;
-	int		valid;
-	int		pipe;
 	int		i_env;
 	int		flag_i;
 	int		lenght;
@@ -77,7 +93,6 @@ typedef struct s_env
 	int		stdin;
 	int		stdout;
 	int		i_tmp;
-	int		out_red;
 	int		i_copy;
 	int		tmp_i;
 	int		do_redir;
@@ -117,12 +132,10 @@ int		update_redir(t_env *e);
 int		single_error(t_env *e);
 int		check_builtin(t_env *e);
 int		check_last_major(t_env *e);
-int		search_arrows(t_env *e, char *s);
 int		index_v_arrows(t_env *e, char *s);
 int		split_pipe(t_env *e);
 int		prev_minor_red(t_env *e, int fd, char *filename);
 int		min_com(t_env *e);
-int		venv(t_env *e, int i, int j);
 int		init_nuller(t_env *e);
 int		search_mult_arrows(t_env *e, char *s);
 int		path_valid(char *s, t_env *e);
@@ -131,11 +144,10 @@ int		get_var_quote(t_env *e, int j, int iter, int i);
 int		cont_print_red(t_env *e, int i, int exist);
 int		check_valid_red2(t_env *e);
 int		do_redir(t_env *e);
-int		short_get_var(t_env *e, int i, int j, int iter);
+int		alloc_str(t_env *e, int i, int c);
 int		len_exp(char *str, t_env *e);
 int		len_tilde(char *s, int i);
 int		mutiple_equal(t_env *e);
-int		is_pipredir(char *s);
 int		cont_last_check(t_env *e);
 int		loop_file(t_env *e, int fd, int type);
 int		valid_redp(t_env *e, int i);
@@ -144,6 +156,7 @@ int		len_red(t_env *e);
 int		exits_pipe(t_env *e);
 int		pipe_or_redir(t_env *e);
 int		which_pipe(t_env *e);
+int		size_env(t_env *e);
 
 void	pipe_error(t_env *e);
 void	execute_pipe(t_env *e);
@@ -159,16 +172,12 @@ void	write_redir(t_env *e);
 void	print_no_quote(char *s, int exist);
 void	check_red_other(t_env *e);
 void	cd_dollar(t_env *e, int i, int j);
-void	single_write(t_env *e, char *fileoutput, int type);
 void	check_next_redp(t_env *e);
-void	flag_env(t_env *e);
 void	do_pipe(t_env *e);
-void	last_in(t_env *e);
 void	copy_env(t_env *e, char **env);
 void	what_exit(t_env *e);
 void	mult_check_file(t_env *e, int fd, char *filename);
 void	cont_espfun(t_env *e);
-void	check_first_input(t_env *e);
 void	expand(t_env *e, int i);
 void	execve_redir(t_env *e);
 void	go_root(t_env *e, int i);
@@ -177,16 +186,15 @@ void	split_clousure(t_env *e);
 void	update_pipe(t_env *e);
 void	apice_var_quote(t_env *e, int j, int iter, int i);
 void	update_i(t_env *e);
-void	change_value(t_env *e, int i, char **tmp);
 void	tilde_or_not(t_env *e, char *tmp);
 void	check_path(t_env *e);
 void	while_multiple_file(t_env *e, int fd);
-void	other_redir(t_env *e);
 void	pipe_com(t_env *e);
 void	cont_what_exit(t_env *e);
 void	pipe_and_redirection(t_env *e);
 void	single_continuous(t_env *e, int fd);
 void	flag_matrix(t_env *e);
+void	expand_first(t_env *e);
 void	espfun(t_env *e);
 void	fork_cotinue(t_env *e, pid_t pid, int fd);
 void	quote_check(t_env *e);
@@ -211,7 +219,6 @@ void	pathcmd(t_env *e);
 void	singals(t_env *e);
 void	error(t_env *e);
 void	dir_cont(t_env *e);
-void	var_quote(t_env *e, int j, int iter, int i);
 void	printf_env(t_env *e, int iter);
 void	variabletype(t_env *e);
 void	directory(t_env *e);
@@ -225,16 +232,12 @@ void	handle_signal(int sig);
 void	writer(t_env *e, int j);
 void	writing_split(t_env *e);
 void	double_minor_redirect(t_env *e);
-void	redirect_double(t_env *e);
-void	redirect_single(t_env *e);
 void	env_variable(t_env *e);
 void	env_variable2(t_env *e);
 void	check_red_fork(t_env *e);
 void	fork_pid_zero(t_env *e);
 void	alloc_mat(char *t, char *u);
 void	exiting_d(t_env *e);
-void	shortwhile(t_env *e);
-void	last_file(t_env *e);
 void	cont_splitme(t_env *e);
 void	redirect_mult_single(t_env *e);
 void	check_built(char *s, int i, t_env *e);
@@ -257,9 +260,7 @@ char	*find_filepath_minor_mult(t_env *e);
 char	*alloc_s(char *buf);
 char	*find_lasth_filepath(t_env *e);
 char	*alloc_file(t_env *e, char s);
-char	*final_while(char *str, int i, char *s);
 char	**new_tmp(t_env *e, char **tmp);
 char	**cont_new_tmp(t_env *e, char **tmp, int i);
-char	**alloc_tmp(t_env *e, char **tmp);
 char	**exclude_env(t_env *e, char **tmp);
 #endif

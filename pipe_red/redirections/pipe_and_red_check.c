@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 11:28:01 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/02 16:23:40 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/18 10:54:26 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,4 @@ void	write_redir(t_env *e)
 	while (e->cmd[e->indx] == '|' || e->cmd[e->indx] == '<'
 		|| e->cmd[e->indx] == '>')
 		e->v[e->i][e->lenght++] = e->cmd[e->indx++];
-}
-
-int	is_pipredir(char *s)
-{
-	if (s[0] == '|' || s[0] == '<' || s[0] == '>')
-		return (1);
-	return (0);
 }

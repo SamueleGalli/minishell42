@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:37:55 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/15 10:08:04 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/18 10:39:52 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,6 @@ int	exporapice(t_env *e, int i, int j)
 		}
 	}
 	return (0);
-}
-
-void	shortwhile(t_env *e)
-{
-	while (e->v[e->i][e->indx] != 0)
-		e->env[e->r][e->iter++] = e->v[e->i][e->indx++];
-	if (e->v[e->i + 1] != NULL)
-	{
-		if (e->v[e->i + 1][0] == 34 || e->v[e->i + 1][0] == 39)
-		{
-			e->indx = 1;
-			e->i++;
-			while (e->v[e->i][e->indx] != 34 && e->v[e->i][e->indx] != 39
-				&& e->v[e->i][e->indx] != 0)
-				e->env[e->r][e->iter++] = e->v[e->i][e->indx++];
-		}
-	}
-	e->env[e->r][e->iter] = '\0';
-	e->env[++e->r] = NULL;
 }
 
 int	valid_element(t_env *e, int i, int j)

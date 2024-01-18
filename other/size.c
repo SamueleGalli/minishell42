@@ -6,11 +6,27 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:35 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/15 11:20:29 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/18 13:06:22 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	size_env(t_env *e)
+{
+	int	size;
+	int	i3;
+
+	i3 = e->i2;
+	size = 0;
+	while (e->env[e->j][e->i2] != 0 && e->env[e->j][e->i2] != ' ')
+	{
+		size++;
+		e->i2++;
+	}
+	e->i2 = i3;
+	return (size);
+}
 
 int	size(t_env *e)
 {

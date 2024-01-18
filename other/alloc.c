@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/16 12:00:57 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/18 13:10:36 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,6 @@ char	*alloc_s(char *buf)
 	}
 	t[i] = 0;
 	return (t);
-}
-
-char	**alloc_tmp(t_env *e, char **tmp)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (e->env[j] != NULL)
-	{
-		if (j == e->ex)
-			change_value(e, i, tmp);
-		else
-		{
-			tmp[i] = (char *)malloc(sizeof(char) * \
-			(ft_strlen(e->env[j]) + 1));
-			alloc_mat(tmp[i], e->env[j]);
-		}
-		i++;
-		j++;
-	}
-	tmp[i] = NULL;
-	return (tmp);
 }
 
 void	alloc_mat(char *d, char *s)
@@ -87,4 +63,23 @@ char	*alloc_file(t_env *e, char s)
 		e->i++;
 	}
 	return (0);
+}
+
+int	alloc_str(t_env *e, int i, int c)
+{
+	int	size;
+
+	while (e->env[e->j][e->i2] != 0)
+	{
+		while (e->env[e->j][e->i2] != 0 && e->env[e->j][e->i2] == ' ')
+			e->i2++;
+		size = size_env(e);
+		e->t[c] = (char *)malloc(sizeof(char) * (size + 1));
+		while (e->env[e->j][e->i2] != 0 && e->env[e->j][e->i2] != ' ')
+			e->t[c][i++] = e->env[e->j][e->i2++];
+		e->t[c][i] = 0;
+		i = 0;
+		c++;
+	}
+	return (c);
 }

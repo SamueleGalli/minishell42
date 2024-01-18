@@ -6,22 +6,11 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 11:44:15 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:39:56 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/18 10:27:58 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	do_pipe_cont(t_env *e)
-{
-	if (e->v[e->i] == NULL)
-		return ;
-	while (e->v[e->i][0] != '|' && e->i != 0)
-		e->i--;
-	e->i++;
-	if (check_builtin(e) == 1)
-		e->valid = 1;
-}
 
 void	write_red(t_env *e)
 {

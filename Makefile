@@ -18,6 +18,7 @@ SRC = 	main.c \
 		other/check_builtin.c \
 		other/env.c \
 		other/free.c \
+		other/expand_first.c \
 		other/quote.c \
 		other/size.c \
 		libft/ft_atoi.c \

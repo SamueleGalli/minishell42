@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 11:38:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/16 12:58:01 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/18 10:37:26 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,6 @@ void	cont_mult_file(t_env *e, int fd, char *filename)
 	if (filename != NULL)
 		free(filename);
 	single_continuous(e, fd);
-}
-
-char	*final_while(char *str, int i, char *s)
-{
-	int	i2;
-
-	i2 = 0;
-	if (s[0] == '\'' || s[0] == '\"')
-	{
-		i = 1;
-		while (s[i] != 0 && s[i] != s[0])
-			str[i2++] = s[i++];
-	}
-	else
-	{
-		while (s[i] != 0 && s[i] != ' ')
-			str[i2++] = s[i++];
-	}
-	if (i2 == 0 || i == 0)
-	{
-		free(str);
-		str = NULL;
-	}
-	str[i2] = '\0';
-	return (str);
 }
 
 int	prev_minor_red(t_env *e, int fd, char *filename)

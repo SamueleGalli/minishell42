@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:32:41 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:42:28 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/18 10:44:16 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,4 @@ void	apic_change(t_env *e, int i, char **tmp)
 		}
 	}
 	tmp[i][j] = '\0';
-}
-
-void	change_value(t_env *e, int i, char **tmp)
-{
-	if (e->v[e->i][0] == '\'' || e->v[e->i][0] == '\"')
-		apic_change(e, i, tmp);
-	else
-	{
-		tmp[i] = (char *)malloc(sizeof(char) * (ft_strlen(e->v[e->i]) + 1));
-		alloc_mat(tmp[i], e->v[e->i]);
-	}
 }
