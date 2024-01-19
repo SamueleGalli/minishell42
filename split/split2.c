@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:06:25 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/18 12:15:08 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/19 12:34:42 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	quote_check(t_env *e)
 		e->indx++;
 	}
 	else
-		e->indx += 2;
+		check_next_car(e);
 }
 
 void	writing_split(t_env *e)
@@ -103,7 +103,7 @@ void	cont_splitme(t_env *e)
 		else if ((e->cmd[e->indx] == 39 || \
 		e->cmd[e->indx] == 34) && e->cmd[e->indx \
 			+ 1] == e->cmd[e->indx])
-			e->indx += 2;
+			write_null(e);
 		else
 		{
 			split(e);

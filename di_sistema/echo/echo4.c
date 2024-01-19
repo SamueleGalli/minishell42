@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:44:56 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/17 10:36:01 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/19 12:25:07 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,25 @@ int	cont_print_red(t_env *e, int i, int exist)
 		exiting(e, e->exit_code);
 	}
 	return (i);
+}
+
+void	short_echo(t_env *e, int i)
+{
+	if (e->v[i][0] == 34 || e->v[i][0] == 39)
+	{
+		check_quote(e, i);
+		if (e->v[i + 1] != NULL)
+			printf(" ");
+	}
+	else
+		writer(e, i);
+}
+
+void	short_write(t_env *e, int j)
+{
+	if (e->v[j][e->word] == '$' && (e->v[j][e->word + 1] == 0 || e->v[j][e->word
+			+ 1] == ' '))
+		printf("%c", e->v[j][e->word++]);
+	while (e->v[j][e->word] != 0 && e->v[j][e->word] != '$')
+		printf("%c", e->v[j][e->word++]);
 }

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:58 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/05 13:00:49 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/19 11:40:22 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,19 @@ int	is_pipe_red(t_env *e)
 		i++;
 	}
 	return (0);
+}
+
+void	print_no_n(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			break ;
+		printf("%c", s[i]);
+		i++;
+	}
+	printf(" command not found\n");
 }

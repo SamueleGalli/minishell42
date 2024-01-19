@@ -80,6 +80,7 @@ typedef struct s_env
 	int		pi_re;
 	int		iter;
 	int		numb;
+	int		q_null;
 	int		i_env;
 	int		flag_i;
 	int		lenght;
@@ -157,8 +158,19 @@ int		exits_pipe(t_env *e);
 int		pipe_or_redir(t_env *e);
 int		which_pipe(t_env *e);
 int		size_env(t_env *e);
+int		is_empty_variable(t_env *e, int j, int i);
+int		is_empty_variable(t_env *e, int j, int i);
+int		count_len_exp(t_env *e, int j, int i, int len);
 
+void	check_next_car(t_env *e);
+void	write_null(t_env *e);
+void	short_write(t_env *e, int j);
+void	check_quote(t_env *e, int j);
+void	short_echo(t_env *e, int i);
+void	print_no_n(char *s);
+void	update_v(t_env *e);
 void	pipe_error(t_env *e);
+void	alloc_mat_space(char *d, char *s);
 void	execute_pipe(t_env *e);
 void	control_pipe(t_env *e);
 void	cont_while_mult_file(t_env *e, int fd, char *filename, int i);

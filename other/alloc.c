@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/18 13:10:36 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/19 12:48:25 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*alloc_s(char *buf)
 	int		i;
 	char	*t;
 
-	t = (char *)malloc(sizeof(char ) * ft_strlen(buf) + 1);
+	t = (char *)malloc(sizeof(char) * ft_strlen(buf) + 1);
 	i = 0;
 	while (buf[i] != 0)
 	{
@@ -54,8 +54,8 @@ char	*alloc_file(t_env *e, char s)
 		if (e->v[e->i][0] == s)
 		{
 			e->i++;
-			if (e->v[e->i + 1] == NULL || e->v[e->i + 1][0] == '>' \
-			|| e->v[e->i + 1][0] == '|')
+			if (e->v[e->i + 1] == NULL || e->v[e->i + 1][0] == '>' || e->v[e->i
+				+ 1][0] == '|')
 				return (e->v[e->i]);
 		}
 		else if (e->v[e->i][0] == '<' || e->v[e->i][0] == '|')
@@ -82,4 +82,18 @@ int	alloc_str(t_env *e, int i, int c)
 		c++;
 	}
 	return (c);
+}
+
+void	alloc_mat_space(char *d, char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		d[i] = s[i];
+		i++;
+	}
+	d[i++] = ' ';
+	d[i] = '\0';
 }

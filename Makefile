@@ -12,13 +12,15 @@ SRC = 	main.c \
 		split/split.c \
 		split/split2.c \
 		split/split3.c \
+		split/split4.c \
 		syntax/check_error.c \
 		syntax/check_error2.c \
 		other/alloc.c \
 		other/check_builtin.c \
 		other/env.c \
 		other/free.c \
-		other/expand_first.c \
+		expand_val/expand_first.c \
+		expand_val/cont_expand.c \
 		other/quote.c \
 		other/size.c \
 		libft/ft_atoi.c \

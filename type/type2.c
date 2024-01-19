@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 11:44:45 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:43:29 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/19 12:43:48 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	dir_cont(t_env *e)
 {
 	char	cwd[1024];
 
+	if (compare(e->v[e->i], "cd") == 1 && e->v[e->i + 1] == NULL)
+	{
+		go_root(e, 0);
+		return ;
+	}
 	if (compare(e->v[e->i], "pwd") == 1)
 	{
 		if (getcwd(cwd, 1024) != NULL)
@@ -54,8 +59,6 @@ void	directory(t_env *e)
 			e->exit_code = 0;
 		return ;
 	}
-	else if (compare(e->v[e->i], "cd") == 1)
-		return ;
 	dir_cont(e);
 }
 

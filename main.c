@@ -26,7 +26,7 @@ int	init_nuller(t_env *e)
 	splitme(e);
 	e->i = 0;
 	e->exit = 0;
-	if (e->v[0][0] == '$')
+	if (e->v[0][0] == '$' && e->v[0][1] != 0 && e->v[0][1] != '?')
 		expand_first(e);
 	return (1);
 }
@@ -35,7 +35,7 @@ void	nuller(t_env *e)
 {
 	if (init_nuller(e) == 0)
 		return ;
-	while (e->v[e->i] != 0 && e->exit != 1)
+	while (e->v != NULL && e->v[e->i] != 0 && e->exit != 1)
 	{
 		check_validation(e);
 		if (e->is_valid == 1)
@@ -91,6 +91,7 @@ void	alloc_e(int c, char **argv, char **env, t_env *e)
 	(void)argv;
 	e->i = 0;
 	e->r = 0;
+	e->t = NULL;
 	e->status = 0;
 	cont_allocation(e);
 }
