@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 15:32:57 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/15 10:08:10 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/22 11:16:00 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void	update_env(t_env *e)
 void	check_env(t_env *e)
 {
 	e->i++;
+	if (e->v[e->i][0] == 'P' && e->v[e->i][1] == 'A' && e->v[e->i][2] == 'T'
+		&& e->v[e->i][3] == 'H')
+		e->finded_path = 1;
 	e->r = 0;
 	e->indx = 0;
 	while (e->env[e->r] != NULL && e->v[e->i] != 0)
