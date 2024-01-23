@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:32:48 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/16 11:22:04 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/23 12:29:28 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,8 @@ int	update_redir(t_env *e)
 {
 	if (e->v[e->i] == NULL)
 		return (1);
-	if (e->v[e->i][0] == '<' && e->v[e->i][0] == '>' \
-	&& (e->v[e->i] != NULL))
-		e->i++;
-	else
-	{
-		if (check_valid_red(e) == 0)
-			return (0);
-	}
+	if (check_valid_red(e) == 0)
+		return (0);
 	if (check_valid_red2(e) == 0)
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 11:22:00 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/18 10:48:14 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/23 10:23:26 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	single_error(t_env *e)
 {
 	if (valid_redp(e, e->i_copy) == 1 || e->v[0][0] == '|')
 	{
+		if (e->v[0][0] == '<' && e->v[0][1] == '<' && e->v[1] != NULL)
+			return (0);
 		if (e->v[0][0] == '|')
 			printf("bash: syntax error near unexpected token `|'\n");
 		else

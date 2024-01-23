@@ -58,6 +58,7 @@ typedef struct s_env
 	char	**env;
 	char	**v;
 	char	**t;
+	char	**delim;
 	char	**mat_flag;
 	char	*s;
 	char	*cmd;
@@ -65,6 +66,7 @@ typedef struct s_env
 	char	*filename;
 	char	*path;
 	int		r;
+	int		here_pipe;
 	int		i;
 	int		piping;
 	int		i2;
@@ -84,6 +86,7 @@ typedef struct s_env
 	int		i_env;
 	int		flag_i;
 	int		lenght;
+	int		here;
 	int		ex;
 	int		check;
 	int		input;
@@ -162,6 +165,8 @@ int		is_empty_variable(t_env *e, int j, int i);
 int		is_empty_variable(t_env *e, int j, int i);
 int		count_len_exp(t_env *e, int j, int i, int len);
 
+void	pipe_here(t_env *e);
+void	here_while(t_env *e, char *line, char *buffer, int i);
 void	check_next_car(t_env *e);
 void	write_null(t_env *e);
 void	short_write(t_env *e, int j);
@@ -170,6 +175,7 @@ void	short_echo(t_env *e, int i);
 void	print_no_n(char *s);
 void	update_v(t_env *e);
 void	pipe_error(t_env *e);
+void	alloc_all_here(t_env *e);
 void	alloc_mat_space(char *d, char *s);
 void	execute_pipe(t_env *e);
 void	control_pipe(t_env *e);
@@ -261,13 +267,14 @@ void	update_env_v(t_env *e, int k, int i, char **tmp);
 void	alloc_mat_esp(char *d, t_env *e);
 void	mini_while(t_env *e);
 
+char	*convert_line(char *line, t_env *e, int j, int k);
 char	*file_loop(t_env *e);
 char	*filepath(char *str, int j, t_env *e);
 char	*format(char *s);
 char	*find_filepath_major(t_env *e);
 char	*ft_strjoin_n(char *s1, char *s2);
 char	*mini_strcat(char *d, const char *s);
-char	*update_buffer_red(char *line, char *buffer);
+char	*update_buffer_red(char *line, char *buffer, t_env *e);
 char	*find_filepath_minor_mult(t_env *e);
 char	*alloc_s(char *buf);
 char	*find_lasth_filepath(t_env *e);

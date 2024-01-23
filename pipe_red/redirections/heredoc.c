@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:25:41 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/03 11:37:54 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/23 12:02:09 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,33 @@
 
 void	double_minor_redirect(t_env *e)
 {
-	char	*delim;
 	char	*line;
 	char	*buffer;
+	int		i;
 
-	delim = e->v[index_v_arrows(e, "<<") + 1];
+	i = 0;
+	alloc_all_here(e);
 	line = NULL;
 	buffer = NULL;
-	while (1)
-	{
-		line = readline("> ");
-		singals(e);
-		if (check_signals_red(e, line) == 1)
-			break ;
-		if (compare(line, delim) == 1)
-		{
-			redirect_double_arrows(e, buffer);
-			break ;
-		}
-		else
-			buffer = update_buffer_red(line, buffer);
-	}
+	here_while(e, line, buffer, i);
 	e->red_flag = 1;
 	e->exit = 1;
 }
 
-char	*update_buffer_red(char *line, char *buffer)
+char	*update_buffer_red(char *line, char *buffer, t_env *e)
 {
 	char	*all;
 	char	*buf;
 
 	all = NULL;
+	if (line[0] == '$')
+		line = convert_line(line, e, 0, 0);
 	if (buffer != NULL)
 		all = (char *)malloc(sizeof(char ) * ft_strlen(buffer) + 1);
 	all = ft_strcpy(all, buffer);
 	buf = ft_strjoin_n(all, line);
 	free(buffer);
+	free(line);
 	free(all);
 	return (buf);
 }
@@ -92,6 +83,8 @@ void	continue_heredoc(t_env *e, char *s)
 		}
 		else
 		{
+			if (e->here_pipe == 1)
+				pipe_here(e);
 			if (compare(e->v[0], "cat") == 1)
 				printf("%s", s);
 			else
@@ -99,5 +92,6 @@ void	continue_heredoc(t_env *e, char *s)
 		}
 	}
 	free(s);
-	exiting(e, 1);
+	free_table(e->delim);
+	exiting(e, 0);
 }

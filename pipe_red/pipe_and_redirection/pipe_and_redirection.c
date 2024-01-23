@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:33:21 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/22 11:59:42 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/23 12:19:53 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	pipe_red_start(t_env *e)
 {
+	e->here_pipe = 1;
 	while (e->v[e->i] != NULL)
 	{
 		e->c_wait = 0;
@@ -36,7 +37,10 @@ void	pipe_and_redirection(t_env *e)
 {
 	e->check_input = -1;
 	e->pi_re = 1;
+	e->here = 0;
+	e->delim = NULL;
 	e->tmp_i = 0;
+	e->here_pipe = 0;
 	if (exits_pipe(e) == 1)
 		pipe_red_start(e);
 	else

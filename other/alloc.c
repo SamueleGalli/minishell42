@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/19 12:48:25 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/23 12:28:42 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*alloc_s(char *buf)
 	int		i;
 	char	*t;
 
+	if (buf == NULL)
+		return (NULL);
 	t = (char *)malloc(sizeof(char) * ft_strlen(buf) + 1);
 	i = 0;
 	while (buf[i] != 0)

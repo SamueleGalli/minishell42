@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 09:27:45 by marvin            #+#    #+#             */
-/*   Updated: 2024/01/09 11:27:35 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/23 11:14:52 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ void	type_cont(t_env *e)
 
 void	typing(t_env *e)
 {
-	if (compare(e->v[index_v_arrows(e, "<<")], "<<") == 1 \
-	&& e->v[index_v_arrows(e, "<<") + 1] != NULL)
-		double_minor_redirect(e);
-	else if (is_pipe_red(e) == 1)
+	if (is_pipe_red(e) == 1)
 		pipe_and_redirection(e);
 	else
 		type_cont(e);

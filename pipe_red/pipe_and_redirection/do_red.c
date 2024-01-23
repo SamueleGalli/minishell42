@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 11:25:35 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/16 11:23:48 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/23 12:34:45 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ int	do_redir(t_env *e)
 		while (e->v[e->i][0] != '<' && e->v[e->i][0] != '>')
 			e->i++;
 		redirect_mult_single(e);
+		if (e->here != 0 && e->v[e->i][0] != '|' && \
+		e->v[e->i][0] != '>' && e->v[e->i][0] != '<' && \
+		e->v[e->i] != NULL)
+			variabletype(e);
 		if (e->do_redir == 1)
 			execve_redir(e);
 		if (update_redir(e) == 0)
