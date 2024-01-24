@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:41:45 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/24 11:08:22 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/24 11:24:33 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	redirect_double_arrows(t_env *e, char *buffer)
 	pid_t	pid;
 	char	*s;
 
+	e->exit_code = 0;
 	s = alloc_s(buffer);
 	free(buffer);
 	pid = fork();
@@ -52,8 +53,7 @@ int	num_here(t_env *e)
 
 	i = e->i;
 	j = 0;
-	while (e->v[i] != NULL && e->v[i][0] != '|' && e->v[i][0] != '>' && \
-	!(e->v[i][0] == '<' && e->v[i][1] == 0))
+	while (e->v[i] != NULL && e->v[i][0] != '|' && e->v[i][0] != '>')
 	{
 		if ((compare(e->v[i], "<<") == 1 || compare(e->v[i], "<< ") == 1) \
 		&& e->v[i + 1] != NULL)
@@ -92,8 +92,7 @@ void	alloc_all_here(t_env *e)
 	i = num_here(e);
 	e->delim = (char **)malloc(sizeof(char *) * (i + 1));
 	i = e->i;
-	while (e->v[i] != NULL && e->v[i][0] != '|' && e->v[i][0] != '>' && \
-	!(e->v[i][0] == '<' && e->v[i][1] == 0))
+	while (e->v[i] != NULL && e->v[i][0] != '|' && e->v[i][0] != '>')
 	{
 		if ((compare(e->v[i], "<<") == 1 || compare(e->v[i], "<< ") == 1) \
 		&& e->v[i + 1] != NULL)

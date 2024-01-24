@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:25:41 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/24 10:46:21 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/24 11:40:46 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,7 @@ void	continue_heredoc(t_env *e, char *s)
 			free(s);
 		}
 		else
-		{
-			if (e->here_pipe == 1)
-				pipe_here(e);
-			if (compare(e->v[e->i], "cat") == 1)
-				printf("%s", s);
-			else
-				variabletype(e);
-		}
+			shoreter_else(e, s);
 	}
 	free(s);
 	free_table(e->delim);

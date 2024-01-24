@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 10:46:51 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/24 11:01:38 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/24 11:34:23 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	update_mult_file(t_env *e)
 	e->v[e->i][0] == '<' && e->v[e->i][1] == '<')
 	{
 		e->i = e->i + 2;
-		if (e->i_here == 0)
-			e->i_here = e->i - 2;
+		e->i_here = e->i - 2;
 	}
 	else if (e->v[e->i] != NULL && e->v[e->i][0] == '<' \
 	&& e->v[e->i + 1] != NULL)
@@ -35,6 +34,8 @@ void	mult_check_file(t_env *e, int fd, char *filename)
 		fd = open(filename, O_RDONLY);
 		if (fd < 0)
 		{
+			if (e->i_here > 0)
+				e->i = e->i_here;
 			e->exit_code = 1;
 			perror("open");
 			free(filename);

@@ -94,6 +94,7 @@ typedef struct s_env
 	int		i_here;
 	int		output;
 	int		exit_code;
+	int		no_here;
 	int		exit;
 	int		stdin;
 	int		stdout;
@@ -166,7 +167,7 @@ int		is_empty_variable(t_env *e, int j, int i);
 int		is_empty_variable(t_env *e, int j, int i);
 int		count_len_exp(t_env *e, int j, int i, int len);
 
-void	pipe_here(t_env *e);
+void	shoreter_else(t_env *e, char *s);
 void	here_while(t_env *e, char *line, char *buffer, int i);
 void	check_next_car(t_env *e);
 void	write_null(t_env *e);

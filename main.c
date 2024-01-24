@@ -17,6 +17,7 @@ int	init_nuller(t_env *e)
 	e->pi_re = 0;
 	e->output = 0;
 	e->input = 0;
+	e->no_here = 0;
 	e->i_here = 0;
 	e->here = 0;
 	e->s = NULL;

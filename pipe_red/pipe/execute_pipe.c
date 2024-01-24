@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:06:17 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/22 11:57:03 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/24 11:42:35 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	child_do_pipe(t_env *e)
 	if (which_pipe(e) == 0)
 		dup2(e->pipefd[1], STDOUT_FILENO);
 	close(e->pipefd[1]);
+	if (e->no_here == 1)
+		exiting(e, e->exit_code);
 	if (check_builtin(e) == 0)
 	{
 		pathcmd(e);
