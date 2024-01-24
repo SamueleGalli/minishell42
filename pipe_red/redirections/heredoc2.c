@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:41:45 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/23 12:30:51 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/24 11:08:22 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,15 @@ void	continuing_minor_double(t_env *e, char *s, pid_t pid)
 	if (pid == 0)
 		continue_heredoc(e, s);
 	else
-		waitpid(pid, NULL, 0);
+	{
+		waitpid(pid, &e->status, 0);
+		if (e->here_pipe == 1)
+		{
+			close(e->pipefd[1]);
+			dup2(e->pipefd[0], STDIN_FILENO);
+			close(e->pipefd[0]);
+		}
+	}
 	free(s);
 }
 
@@ -42,7 +50,7 @@ int	num_here(t_env *e)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = e->i;
 	j = 0;
 	while (e->v[i] != NULL && e->v[i][0] != '|' && e->v[i][0] != '>' && \
 	!(e->v[i][0] == '<' && e->v[i][1] == 0))
@@ -50,10 +58,8 @@ int	num_here(t_env *e)
 		if ((compare(e->v[i], "<<") == 1 || compare(e->v[i], "<< ") == 1) \
 		&& e->v[i + 1] != NULL)
 		{
-			if (e->v[e->i + 2] != NULL)
-				e->here = i + 2;
-			else
-				e->here = i + 1;
+			e->i_here = i + 2;
+			e->here = 1;
 			j++;
 		}
 		i++;
@@ -85,7 +91,7 @@ void	alloc_all_here(t_env *e)
 	j = 0;
 	i = num_here(e);
 	e->delim = (char **)malloc(sizeof(char *) * (i + 1));
-	i = 0;
+	i = e->i;
 	while (e->v[i] != NULL && e->v[i][0] != '|' && e->v[i][0] != '>' && \
 	!(e->v[i][0] == '<' && e->v[i][1] == 0))
 	{

@@ -91,6 +91,7 @@ typedef struct s_env
 	int		check;
 	int		input;
 	int		count_exp;
+	int		i_here;
 	int		output;
 	int		exit_code;
 	int		exit;

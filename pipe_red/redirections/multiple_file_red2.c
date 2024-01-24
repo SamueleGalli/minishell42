@@ -6,11 +6,26 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 10:46:51 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/23 12:58:51 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/24 11:01:38 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	update_mult_file(t_env *e)
+{
+	e->i++;
+	if (e->v[e->i] != NULL && \
+	e->v[e->i][0] == '<' && e->v[e->i][1] == '<')
+	{
+		e->i = e->i + 2;
+		if (e->i_here == 0)
+			e->i_here = e->i - 2;
+	}
+	else if (e->v[e->i] != NULL && e->v[e->i][0] == '<' \
+	&& e->v[e->i + 1] != NULL)
+		e->i++;
+}
 
 void	mult_check_file(t_env *e, int fd, char *filename)
 {
@@ -26,13 +41,11 @@ void	mult_check_file(t_env *e, int fd, char *filename)
 			return ;
 		}
 		free(filename);
-		e->i++;
-		if (e->v[e->i] != NULL && e->v[e->i][0] == '<' \
-		&& e->v[e->i + 1] != NULL)
-			e->i++;
+		update_mult_file(e);
 	}
 	if (e->v[e->i] == NULL)
 		single_continuous(e, fd);
+	e->i = e->i_here;
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:11:31 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/23 13:04:27 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/24 10:58:09 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	redirect_mult_single(t_env *e)
 	else if (search_mult_arrows(e, "< ") == 1 \
 	|| search_mult_arrows(e, "<") == 1)
 		min_mult_redirect(e);
-	else if ((compare(e->v[e->i], "<< ") == 1 || \
-	compare(e->v[e->i], "<<") == 1) && e->v[e->i + 1] != NULL)
+	if (e->v[e->i] != NULL && e->v[e->i + 1] != NULL \
+	&& (compare(e->v[e->i], "<< ") == 1 || \
+	compare(e->v[e->i], "<<") == 1))
 		double_minor_redirect(e);
 	if (e->delim != NULL)
 		free_table(e->delim);

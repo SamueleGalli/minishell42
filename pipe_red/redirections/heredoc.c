@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:25:41 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/23 12:02:09 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/24 10:46:21 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int	check_signals_red(t_env *e, char *line)
 
 void	init_heredoc(t_env *e)
 {
-	if (check_builtin(e) == 0 && compare(e->v[0], "cat") == 0)
+	e->i = e->i_tmp;
+	if (check_builtin(e) == 0 && compare(e->v[e->i], "cat") == 0)
 	{
-		e->i = 0;
 		pathcmd(e);
 		flag_matrix(e);
 	}
@@ -85,7 +85,7 @@ void	continue_heredoc(t_env *e, char *s)
 		{
 			if (e->here_pipe == 1)
 				pipe_here(e);
-			if (compare(e->v[0], "cat") == 1)
+			if (compare(e->v[e->i], "cat") == 1)
 				printf("%s", s);
 			else
 				variabletype(e);

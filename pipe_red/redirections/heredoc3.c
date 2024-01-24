@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:43:52 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/23 12:35:19 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/24 10:43:06 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	here_while(t_env *e, char *line, char *buffer, int i)
 		else
 			buffer = update_buffer_red(line, buffer, e);
 	}
-	e->i = e->here;
+	e->i = e->i_here;
 }
 
 void	pipe_here(t_env *e)
