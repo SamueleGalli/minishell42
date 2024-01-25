@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 10:16:08 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/19 12:12:19 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/25 11:10:39 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	mini_get_var(t_env *e, int i, int j)
 	return (i);
 }
 
-void	writer(t_env *e, int j)
+int	writer(t_env *e, int j)
 {
 	e->word = 0;
 	while (e->v[j] != NULL && e->v[j][e->word] != 0)
@@ -50,16 +50,18 @@ void	writer(t_env *e, int j)
 			printf("%d", e->exit_code);
 			e->word += 2;
 		}
-		else if (e->v[j][e->word] == '$' && e->v[j][e->word + 1] != '\0')
+		else if (e->v[j][e->word] == '$' && e->v[j][e->word + 1] != '\0' \
+		&& ft_isalpha(e->v[j][e->word + 1]) == 1)
 		{
 			if (get_var_quote(e, j, -1, e->word) == 1)
-				return ;
+				return (j);
 			j++;
 			e->word = 0;
 		}
 		else
 			short_write(e, j);
 	}
+	return (j);
 }
 
 void	bridge(t_env *e, int j)

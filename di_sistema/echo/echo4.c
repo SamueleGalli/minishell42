@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:44:56 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/19 12:25:07 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/25 11:09:46 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	cont_print_red(t_env *e, int i, int exist)
 	return (i);
 }
 
-void	short_echo(t_env *e, int i)
+int	short_echo(t_env *e, int i)
 {
 	if (e->v[i][0] == 34 || e->v[i][0] == 39)
 	{
@@ -60,7 +60,8 @@ void	short_echo(t_env *e, int i)
 			printf(" ");
 	}
 	else
-		writer(e, i);
+		i = writer(e, i);
+	return (i);
 }
 
 void	short_write(t_env *e, int j)
@@ -68,6 +69,11 @@ void	short_write(t_env *e, int j)
 	if (e->v[j][e->word] == '$' && (e->v[j][e->word + 1] == 0 || e->v[j][e->word
 			+ 1] == ' '))
 		printf("%c", e->v[j][e->word++]);
+	if (e->v[j][e->word] == '$' && ft_isalpha(e->v[j][e->word + 1]) == 0)
+	{
+		while (e->v[j][e->word] != 0)
+			printf("%c", e->v[j][e->word++]);
+	}
 	while (e->v[j][e->word] != 0 && e->v[j][e->word] != '$')
 		printf("%c", e->v[j][e->word++]);
 }

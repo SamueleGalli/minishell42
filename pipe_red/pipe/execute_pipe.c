@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:06:17 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/24 11:42:35 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/25 11:41:27 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@ void	child_do_pipe(t_env *e)
 		e->s = NULL;
 	if (e->s != NULL)
 	{
-		if (e->c_path == 0 && access(e->s, X_OK) == 0 \
-		&& e->exit_code == 0)
+		if (e->c_path == 0 && access(e->s, X_OK) == 0)
 			father_pipe(e);
-		else
-			e->exit_code = 0;
 	}
 	else
 		variabletype(e);
