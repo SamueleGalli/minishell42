@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 09:55:43 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/19 12:47:25 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/26 13:27:12 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	count_len_exp(t_env *e, int j, int i, int len)
 
 	s = 0;
 	e->j = j;
-	while (e->env[j][i] != '=')
-		i++;
 	i++;
-	while (e->env[j][i] != 0)
+	if (e->env[j][i] == '\'' || e->env[j][i] == '"')
+		i++;
+	while (e->env[j][i] != 0 && e->env[j][i] != '\'' && e->env[j][i] != '"')
 	{
 		if (e->env[j][i] == ' ')
 			i++;
@@ -67,23 +67,16 @@ int	check_expanding(t_env *e, int j, int i)
 
 void	update_v(t_env *e)
 {
+	int	i;
+
 	free_table(e->v);
 	e->v = NULL;
 	e->v = (char **)malloc(sizeof(char *) * (size_mat(e->t)));
 	while (e->t[e->i] != NULL)
 	{
-		if (e->t[e->i + 1] != NULL)
-		{
-			e->v[e->i] = (char *)malloc(sizeof(char) * (ft_strlen(e->t[e->i])
-						+ 2));
-			alloc_mat_space(e->v[e->i], e->t[e->i]);
-		}
-		else
-		{
-			e->v[e->i] = (char *)malloc(sizeof(char) * (ft_strlen(e->t[e->i])
-						+ 1));
-			alloc_mat(e->v[e->i], e->t[e->i]);
-		}
+		i = ft_strlen(e->t[e->i]) + 1;
+		e->v[e->i] = (char *)malloc(sizeof(char) * i);
+		alloc_mat(e->v[e->i], e->t[e->i]);
 		e->i++;
 	}
 	e->v[e->i] = NULL;

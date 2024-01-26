@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:43:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:40:44 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/26 13:29:51 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	path_valid(char *s, t_env *e)
 	if (s[0] == 'P' && s[1] == 'A' && s[2] == 'T' \
 	&& s[3] == 'H' && s[4] == '=' && s[5] != '\0')
 	{
-		if (comparing(s, 5, "/usr/bin/", "/bin/") == 1)
+		if (comparing(s, 5, "/usr/bin", "/bin") == 1)
 		{
 			e->c_path = 0;
 			return (1);

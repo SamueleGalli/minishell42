@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:33:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/17 11:54:51 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/26 12:56:04 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ void	check_valid_file(t_env *e)
 
 void	com(t_env *e)
 {
+	if (e->v[0][0] == '\'' || e->v[0][0] == '\"')
+	{
+		print_no_quote(e->v[0], 0);
+		printf(" command not found\n");
+		return ;
+	}
 	pathcmd(e);
 	flag_matrix(e);
 	if (empty(e) == 0)
@@ -77,5 +83,3 @@ void	com(t_env *e)
 	else
 		error(e);
 }
-
-//./split

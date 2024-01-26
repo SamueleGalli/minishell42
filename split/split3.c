@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:56:05 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/19 12:47:59 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/26 12:43:43 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	split_clousure(t_env *e)
 			if (e->cmd[e->j] == e->cmd[j2] && (e->cmd[e->j + 1] == 0
 					|| e->cmd[e->j + 1] == ' '))
 				break ;
-			else if (e->cmd[e->j + 1] == e->cmd[e->j])
+			else if (check_quote_sindoub(e) == 1)
 				e->j = e->j + 2;
 			if (e->cmd[e->j] != e->cmd[j2])
 				e->word++;

@@ -29,13 +29,15 @@ int	init_nuller(t_env *e)
 	splitme(e);
 	e->i = 0;
 	e->exit = 0;
-	if (e->v[0][0] == '$' && e->v[0][1] != 0 && e->v[0][1] != '?')
+	if (e->v[0] != NULL && e->v[0][0] == '$' && \
+	e->v[0][1] != 0 && e->v[0][1] != '?')
 		expand_first(e);
 	return (1);
 }
 
 void	nuller(t_env *e)
 {
+	if_only_space(e);
 	if (init_nuller(e) == 0)
 		return ;
 	while (e->v != NULL && e->v[e->i] != 0 && e->exit != 1)
@@ -60,7 +62,6 @@ void	nuller(t_env *e)
 
 void	cont_allocation(t_env *e)
 {
-	e->start_red = 0;
 	e->ex = 0;
 	e->stdin = dup(STDIN_FILENO);
 	e->stdout = dup(STDOUT_FILENO);
@@ -114,13 +115,9 @@ int	main(int c, char **argv, char **env)
 		e->cmd = readline("#> ");
 		if (e->cmd == NULL)
 			exiting_d(e);
-		nuller(e);
-		if (e->v != NULL)
-			free_table(e->v);
-		if (e->s != NULL)
-			free(e->s);
-		if (e->cmd[0] != '\0' && e->red_flag == 0)
-			add_history(e->cmd);
+		if (if_only_space(e) == 0)
+			nuller(e);
+		reset_variable(e);
 		e->red_flag = 0;
 	}
 }

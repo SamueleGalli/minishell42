@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:50:43 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/09 12:41:07 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/26 11:47:22 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	check_type(t_env *e)
 		return (0);
 	else if (e->v[e->check][0] == '<')
 	{
-		e->start_red = e->check;
 		e->input = e->check;
 		return (1);
 	}
@@ -29,7 +28,7 @@ int	check_type(t_env *e)
 	}
 	else if (e->v[e->check][0] == '>')
 	{
-		e->start_red = e->check;
+		e->piping = 1;
 		e->output = e->check;
 		return (1);
 	}

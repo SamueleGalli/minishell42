@@ -1,2 +1,4 @@
-cat <missing | cat (dovrei passare l'errore a cat perche rimane in attesa all'infinito senno)
-echo $PWD $OLDPWD (non si aggiorna PWD e OLDPWD)
+cat
+doppio redline
+segnale ctr-c
+dare un occhiata a heredoc e redirection

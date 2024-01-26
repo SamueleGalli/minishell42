@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:37:14 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/25 10:27:05 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/26 11:38:34 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	fork_red_pipe(t_env *e, int fd)
 	close(fd);
 	check_out(e);
 	e->i = e->i_tmp;
+	if (e->v[e->i][0] == '<')
+		exiting(e, 0);
 	if (check_builtin(e) == 0)
 	{
 		if (e->output == -1 && e->input > -1 && e->piping == 1)

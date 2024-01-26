@@ -6,15 +6,17 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:07:09 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/16 13:08:13 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/26 13:37:48 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	execve_red(t_env *e)
+void	execve_red(t_env *e, int fd)
 {
-	e->i = e->tmp_i;
+	close(0);
+	dup2(fd, 1);
+	close(fd);
 	if (check_builtin(e) == 0)
 	{
 		pathcmd(e);
@@ -37,16 +39,18 @@ void	fork_pid_zero(t_env *e)
 {
 	int	fd;
 
-	if (e->v[e->i][1] == '>')
+	if (single_red(e) == 1)
+		fd = single_file(e, 0, 0);
+	else if (e->v[e->i][1] == '>')
 		fd = loop_file(e, 0, 2);
 	else
 		fd = loop_file(e, 0, 1);
 	if (e->filename != NULL)
 		free(e->filename);
-	close(0);
-	dup2(fd, 1);
-	close(fd);
-	execve_red(e);
+	e->i = e->tmp_i;
+	if (e->v[e->i][0] == '>')
+		exiting(e, 0);
+	execve_red(e, fd);
 }
 
 void	waiting2(t_env *e, pid_t pid)
@@ -57,6 +61,11 @@ void	waiting2(t_env *e, pid_t pid)
 		e->exit_code = 2;
 	else
 		e->exit_code = WEXITSTATUS(e->status);
+	if (e->piping == 1)
+	{
+		close(e->pipefd[0]);
+		close(e->pipefd[1]);
+	}
 }
 
 void	check_red_fork(t_env *e)
@@ -81,8 +90,7 @@ void	check_red_fork(t_env *e)
 void	redirect_mult_double(t_env *e)
 {
 	e->filename = find_filepath_major(e);
-	if (e->exit_code == 0)
-		check_red_fork(e);
+	check_red_fork(e);
 	if (e->filename != NULL)
 		free(e->filename);
 }
