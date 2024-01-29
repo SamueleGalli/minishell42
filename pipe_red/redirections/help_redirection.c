@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:20:33 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/23 10:26:44 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/29 11:01:23 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,17 @@ void	check_next_redp(t_env *e)
 			return ;
 		}
 		i++;
+	}
+}
+
+void	error_perror(t_env *e, int fd)
+{
+	if (fd < 0)
+	{
+		if (e->no_print == 0)
+			perror("open");
+		e->exit = 1;
+		free(e->filename);
+		exiting(e, 1);
 	}
 }

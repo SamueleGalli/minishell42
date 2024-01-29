@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:13 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/26 13:41:09 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/29 12:54:30 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ void	exiting_d(t_env *e)
 
 void	reset_variable(t_env *e)
 {
-	e->cmd = NULL;
-	e->v = NULL;
-	e->s = NULL;
-	if (e->v != NULL)
-		free_table(e->v);
-	if (e->s != NULL)
-		free(e->s);
 	if (e->cmd[0] != '\0' && e->red_flag == 0 && e->v != NULL)
 		add_history(e->cmd);
+	if (e->v != NULL)
+	{
+		free_table(e->v);
+		e->v = NULL;
+	}
+	if (e->s != NULL)
+		free(e->s);
 }

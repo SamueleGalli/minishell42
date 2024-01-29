@@ -108,6 +108,9 @@ int	main(int c, char **argv, char **env)
 	if (e == NULL)
 		return (1);
 	alloc_e(c, argv, env, e);
+	e->v = NULL;
+	e->s = NULL;
+	e->cmd = NULL;
 	while (1)
 	{
 		singals(e);

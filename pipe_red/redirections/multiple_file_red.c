@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 11:45:20 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/25 10:14:59 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/29 11:02:19 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int	check_first(t_env *e, int fd, int i)
 	if (fd < 0)
 	{
 		e->exit_code = 1;
-		perror("open");
+		if (e->no_print == 0)
+			perror("open");
 		if (file != NULL)
 			free(file);
 		e->exit = 1;

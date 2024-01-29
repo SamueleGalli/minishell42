@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:37:14 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/26 11:38:34 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/29 11:01:16 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,7 @@ void	check_out(t_env *e)
 			fd = open(e->filename, O_WRONLY | O_APPEND | O_CREAT, 0666);
 		else
 			fd = open(e->filename, O_WRONLY | O_TRUNC | O_CREAT, 0666);
-		if (fd < 0)
-		{
-			perror("open");
-			e->exit = 1;
-			free(e->filename);
-			exiting(e, 1);
-		}
+		error_perror(e, fd);
 		free(e->filename);
 		dup2(fd, STDOUT_FILENO);
 		close (fd);

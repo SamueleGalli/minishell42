@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:07:09 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/26 13:37:48 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/29 11:07:32 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	execve_red(t_env *e, int fd)
 {
-	close(0);
 	dup2(fd, 1);
 	close(fd);
+	close(0);
 	if (check_builtin(e) == 0)
 	{
 		pathcmd(e);
@@ -45,6 +45,13 @@ void	fork_pid_zero(t_env *e)
 		fd = loop_file(e, 0, 2);
 	else
 		fd = loop_file(e, 0, 1);
+	if (access(e->filename, W_OK) == -1)
+	{
+		if (e->no_print == 0)
+			perror("permission denied");
+		free(e->filename);
+		exiting(e, 1);
+	}
 	if (e->filename != NULL)
 		free(e->filename);
 	e->i = e->tmp_i;
@@ -61,6 +68,8 @@ void	waiting2(t_env *e, pid_t pid)
 		e->exit_code = 2;
 	else
 		e->exit_code = WEXITSTATUS(e->status);
+	if (e->exit_code == 1)
+		e->no_print = 1;
 	if (e->piping == 1)
 	{
 		close(e->pipefd[0]);

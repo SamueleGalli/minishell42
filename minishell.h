@@ -84,6 +84,7 @@ typedef struct s_env
 	int		numb;
 	int		q_null;
 	int		i_env;
+	int		no_print;
 	int		flag_i;
 	int		lenght;
 	int		here;
@@ -173,11 +174,13 @@ int		short_echo(t_env *e, int i);
 int		check_quote_sindoub(t_env *e);
 int		if_only_space(t_env *e);
 
+void	handle_signal_pipe(int sig);
 void	reset_variable(t_env *e);
 void	shoreter_else(t_env *e, char *s);
 void	here_while(t_env *e, char *line, char *buffer, int i);
 void	check_next_car(t_env *e);
 void	write_null(t_env *e);
+void	error_perror(t_env *e, int fd);
 void	short_write(t_env *e, int j);
 void	check_quote(t_env *e, int j);
 void	print_no_n(char *s);

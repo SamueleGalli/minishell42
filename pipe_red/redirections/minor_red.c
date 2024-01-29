@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 11:38:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/25 10:27:20 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/29 10:57:32 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	prev_minor_red(t_env *e, int fd, char *filename)
 	{
 		if (e->piping == 1)
 			print_in_pipe(e);
-		perror("open");
+		if (e->no_print == 0)
+			perror("open");
 		e->exit_code = 1;
 		e->exit = 1;
 		free(filename);

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:33:21 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/26 13:27:19 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/29 12:50:42 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	pipe_red_start(t_env *e)
 	}
 	if (WIFEXITED(e->status) != 0)
 		e->exit_code = WEXITSTATUS(e->status);
+	singals(e);
 }
 
 void	pipe_and_redirection(t_env *e)
@@ -39,6 +40,7 @@ void	pipe_and_redirection(t_env *e)
 	e->check_input = -1;
 	e->pi_re = 1;
 	e->here = 0;
+	e->no_print = 0;
 	e->delim = NULL;
 	e->tmp_i = 0;
 	e->here_pipe = 0;

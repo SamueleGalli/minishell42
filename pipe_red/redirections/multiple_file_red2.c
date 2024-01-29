@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 10:46:51 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/25 10:19:10 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/29 11:06:00 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void	mult_check_file(t_env *e, int fd, char *filename)
 			if (e->i_here > 0)
 				e->i = e->i_here;
 			e->exit_code = 1;
-			perror("open");
+			if (e->no_print == 0)
+				perror("open");
+			e->no_print = 1;
 			free(filename);
 			return ;
 		}
