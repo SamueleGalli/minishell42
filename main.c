@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:56:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/05 09:56:59 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/02/01 11:02:16 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	init_nuller(t_env *e)
 	splitme(e);
 	e->i = 0;
 	e->exit = 0;
-	if (e->v[0] != NULL && e->v[0][0] == '$' && \
-	e->v[0][1] != 0 && e->v[0][1] != '?')
+	if (e->v[0] != NULL && e->v[0][0] == '$' && e->v[0][1] != 0
+		&& e->v[0][1] != '?')
 		expand_first(e);
 	return (1);
 }
@@ -87,7 +87,6 @@ void	cont_allocation(t_env *e)
 void	alloc_e(int c, char **argv, char **env, t_env *e)
 {
 	e->p = NULL;
-	e->s = NULL;
 	e->cmd = NULL;
 	e->v = NULL;
 	e->s = NULL;
