@@ -174,6 +174,7 @@ int		short_echo(t_env *e, int i);
 int		check_quote_sindoub(t_env *e);
 int		if_only_space(t_env *e);
 
+void	in_major(t_env *e);
 void	handle_signal_pipe(int sig);
 void	reset_variable(t_env *e);
 void	shoreter_else(t_env *e, char *s);

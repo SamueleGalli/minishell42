@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 11:25:35 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/29 10:54:26 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/31 10:52:13 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int	do_redir(t_env *e)
 		e->v[e->i][0] != '|' && e->v[e->i][0] != '>' \
 		&& e->v[e->i][0] != '<')
 			variabletype(e);
-		if (e->do_redir == 1)
-			execve_redir(e);
 		if (update_redir(e) == 0)
 			return (0);
 		e->i_tmp = e->i;

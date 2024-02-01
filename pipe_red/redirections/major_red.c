@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:07:09 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/29 11:07:32 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/31 09:51:03 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	execve_red(t_env *e, int fd)
 {
 	dup2(fd, 1);
 	close(fd);
-	close(0);
+	in_major(e);
 	if (check_builtin(e) == 0)
 	{
 		pathcmd(e);

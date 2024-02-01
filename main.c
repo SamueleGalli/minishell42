@@ -87,6 +87,7 @@ void	cont_allocation(t_env *e)
 void	alloc_e(int c, char **argv, char **env, t_env *e)
 {
 	e->p = NULL;
+	e->s = NULL;
 	e->cmd = NULL;
 	e->v = NULL;
 	e->s = NULL;

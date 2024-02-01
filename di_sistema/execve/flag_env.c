@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:25:43 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:42:03 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/02/01 10:40:59 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,6 @@ void	env_variable2(t_env *e)
 	}
 	while (e->env[i] != NULL)
 		i = enviroment_control(e, i, 0);
+	if (e->env[i] == NULL)
+		e->mat_flag[e->word] = NULL;
 }

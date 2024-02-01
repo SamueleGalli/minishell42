@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:06:17 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/29 13:00:12 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/02/01 10:35:46 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	child_do_pipe(t_env *e)
 	}
 	else
 		variabletype(e);
+	free_table(e->mat_flag);
+	e->mat_flag = NULL;
 	exiting(e, e->exit_code);
 }
 
@@ -49,7 +51,8 @@ void	execute_pipe(t_env *e)
 	e->pid_pipe = fork();
 	if (e->pid_pipe < 0)
 	{
-		perror("fork");
+		if (e->no_print == 0)
+			perror("fork");
 		exiting(e, 1);
 	}
 	if (e->pid_pipe == 0)

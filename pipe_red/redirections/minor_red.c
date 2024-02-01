@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 11:38:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/29 10:57:32 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/01/31 13:50:12 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ void	cont_mult_file(t_env *e, int fd, char *filename)
 	single_continuous(e, fd);
 }
 
+void	cont_fd_error(t_env *e, char *filename)
+{
+	if (e->no_print == 0)
+		perror("open");
+	e->exit_code = 1;
+	e->exit = 1;
+	free(filename);
+}
+
 int	prev_minor_red(t_env *e, int fd, char *filename)
 {
 	if (multi_file(e) >= 2 && min_com(e) == 1)
@@ -56,13 +65,7 @@ int	prev_minor_red(t_env *e, int fd, char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		if (e->piping == 1)
-			print_in_pipe(e);
-		if (e->no_print == 0)
-			perror("open");
-		e->exit_code = 1;
-		e->exit = 1;
-		free(filename);
+		cont_fd_error(e, filename);
 		return (0);
 	}
 	free(filename);
