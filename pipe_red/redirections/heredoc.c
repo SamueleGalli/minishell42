@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:25:41 by eraccane          #+#    #+#             */
-/*   Updated: 2024/01/24 11:40:46 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/02/03 14:01:49 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 void	double_minor_redirect(t_env *e)
 {
 	char	*line;
-	char	*buffer;
 	int		i;
 
 	i = 0;
 	alloc_all_here(e);
 	line = NULL;
-	buffer = NULL;
-	here_while(e, line, buffer, i);
+	e->buffer = NULL;
+	here_while(e, line, i);
 	e->red_flag = 1;
 	e->exit = 1;
 }

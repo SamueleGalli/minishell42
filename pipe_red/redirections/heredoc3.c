@@ -6,38 +6,36 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:43:52 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/29 09:52:41 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/02/03 16:25:03 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	here_while(t_env *e, char *line, char *buffer, int i)
+//<< HERE << DOC
+
+void	here_while(t_env *e, char *line, int i)
 {
 	while (1)
 	{
 		line = readline("> ");
-		singals(e);
-		if (check_signals_red(e, line) == 1)
+		if (singals_heredoc(e) == 1)
 			break ;
-		if (compare(line, e->delim[i]) == 1)
+		if (check_here(e, line) == 2)
+			printf("heredoc error \'%s\'\n", e->delim[i++]);
+		else if (compare(line, e->delim[i]) == 1)
 		{
 			i++;
-			if (e->delim[i] == NULL)
-			{
-				redirect_double_arrows(e, buffer);
+			if (final_here(e, i) == 1)
 				break ;
-			}
-			else
-			{
-				free(buffer);
-				buffer = NULL;
-			}
 		}
 		else
-			buffer = update_buffer_red(line, buffer, e);
+			e->buffer = update_buffer_red(line, e->buffer, e);
+		if (e->delim[i] == NULL)
+			break ;
 	}
 	e->i = e->i_here;
+	free_here(e, line);
 }
 
 void	shoreter_else(t_env *e, char *s)

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:53 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/19 11:42:51 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/02/03 11:11:50 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	update_i(t_env *e)
 void	error(t_env *e)
 {
 	if (e->v[e->i][0] == '$' && e->v[e->i][1] == '?')
-		print_no_n(e->v[e->i]);
+		printf("%d: command not found\n", e->exit_code);
 	else
 	{
 		print_no_n(e->v[e->i]);
