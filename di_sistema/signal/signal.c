@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:12:38 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/29 12:58:28 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/02/03 11:53:26 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,5 @@ void	singals(t_env *e)
 void	handle_signal_pipe(int sig)
 {
 	if (sig == SIGINT)
-	{
 		printf("\n");
-	}
 }

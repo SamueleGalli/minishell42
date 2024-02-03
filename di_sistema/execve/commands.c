@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:33:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/02/01 10:08:20 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/02/03 11:10:27 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	com(t_env *e)
 	{
 		print_no_quote(e->v[0], 0);
 		printf(" command not found\n");
+		e->exit_code = 127;
 		return ;
 	}
 	pathcmd(e);
