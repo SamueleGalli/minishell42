@@ -15,6 +15,7 @@ SRC = 	main.c \
 		split/split4.c \
 		syntax/check_error.c \
 		syntax/check_error2.c \
+		syntax/check_error3.c \
 		other/alloc.c \
 		other/check_builtin.c \
 		other/env.c \

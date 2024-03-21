@@ -5,32 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 10:36:07 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/18 10:36:07 by sgalli           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 10:35:58 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/18 10:35:58 by sgalli           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 11:43:14 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:43:14 by sgalli           ###   ########.fr       */
+/*   Created: 2024/03/21 10:42:52 by sgalli            #+#    #+#             */
+/*   Updated: 2024/03/21 10:42:52 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +137,6 @@ int		loop_file(t_env *e, int fd, int type);
 int		valid_redp(t_env *e, int i);
 int		multi_file(t_env *e);
 int		single_red(t_env *e);
-int		singals_heredoc(t_env *e);
 int		len_red(t_env *e);
 int		exits_pipe(t_env *e);
 int		opening_file(t_env *e, int fd, int type);
@@ -175,8 +150,9 @@ int		count_len_exp(t_env *e, int j, int i, int len);
 int		short_echo(t_env *e, int i);
 int		check_quote_sindoub(t_env *e);
 int		if_only_space(t_env *e);
+int		close_quote(t_env *e, char s, int i, int j);
+int		invalid_red(t_env *e, int i);
 
-void	free_here(t_env *e, char *line);
 void	in_major(t_env *e);
 void	handle_signal_pipe(int sig);
 void	reset_variable(t_env *e);
@@ -262,6 +238,7 @@ void	single_export(t_env *e);
 void	redirect_mult_double(t_env *e);
 void	searchpath(t_env *e);
 void	handle_signal(int sig);
+
 void	writing_split(t_env *e);
 void	double_minor_redirect(t_env *e);
 void	env_variable(t_env *e);

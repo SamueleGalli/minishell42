@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 11:17:01 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/31 11:07:03 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/21 14:26:02 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int	single_red(t_env *e)
 
 int	single_file(t_env *e, int fd, int type)
 {
-	if (e->v[e->i][1] == '>')
+	int	i;
+
+	i = e->i - 1;
+	if (e->v[i][1] == '>')
 		type = 2;
 	else
 		type = 1;

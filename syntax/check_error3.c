@@ -1,47 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc4.c                                         :+:      :+:    :+:   */
+/*   check_error3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/03 12:01:40 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/21 12:35:43 by sgalli           ###   ########.fr       */
+/*   Created: 2024/03/21 11:44:45 by sgalli            #+#    #+#             */
+/*   Updated: 2024/03/21 13:58:04 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
-int	check_here(t_env *e, char *line)
+int	invalid_red(t_env *e, int i)
 {
-	if (line == NULL)
+	while (e->v[i] != 0 && e->v[i][0] != '>' && \
+	e->v[i][0] != '<')
 	{
-		if (e->buffer != NULL)
-		{
-			free(e->buffer);
-			e->buffer = NULL;
-		}
-		if (line != NULL)
-		{
-			free(line);
-			line = NULL;
-		}
-		return (2);
+		i++;
 	}
-	return (0);
-}
-
-int	final_here(t_env *e, int i)
-{
-	if (e->delim[i] == NULL)
+	if ((e->v[i] != 0 && e->v[i + 1] != 0) && (e->v[i + 1][0] == '>' || \
+	e->v[i + 1][0] == '<'))
 	{
-		redirect_double_arrows(e, e->buffer);
+		printf("syntax error near unexpected token `%c'\n", e->v[i][0]);
+		e->is_valid = 1;
 		return (1);
-	}
-	else
-	{
-		free(e->buffer);
-		e->buffer = NULL;
 	}
 	return (0);
 }

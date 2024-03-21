@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:13 by sgalli            #+#    #+#             */
-/*   Updated: 2024/02/03 16:23:58 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/21 10:52:50 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,5 @@ void	reset_variable(t_env *e)
 	{
 		free(e->s);
 		e->s = NULL;
-	}
-}
-
-void	free_here(t_env *e, char *line)
-{
-	if (e->buffer != NULL)
-	{
-		free(e->buffer);
-		e->buffer = NULL;
-	}
-	if (line != NULL)
-	{
-		free(line);
-		line = NULL;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:25:41 by eraccane          #+#    #+#             */
-/*   Updated: 2024/02/03 14:01:49 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/21 14:15:43 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	double_minor_redirect(t_env *e)
 	alloc_all_here(e);
 	line = NULL;
 	e->buffer = NULL;
+	if (e->cmd != 0)
+		add_history(e->cmd);
 	here_while(e, line, i);
 	e->red_flag = 1;
 	e->exit = 1;
@@ -71,6 +73,8 @@ void	init_heredoc(t_env *e)
 
 void	continue_heredoc(t_env *e, char *s)
 {
+	if (e->delim != 0)
+		free_table(e->delim);
 	if (e->v[0][0] != '<')
 	{
 		init_heredoc(e);
@@ -81,9 +85,10 @@ void	continue_heredoc(t_env *e, char *s)
 			free(s);
 		}
 		else
+		{
 			shoreter_else(e, s);
+		}
 	}
 	free(s);
-	free_table(e->delim);
 	exiting(e, 0);
 }

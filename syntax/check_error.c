@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 11:22:00 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/26 13:36:13 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/21 11:55:17 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,10 @@ void	cont_check_validation(t_env *e)
 void	check_validation(t_env *e)
 {
 	e->i_copy = 0;
+	if (invalid_red(e, 0) == 1)
+	{
+		return ;
+	}
 	if (single_error(e) == 1)
 	{
 		e->is_valid = 1;

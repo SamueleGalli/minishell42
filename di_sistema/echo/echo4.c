@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:44:56 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/25 11:09:46 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/21 13:59:35 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,19 @@ void	short_write(t_env *e, int j)
 	}
 	while (e->v[j][e->word] != 0 && e->v[j][e->word] != '$')
 		printf("%c", e->v[j][e->word++]);
+}
+
+int	close_quote(t_env *e, char s, int i, int j)
+{
+	while (e->v[j][i] != 0 && e->v[j][i] != s)
+	{
+		i++;
+	}
+	if (e->v[j][i] != 0 && e->v[j][i] == s)
+		return (1);
+	else
+	{
+		printf("invalid quote");
+		return (0);
+	}
 }

@@ -6,21 +6,17 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:43:52 by sgalli            #+#    #+#             */
-/*   Updated: 2024/02/03 16:25:03 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/21 14:17:26 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-//<< HERE << DOC
 
 void	here_while(t_env *e, char *line, int i)
 {
 	while (1)
 	{
 		line = readline("> ");
-		if (singals_heredoc(e) == 1)
-			break ;
 		if (check_here(e, line) == 2)
 			printf("heredoc error \'%s\'\n", e->delim[i++]);
 		else if (compare(line, e->delim[i]) == 1)
@@ -32,10 +28,11 @@ void	here_while(t_env *e, char *line, int i)
 		else
 			e->buffer = update_buffer_red(line, e->buffer, e);
 		if (e->delim[i] == NULL)
+		{
 			break ;
+		}
 	}
 	e->i = e->i_here;
-	free_here(e, line);
 }
 
 void	shoreter_else(t_env *e, char *s)
@@ -54,7 +51,10 @@ void	shoreter_else(t_env *e, char *s)
 			printf("%s", s);
 	}
 	else
+	{
+		free(s);
 		variabletype(e);
+	}
 }
 
 char	*converting(t_env *e, int j, int k, char *line)

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:12:38 by sgalli            #+#    #+#             */
-/*   Updated: 2024/02/03 16:22:27 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/21 10:44:24 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,4 @@ void	handle_signal_pipe(int sig)
 {
 	if (sig == SIGINT)
 		printf("\n");
-}
-
-void	handle_signal_here(int sig)
-{
-	if (sig == SIGINT)
-	{
-		g_code = 130;
-		write(1, "\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-		rl_clear_history();
-	}
-}
-
-int	singals_heredoc(t_env *e)
-{
-	signal(SIGINT, &handle_signal_here);
-	if (g_code == 130)
-	{
-		e->exit_code = g_code;
-		g_code = 0;
-		return (1);
-	}
-	return (0);
 }

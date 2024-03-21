@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:41:45 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/24 11:24:33 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/21 12:39:23 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	redirect_double_arrows(t_env *e, char *buffer)
 
 	e->exit_code = 0;
 	s = alloc_s(buffer);
-	free(buffer);
+	if (buffer != 0)
+		free(buffer);
 	pid = fork();
 	continuing_minor_double(e, s, pid);
 }

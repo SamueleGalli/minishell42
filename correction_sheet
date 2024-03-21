@@ -1,14 +1,3 @@
-Problemi: 
-- $? deve riportare l'ultimo error code 
-- $var deve espandere sempre 
-- ricontrollare pipe (cat | cat | cat | ls -> deve fare ls e 3 nl) 
-- controllare redirection multiple - exit non impostava exit code 
-- unset toglie il path da env ma effettivamente rimane 
-- pipe e redirection mischiate 
-- disabilitare ctr-c durante cat o wc ecc vuoti 
-- echo -n funziona solo senza argomenti 
-- non esegue gli altri eseguibili con path relativo 
-- deve fare tipo -> export CMD="echo ciao"; se fai $CMD deve fare echo ciao 
-- $ prima comando
-- redirect e extra
-- redirect exit_code perche ne ho tanti di errori
+- errore echo 'ad"d'ad"sd
+- quotes non vengono ignorate sempre (e'ch'o ciao)
+- env, pwd e old_pwd non si aggiornano
