@@ -64,6 +64,7 @@ SRC = 	main.c \
 		di_sistema/exit/exit.c \
 		di_sistema/cd/cd.c \
 		di_sistema/cd/cd2.c \
+		di_sistema/cd/cd3.c \
 		di_sistema/echo/echo.c \
 		di_sistema/echo/echo2.c \
 		di_sistema/echo/echo3.c \

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:51:17 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:41:21 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/21 14:59:00 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,30 @@ void	go_tilde(t_env *e, int i, int j)
 	free(tmp);
 }
 
+void	update_pwd(t_env *e, int i)
+{
+	char	pwd[1024];
+	char	*p;
+
+	while (e->env[i] != 0 && e->env[i][0] != 'P' &&
+			e->env[i][1] != 'W' && e->env[i][2] != 'D' && e->env[i][3] != '=')
+	{
+		i++;
+	}
+	if (getcwd(pwd, 1024) != NULL)
+	{
+		p = (char *)malloc(sizeof(char) * (ft_strlen(pwd) + 4));
+		alloc_mat(p, e->env[i]);
+		cont_pwd(e, i, p);
+	}
+}
+
 void	go_root(t_env *e, int i)
 {
 	while (e->env[i] != NULL)
 	{
-		if (e->env[i][0] == 'H' && e->env[i][1] == 'O' && e->env[i][2] == 'M' \
-		&& e->env[i][3] == 'E')
+		if (e->env[i][0] == 'H' && e->env[i][1] == 'O' && e->env[i][2] == 'M'
+			&& e->env[i][3] == 'E')
 		{
 			go_tilde(e, i, 5);
 			return ;
