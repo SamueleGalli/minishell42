@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 10:50:39 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/22 12:34:16 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/22 12:39:52 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	splitme(t_env *e)
 	e->word = 0;
 	e->q_null = 0;
 	e->numb = spacer(e);
-	printf("%d\n", e->numb);
 	e->v = (char **)malloc(sizeof(char *) * (e->numb + 1));
 	if (e->v == NULL)
 		exiting(e, 0);

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:06:25 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/21 11:41:40 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/22 12:42:45 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	word(t_env *e)
 		e->indx++;
 	e->word++;
 	while (e->cmd[e->indx] != ' ' && e->cmd[e->indx] != 0
-		&& e->cmd[e->indx] != 39 && e->cmd[e->indx] != 34
 		&& e->cmd[e->indx] != '$' && e->cmd[e->indx] != '|' \
 		&& e->cmd[e->indx] != '<' && e->cmd[e->indx] != '>')
 		e->indx++;
@@ -80,7 +79,6 @@ void	writing_split(t_env *e)
 		if (e->cmd[e->indx] == '$')
 			e->v[e->i][e->lenght++] = e->cmd[e->indx++];
 		while (e->cmd[e->indx] != ' ' && e->cmd[e->indx] != 0
-			&& e->cmd[e->indx] != 39 && e->cmd[e->indx] != 34
 			&& e->cmd[e->indx] != '$' && e->cmd[e->indx] != '|' \
 			&& e->cmd[e->indx] != '<' && e->cmd[e->indx] != '>')
 			e->v[e->i][e->lenght++] = e->cmd[e->indx++];
