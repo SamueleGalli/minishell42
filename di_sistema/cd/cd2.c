@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:51:17 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/21 14:59:00 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/22 10:46:11 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,30 @@ void	go_tilde(t_env *e, int i, int j)
 	free(tmp);
 }
 
-void	update_pwd(t_env *e, int i)
+void	cont_pwd(t_env *e)
 {
-	char	pwd[1024];
-	char	*p;
+	char	**tmp;
+	int		i;
 
-	while (e->env[i] != 0 && e->env[i][0] != 'P' &&
-			e->env[i][1] != 'W' && e->env[i][2] != 'D' && e->env[i][3] != '=')
+	i = 0;
+	tmp = (char **)malloc(sizeof(char *) * (size_mat(e->env) + 1));
+	tmp = copy_pwd(e, tmp);
+	free_table(e->env);
+	e->env = (char **)malloc(sizeof(char *) * (size_mat(tmp)));
+	while (tmp[i] != 0)
 	{
+		if (tmp[i] != 0 && tmp[i][0] == 'P' && tmp[i][1] == 'W' \
+		&& tmp[i][2] == 'D' && tmp[i][3] == '=')
+			alloc_pwd(e, i);
+		else
+		{
+			e->env[i] = (char *)malloc(sizeof(char) * (ft_strlen(tmp[i]) + 1));
+			alloc_mat(e->env[i], tmp[i]);
+		}
 		i++;
 	}
-	if (getcwd(pwd, 1024) != NULL)
-	{
-		p = (char *)malloc(sizeof(char) * (ft_strlen(pwd) + 4));
-		alloc_mat(p, e->env[i]);
-		cont_pwd(e, i, p);
-	}
+	free_table(tmp);
+	e->env[i] = NULL;
 }
 
 void	go_root(t_env *e, int i)
