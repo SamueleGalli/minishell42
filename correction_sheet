@@ -1,3 +1,2 @@
 - errore echo 'ad"d'ad"sd
 - quotes non vengono ignorate sempre (e'ch'o ciao)
-- (sto facendo questo)env, pwd e old_pwd non si aggiornano

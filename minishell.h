@@ -36,6 +36,7 @@ typedef struct s_env
 	char	**t;
 	char	**delim;
 	char	**mat_flag;
+	char	*tmp_pwd;
 	char	*s;
 	char	*buffer;
 	char	*cmd;
@@ -152,6 +153,7 @@ int		check_quote_sindoub(t_env *e);
 int		if_only_space(t_env *e);
 int		close_quote(t_env *e, char s, int i, int j);
 int		invalid_red(t_env *e, int i);
+int		while_pwd(t_env *e, int i, char **tmp);
 
 char	**copy_pwd(t_env *e, char **tmp);
 void	alloc_pwd(t_env *e, int i);

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:51:17 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/22 10:46:11 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/22 10:56:58 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,7 @@ void	cont_pwd(t_env *e)
 	tmp = copy_pwd(e, tmp);
 	free_table(e->env);
 	e->env = (char **)malloc(sizeof(char *) * (size_mat(tmp)));
-	while (tmp[i] != 0)
-	{
-		if (tmp[i] != 0 && tmp[i][0] == 'P' && tmp[i][1] == 'W' \
-		&& tmp[i][2] == 'D' && tmp[i][3] == '=')
-			alloc_pwd(e, i);
-		else
-		{
-			e->env[i] = (char *)malloc(sizeof(char) * (ft_strlen(tmp[i]) + 1));
-			alloc_mat(e->env[i], tmp[i]);
-		}
-		i++;
-	}
+	i = while_pwd(e, i, tmp);
 	free_table(tmp);
 	e->env[i] = NULL;
 }

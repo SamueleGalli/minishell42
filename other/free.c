@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:13 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/21 10:52:50 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/22 12:30:31 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	free_table(char **s)
 
 void	exiting(t_env *e, int i)
 {
+	if (e->tmp_pwd != 0)
+		free(e->tmp_pwd);
 	if (e->p != NULL)
 		free(e->p);
 	if (e->s != NULL)
@@ -49,6 +51,8 @@ void	exiting(t_env *e, int i)
 
 void	exiting_d(t_env *e)
 {
+	if (e->tmp_pwd != 0)
+		free(e->tmp_pwd);
 	if (e->path != NULL)
 		free(e->path);
 	if (e->p != NULL)
