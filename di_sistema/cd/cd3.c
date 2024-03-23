@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 14:46:12 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/22 12:32:46 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/23 12:54:57 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	alloc_pwd(t_env *e, int i)
 
 	if (getcwd(p, 1024) != NULL)
 	{
-		e->env[i] = (char *)malloc(sizeof(char) * (ft_strlen(p) + \
-		ft_strlen("PWD=") + 1));
+		e->env[i] = (char *)malloc(sizeof(char) * (ft_strlen(p)
+					+ ft_strlen("PWD=") + 1));
 		e->env[i][0] = 'P';
 		e->env[i][1] = 'W';
 		e->env[i][2] = 'D';
@@ -67,8 +67,8 @@ void	alloc_old_pwd(t_env *e, int i)
 
 	t = 7;
 	j = 0;
-	e->env[i] = (char *)malloc(sizeof(char ) * (ft_strlen(e->tmp_pwd) + \
-	ft_strlen("OLDPWD=") + 1));
+	e->env[i] = (char *)malloc(sizeof(char) * (ft_strlen(e->tmp_pwd)
+				+ ft_strlen("OLDPWD=") + 1));
 	e->env[i][0] = 'O';
 	e->env[i][1] = 'L';
 	e->env[i][2] = 'D';
@@ -87,14 +87,14 @@ int	while_pwd(t_env *e, int i, char **tmp)
 {
 	while (tmp[i] != 0)
 	{
-		if (tmp[i] != 0 && tmp[i][0] == 'P' && tmp[i][1] == 'W' \
-		&& tmp[i][2] == 'D' && tmp[i][3] == '=')
+		if (tmp[i] != 0 && tmp[i][0] == 'P' && tmp[i][1] == 'W'
+			&& tmp[i][2] == 'D' && tmp[i][3] == '=')
 		{
 			alloc_pwd(e, i);
 		}
-		else if(tmp[i] != 0 && tmp[i][0] == 'O' && tmp[i][1] == 'L' \
-		&& tmp[i][2] == 'D' && tmp[i][3] == 'P' && tmp[i][4] == 'W' \
-		&& tmp[i][5] == 'D' && tmp[i][6] == '=')
+		else if (tmp[i] != 0 && tmp[i][0] == 'O' && tmp[i][1] == 'L'
+			&& tmp[i][2] == 'D' && tmp[i][3] == 'P' && tmp[i][4] == 'W'
+			&& tmp[i][5] == 'D' && tmp[i][6] == '=')
 			alloc_old_pwd(e, i);
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:29:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 11:27:00 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/23 12:55:50 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	min_child_parent(t_env *e, pid_t pid, int fd)
 	}
 	else
 	{
-		singal_fork(e);	
+		singal_fork(e);
 		waitpid(pid, NULL, 0);
 	}
 }

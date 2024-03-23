@@ -151,9 +151,10 @@ int		count_len_exp(t_env *e, int j, int i, int len);
 int		short_echo(t_env *e, int i);
 int		check_quote_sindoub(t_env *e);
 int		if_only_space(t_env *e);
-int		close_quote(t_env *e, char s, int i, int j);
 int		invalid_red(t_env *e, int i);
 int		while_pwd(t_env *e, int i, char **tmp);
+int		close_quote_double(t_env *e, int i, int j);
+int		close_quote_single(t_env *e, int i, int j);
 
 void	singal_fork(t_env *e);
 void	alloc_pwd(t_env *e, int i);

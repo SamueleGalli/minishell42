@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 09:27:45 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/22 12:31:40 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/23 12:53:55 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	type_cont(t_env *e)
 
 void	typing(t_env *e)
 {
-	char p[1024];
+	char	p[1024];
 
 	if (getcwd(p, 1024) != NULL)
 	{

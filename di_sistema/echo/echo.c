@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 10:43:05 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/21 11:22:27 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/23 13:01:30 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ void	check_quote(t_env *e, int j)
 		print_str(e->v[j], 0);
 	else if (e->v[j][0] == 39)
 	{
-		if (close_quote(e, '\'', 1, j) == 0)
+		if (close_quote_single(e, 1, j) == 0)
 			return ;
 		while (e->v[j][e->word] != 39)
 			printf("%c", e->v[j][e->word++]);
 	}
 	else
 	{
-		if (close_quote(e, '\"', 1, j) == 0)
+		if (close_quote_double(e, 1, j) == 0)
 			return ;
 		while (e->v[j][e->word] != 34)
 		{

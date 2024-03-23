@@ -69,6 +69,7 @@ SRC = 	main.c \
 		di_sistema/echo/echo2.c \
 		di_sistema/echo/echo3.c \
 		di_sistema/echo/echo4.c \
+		di_sistema/echo/echo5.c \
 		di_sistema/export_unset_env/unset_env.c \
 		di_sistema/export_unset_env/export.c \
 		di_sistema/export_unset_env/export2.c \
