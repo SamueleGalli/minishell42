@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 10:56:05 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/22 12:52:25 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/23 12:29:33 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,20 @@ void	expand_variable(t_env *e)
 
 void	write_null(t_env *e)
 {
+	int	j;
+
+	j = e->indx - 1;
 	e->indx += 2;
 	if (e->q_null == 0)
+	{
+		e->v[e->i] = (char *)malloc(sizeof(char) * 3);
+		e->v[e->i][0] = e->cmd[j];
+		e->v[e->i][1] = e->cmd[j];
+		e->v[e->i][2] = 0;
+		e->i++;
+		e->q_null = 1;
 		return ;
+	}
 	e->v[e->i] = (char *)malloc(sizeof(char) * 2);
 	e->v[e->i][0] = ' ';
 	e->v[e->i][1] = 0;

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:33:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/02/03 16:07:52 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/23 11:23:04 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void	waiting(t_env *e)
 {
-	signal(SIGINT, &handle_signal_pipe);
+	singal_fork(e);
 	waitpid(e->pid, &e->status, 0);
 	e->exit = 1;
 	if (WIFEXITED(e->status) == 0)
 		e->exit_code = 2;
 	else
 		e->exit_code = WEXITSTATUS(e->status);
-	singals(e);
 }
 
 void	com_flag(t_env *e)

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:27:41 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/26 13:37:23 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/23 12:18:46 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void	check_next_car(t_env *e)
 {
 	e->indx += 2;
 	if (e->cmd[e->indx] != ' ')
+	{
+		e->word++;
 		return ;
+	}
 	e->q_null = 1;
 	e->word++;
 }

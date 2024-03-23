@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:06:17 by sgalli            #+#    #+#             */
-/*   Updated: 2024/02/01 11:02:04 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/23 11:26:43 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	execute_pipe(t_env *e)
 		child_do_pipe(e);
 	else
 	{
-		signal(SIGINT, &handle_signal_pipe);
 		close(e->pipefd[1]);
 		dup2(e->pipefd[0], STDIN_FILENO);
 		close(e->pipefd[0]);

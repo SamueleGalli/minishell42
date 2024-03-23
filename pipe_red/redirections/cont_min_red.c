@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:37:14 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/29 11:01:16 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/23 11:27:37 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	fork_cotinue(t_env *e, pid_t pid, int fd)
 {
 	if (pid == 0)
 		fork_red_pipe(e, fd);
+	singal_fork(e);
 	waitpid(pid, &e->status, 0);
 	if (e->status != 0)
 		e->exit_code = WEXITSTATUS(e->status);

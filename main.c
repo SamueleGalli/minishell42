@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:56:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/22 12:31:46 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/23 11:54:47 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	alloc_e(int c, char **argv, char **env, t_env *e)
 	(void)argv;
 	e->i = 0;
 	e->r = 0;
+	e->pid_pipe = 0;
 	e->t = NULL;
 	e->status = 0;
 	cont_allocation(e);

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:34:08 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:40:03 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/23 11:27:13 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ void	execve_redir(t_env *e)
 	if (pid == 0)
 		pid_red(e, file);
 	else
+	{
+		singal_fork(e);		
 		waitpid(pid, NULL, 0);
+	}
 	if (file != NULL)
 		free(file);
 	e->do_redir = 0;
