@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 12:58:25 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/25 18:12:25 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/25 18:45:28 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	close_quote_single(t_env *e, int i, int j)
 		return (1);
 	else
 	{
-		printf("invalid quote");
+		printf("|invalid quote|");
 		return (0);
 	}
 }
@@ -33,7 +33,7 @@ int	close_quote_double(t_env *e, int i, int j)
 		return (1);
 	else
 	{
-		printf("invalid quote");
+		printf("|invalid quote|");
 		return (0);
 	}
 }

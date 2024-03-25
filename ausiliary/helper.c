@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:53 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 11:38:55 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/25 18:44:13 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,20 @@ void	error(t_env *e)
 int	compare(char *s1, char *s2)
 {
 	int	j;
+	int	i;
 
 	j = 0;
-	while (s1[j] != 0 && s2[j] != 0)
+	i = 0;
+	while (s1[j] != 0 && s2[i] != 0)
 	{
-		if (s1[j] != s2[j])
+		while ((s1[j] != 0) && (s1[j] == '\'' || s1[j] == '\"'))
+			j++;
+		if (s1[j] != s2[i])
 			return (0);
 		j++;
+		i++;
 	}
-	if (s1[j] == 0 && s2[j] == 0)
+	if (s1[j] == 0 && s2[i] == 0)
 		return (1);
 	return (0);
 }
