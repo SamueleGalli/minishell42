@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 12:58:25 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 13:05:13 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/25 18:12:25 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,7 @@
 int	close_quote_single(t_env *e, int i, int j)
 {
 	while (e->v[j][i] != 0 && e->v[j][i] != '\'')
-	{
-		if (e->v[j][i] == '\"')
-		{
-			printf("invalid quote");
-			return (0);
-		}
 		i++;
-	}
 	if (e->v[j][i] != 0 && e->v[j][i] == '\'')
 		return (1);
 	else
@@ -35,14 +28,7 @@ int	close_quote_single(t_env *e, int i, int j)
 int	close_quote_double(t_env *e, int i, int j)
 {
 	while (e->v[j][i] != 0 && e->v[j][i] != '\"')
-	{
-		if (e->v[j][i] == '\'')
-		{
-			printf("invalid quote");
-			return (0);
-		}
 		i++;
-	}
 	if (e->v[j][i] != 0 && e->v[j][i] == '\"')
 		return (1);
 	else
@@ -50,4 +36,13 @@ int	close_quote_double(t_env *e, int i, int j)
 		printf("invalid quote");
 		return (0);
 	}
+}
+
+
+int	check_truth(t_env *e, int i)
+{
+	if (e->v[i + 1] != 0)
+		printf(" ");
+	i++;
+	return(i);
 }

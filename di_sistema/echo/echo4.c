@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 10:44:56 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 12:58:17 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/25 15:48:14 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,10 @@ void	short_write(t_env *e, int j)
 			printf("%c", e->v[j][e->word++]);
 	}
 	while (e->v[j][e->word] != 0 && e->v[j][e->word] != '$')
-		printf("%c", e->v[j][e->word++]);
+	{
+		if (e->v[j][e->word] == '\'' || e->v[j][e->word] == '"')
+			e->word++;
+		else
+			printf("%c", e->v[j][e->word++]);
+	}
 }

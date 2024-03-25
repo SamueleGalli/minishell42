@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:56:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 11:54:47 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/25 17:28:10 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	nuller(t_env *e)
 
 void	cont_allocation(t_env *e)
 {
+	e->pwd = 0;
 	e->tmp_pwd = 0;
 	e->ex = 0;
 	e->stdin = dup(STDIN_FILENO);

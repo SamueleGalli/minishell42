@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:35 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/18 13:06:22 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/25 18:22:47 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ int	ft_strlen_red(char *s)
 		i++;
 	while (s[i] != '\0' && s[i] != 34 && s[i] != 39)
 	{
-		i++;
 		j++;
+		i++;
 	}
-	return (i);
+	return (j);
 }
 
 int	ft_strlen(const char *s)

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 11:06:25 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 12:30:32 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/25 17:59:15 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,10 @@ void	writing_split(t_env *e)
 	{
 		if (e->cmd[e->indx] == '$')
 			e->v[e->i][e->lenght++] = e->cmd[e->indx++];
-		while (e->cmd[e->indx] != ' ' && e->cmd[e->indx] != 0
-			&& e->cmd[e->indx] != '|' && e->cmd[e->indx] != '<' \
-			&& e->cmd[e->indx] != '>')
-			e->v[e->i][e->lenght++] = e->cmd[e->indx++];
-		if (e->cmd[e->indx] == 34 || e->cmd[e->indx] == 39)
-			if (e->cmd[e->indx + 1] == '\0')
-				e->v[e->i][e->lenght++] = e->cmd[e->indx++];
-		if (e->count == 1)
-			e->v[e->i][e->lenght++] = ' ';
+		if (is_quote(e, e->indx) == 1)
+			exp_split(e);
+		else
+			split_normal(e);
 	}
 }
 

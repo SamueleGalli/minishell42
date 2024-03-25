@@ -46,6 +46,7 @@ typedef struct s_env
 	int		r;
 	int		here_pipe;
 	int		i;
+	int		pwd;
 	int		piping;
 	int		i2;
 	int		c_wait;
@@ -155,7 +156,12 @@ int		invalid_red(t_env *e, int i);
 int		while_pwd(t_env *e, int i, char **tmp);
 int		close_quote_double(t_env *e, int i, int j);
 int		close_quote_single(t_env *e, int i, int j);
+int		is_quote(t_env *e, int i);
+int		quoting_len(t_env *e);
+int		check_truth(t_env *e, int i);
 
+void	split_normal(t_env *e);
+void	exp_split(t_env *e);
 void	singal_fork(t_env *e);
 void	alloc_pwd(t_env *e, int i);
 void	cont_pwd(t_env *e);

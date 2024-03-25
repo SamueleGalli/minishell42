@@ -1,4 +1,4 @@
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -lreadline -Wpedantic
 NAME = minishell
 
@@ -13,6 +13,7 @@ SRC = 	main.c \
 		split/split2.c \
 		split/split3.c \
 		split/split4.c \
+		split/split5.c \
 		syntax/check_error.c \
 		syntax/check_error2.c \
 		syntax/check_error3.c \

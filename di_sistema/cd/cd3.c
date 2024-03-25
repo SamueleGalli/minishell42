@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 14:46:12 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 12:54:57 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/25 17:31:28 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ char	**copy_pwd(t_env *e, char **tmp)
 		alloc_mat(tmp[j], e->env[i]);
 		j++;
 		i++;
+	}
+	if (e->pwd == 0)
+	{
+		tmp[j] = (char *)malloc(sizeof(char) * (ft_strlen("OLDPWD=") + 1));
+		alloc_mat(tmp[j], "OLDPWD=");
+		j++;
 	}
 	tmp[j] = NULL;
 	return (tmp);

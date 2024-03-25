@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:51:17 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/22 10:56:58 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/25 17:34:58 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ void	go_tilde(t_env *e, int i, int j)
 		e->exit = 1;
 		e->exit_code = 1;
 		printf("bash: cd: %s: No such file or directory\n", tmp);
+		return ;
 	}
+	e->pwd = 1;
 	free(tmp);
 }
 
@@ -76,9 +78,14 @@ void	cont_pwd(t_env *e)
 {
 	char	**tmp;
 	int		i;
+	int		size;
 
 	i = 0;
-	tmp = (char **)malloc(sizeof(char *) * (size_mat(e->env) + 1));
+	if (e->pwd == 0)
+		size = size_mat(e->env) + 1;
+	else
+		size = size_mat(e->env);
+	tmp = (char **)malloc(sizeof(char *) * (size + 1));
 	tmp = copy_pwd(e, tmp);
 	free_table(e->env);
 	e->env = (char **)malloc(sizeof(char *) * (size_mat(tmp)));

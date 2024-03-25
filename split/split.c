@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 10:50:39 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 12:29:58 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/25 16:14:05 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	splong(t_env *e)
 	}
 	else
 	{
+		if (is_quote(e, e->j) == 1)
+			return (quoting_len(e));
 		while (e->cmd[e->j] != 0 && e->cmd[e->j] != ' ' && \
 		e->cmd[e->j] != '|' && e->cmd[e->j] != '<' && \
 		e->cmd[e->j] != '>')

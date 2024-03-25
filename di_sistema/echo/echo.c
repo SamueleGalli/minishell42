@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 10:43:05 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 13:01:30 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/25 18:13:35 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,14 @@ void	mini_while(t_env *e)
 	e->v[i][0] != '>')
 	{
 		exist = 1;
-		i = short_echo(e, i);
-		if (e->v[i] != NULL)
-			i++;
+		if (e->v[i][0] == ' ')
+			i = check_truth(e, i);
+		else
+		{
+			i = short_echo(e, i);
+			if (e->v[i] != NULL)
+				i++;
+		}
 	}
 	if (e->pi_re == 1)
 		print_red(e, exist);

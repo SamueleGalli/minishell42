@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:12:38 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 12:54:24 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/25 16:37:42 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	singal_fork(t_env *e)
 	signal(SIGINT, SIG_DFL);
 	signal(SIGINT, &handle_signal);
 	signal(SIGQUIT, &handle_signal);
-	printf("%d\n", g_code);
 	if (g_code == 130)
 	{
 		e->exit_code = g_code;
