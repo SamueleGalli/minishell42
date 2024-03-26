@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:12:38 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/26 18:03:08 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/26 18:07:51 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,18 @@ void	handle_signal_fork(int sig)
 	}
 }
 
-void singal_fork(t_env *e)
+void	singal_fork(t_env *e)
 {
-    signal(SIGINT, &handle_signal_fork);
-    signal(SIGQUIT, &handle_signal_fork);
-    if (g_code == 130)
-    {
-        e->exit_code = g_code;
-        g_code = 0;
-    }
-    else if (g_code == 131)
-    {
-        e->exit_code = g_code;
-        g_code = 0;
-    }
+	signal(SIGINT, &handle_signal_fork);
+	signal(SIGQUIT, &handle_signal_fork);
+	if (g_code == 130)
+	{
+		e->exit_code = g_code;
+		g_code = 0;
+	}
+	else if (g_code == 131)
+	{
+		e->exit_code = g_code;
+		g_code = 0;
+	}
 }
