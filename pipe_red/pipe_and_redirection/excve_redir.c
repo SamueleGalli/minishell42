@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:34:08 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 12:55:39 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/26 18:02:35 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	execve_redir(t_env *e)
 
 	file = find_lasth_filepath(e);
 	e->i = e->check + 1;
+	singal_fork(e);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -62,10 +63,7 @@ void	execve_redir(t_env *e)
 	if (pid == 0)
 		pid_red(e, file);
 	else
-	{
-		singal_fork(e);
 		waitpid(pid, NULL, 0);
-	}
 	if (file != NULL)
 		free(file);
 	e->do_redir = 0;

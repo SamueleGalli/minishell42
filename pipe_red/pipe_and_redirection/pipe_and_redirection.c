@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 16:33:21 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/25 17:07:14 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/26 17:53:02 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	pipe_red_start(t_env *e)
 	}
 	if (e->c_wait == 1)
 		return ;
-	singal_fork(e);
 	while (waitpid(-1, &e->status, 0) > 0)
 	{
 	}

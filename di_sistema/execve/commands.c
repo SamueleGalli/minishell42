@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:33:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 11:23:04 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/26 18:03:21 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	waiting(t_env *e)
 {
-	singal_fork(e);
 	waitpid(e->pid, &e->status, 0);
 	e->exit = 1;
 	if (WIFEXITED(e->status) == 0)
@@ -25,6 +24,7 @@ void	waiting(t_env *e)
 
 void	com_flag(t_env *e)
 {
+	singal_fork(e);
 	e->pid = fork();
 	if (e->pid < 0)
 	{

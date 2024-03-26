@@ -6,39 +6,11 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:29:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/23 12:55:50 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/26 17:51:56 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	min_child_parent(t_env *e, pid_t pid, int fd)
-{
-	if (pid == 0)
-	{
-		dup2(fd, STDIN_FILENO);
-		e->i -= 1;
-		if (check_builtin(e) == 0)
-		{
-			pathcmd(e);
-			flag_matrix(e);
-			if (e->c_path == 0 && access(e->s, X_OK) == 0
-				&& check_builtin(e) == 0)
-			{
-				execve(e->s, e->mat_flag, e->env);
-				perror("execve");
-				exiting(e, 1);
-			}
-		}
-		variabletype(e);
-		exiting(e, 0);
-	}
-	else
-	{
-		singal_fork(e);
-		waitpid(pid, NULL, 0);
-	}
-}
 
 int	min_com(t_env *e)
 {
