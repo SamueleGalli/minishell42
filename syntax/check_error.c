@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 11:22:00 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/21 11:55:17 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/27 11:23:11 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	check_validation(t_env *e)
 	}
 	while (e->v[e->i_copy] != 0 && e->is_valid == 0)
 	{
-		if (e->v[e->i_copy][0] != 34 || e->v[e->i_copy][0] != 39)
+		if (e->v[e->i_copy][0] != 34 && e->v[e->i_copy][0] != 39)
 			cont_check_validation(e);
 		if (e->exit == 0 && e->v[e->i_copy + 1] == 0 && \
 		(e->v[e->i_copy][0] == '|' \

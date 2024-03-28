@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:37:14 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/26 18:02:25 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/27 11:23:57 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	single_continuous(t_env *e, int fd)
 {
 	pid_t	pid;
 
-	singal_fork(e);
+	singal_fork();
 	pid = fork();
 	if (pid == -1)
 	{

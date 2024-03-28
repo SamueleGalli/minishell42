@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:33:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/26 18:06:40 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/27 11:23:57 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	waiting(t_env *e)
 
 void	com_flag(t_env *e)
 {
-	singal_fork(e);
+	singal_fork();
 	e->pid = fork();
 	if (e->pid < 0)
 	{

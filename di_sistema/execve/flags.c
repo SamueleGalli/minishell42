@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 15:06:10 by sgalli            #+#    #+#             */
-/*   Updated: 2024/02/01 10:38:18 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/28 12:47:39 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,3 @@ void	flag_matrix(t_env *e)
 	flag_while(e);
 	e->mat_flag[e->word] = NULL;
 }
-
-//env | grep $OLDPWd

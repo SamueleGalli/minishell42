@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:12:38 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/26 18:19:13 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/27 11:23:30 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,8 @@ void	handle_signal_fork(int sig)
 	}
 }
 
-void	singal_fork(t_env *e)
+void	singal_fork(void)
 {
-	e = e;
 	signal(SIGINT, &handle_signal_fork);
 	signal(SIGQUIT, &handle_signal_fork);
 }

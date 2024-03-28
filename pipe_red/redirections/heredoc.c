@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:25:41 by eraccane          #+#    #+#             */
-/*   Updated: 2024/03/21 14:15:43 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/28 13:09:17 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,14 @@ void	continue_heredoc(t_env *e, char *s)
 			if (e->c_path == 0 && access(e->s, X_OK) == 0)
 				pipe_com(e);
 			free(s);
+			s = 0;
 		}
 		else
 		{
 			shoreter_else(e, s);
 		}
 	}
-	free(s);
+	if (s != 0)
+		free(s);
 	exiting(e, 0);
 }

@@ -162,7 +162,7 @@ int		check_truth(t_env *e, int i);
 
 void	split_normal(t_env *e);
 void	exp_split(t_env *e);
-void	singal_fork(t_env *e);
+void	singal_fork(void);
 void	alloc_pwd(t_env *e, int i);
 void	cont_pwd(t_env *e);
 void	in_major(t_env *e);

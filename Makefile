@@ -1,6 +1,7 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -lreadline -Wpedantic
+CFLAGS = -g -Wall -Wextra -Werror
 NAME = minishell
+LDFLAGS = -lreadline
 
 SRC = 	main.c \
 		type/type.c \
@@ -116,7 +117,7 @@ all: $(NAME)
 
 $(NAME): libft $(OBJ)
 	@echo Linking... {$(NAME)}...
-	$(CC) $(OBJ) -o $(NAME) $(CFLAGS) 
+	$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
 
 clean:
 	@echo Cleaning...

@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 14:46:12 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/25 17:31:28 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/28 12:43:38 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ int	while_pwd(t_env *e, int i, char **tmp)
 		}
 		else if (tmp[i] != 0 && tmp[i][0] == 'O' && tmp[i][1] == 'L'
 			&& tmp[i][2] == 'D' && tmp[i][3] == 'P' && tmp[i][4] == 'W'
-			&& tmp[i][5] == 'D' && tmp[i][6] == '=')
+			&& tmp[i][5] == 'D' && tmp[i][6] == '=' \
+			&& e->tmp_pwd != NULL)
 			alloc_old_pwd(e, i);
 		else
 		{
