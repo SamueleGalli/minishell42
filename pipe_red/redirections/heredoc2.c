@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:41:45 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/28 13:26:59 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/28 14:43:46 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,8 @@ void	continuing_minor_double(t_env *e, pid_t pid)
 		continue_heredoc(e);
 	else
 	{
+		writing_here(e);
 		waitpid(pid, &e->status, 0);
-		if (e->here_pipe == 1)
-		{
-			close(e->pipefd[1]);
-			dup2(e->pipefd[0], STDIN_FILENO);
-			close(e->pipefd[0]);
-		}
 	}
 	if (e->here_p != 0)
 		free(e->here_p);
@@ -46,6 +41,11 @@ void	redirect_double_arrows(t_env *e, char *buffer)
 	e->here_p = alloc_s(buffer);
 	if (buffer != 0)
 		free(buffer);
+	if (pipe(e->pipefd) == -1)
+	{
+		perror("pipe");
+		exiting(e, 1);
+	}
 	pid = fork();
 	continuing_minor_double(e, pid);
 }

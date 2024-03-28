@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:12:38 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/27 11:23:30 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/28 15:09:09 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ void	handle_signal_fork(int sig)
 		g_code = 131;
 		ft_putstr_fd("Quit\n", 2);
 	}
+}
+
+void	handle_here(int sig)
+{
+	if (sig == SIGQUIT)
+		g_code = 130;
 }
 
 void	singal_fork(void)

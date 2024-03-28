@@ -160,7 +160,9 @@ int		close_quote_single(t_env *e, int i, int j);
 int		is_quote(t_env *e, int i);
 int		quoting_len(t_env *e);
 int		check_truth(t_env *e, int i);
+int		redir_file(t_env *e);
 
+void	handle_here(int sig);
 void	split_normal(t_env *e);
 void	exp_split(t_env *e);
 void	singal_fork(void);
@@ -168,7 +170,6 @@ void	alloc_pwd(t_env *e, int i);
 void	cont_pwd(t_env *e);
 void	in_major(t_env *e);
 void	reset_variable(t_env *e);
-void	shoreter_else(t_env *e);
 void	here_while(t_env *e, char *line, int i);
 void	check_next_car(t_env *e);
 void	write_null(t_env *e);
@@ -269,6 +270,7 @@ void	continue_heredoc(t_env *e);
 void	update_env_v(t_env *e, int k, int i, char **tmp);
 void	alloc_mat_esp(char *d, t_env *e);
 void	mini_while(t_env *e);
+void	writing_here(t_env *e);
 
 char	**copy_pwd(t_env *e, char **tmp);
 char	*convert_line(char *line, t_env *e, int j, int k);

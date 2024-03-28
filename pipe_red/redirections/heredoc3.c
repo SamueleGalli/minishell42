@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:43:52 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/28 13:28:24 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/28 15:09:40 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	here_while(t_env *e, char *line, int i)
 {
 	while (1)
 	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGQUIT, handle_here);
 		line = readline("> ");
 		if (check_here(e, line) == 2)
 			printf("heredoc error \'%s\'\n", e->delim[i++]);
@@ -33,28 +35,6 @@ void	here_while(t_env *e, char *line, int i)
 		}
 	}
 	e->i = e->i_here;
-}
-
-void	shoreter_else(t_env *e)
-{
-	if (e->here_pipe == 1)
-	{
-		close(e->pipefd[0]);
-		dup2(e->pipefd[1], STDOUT_FILENO);
-		close(e->pipefd[1]);
-	}
-	if (compare(e->v[e->i], "cat") == 1)
-	{
-		if (e->here_p == 0)
-			e->no_here = 1;
-		else
-			printf("%s", e->here_p);
-	}
-	else
-	{
-		free(e->here_p);
-		variabletype(e);
-	}
 }
 
 char	*converting(t_env *e, int j, int k, char *line)

@@ -89,6 +89,7 @@ SRC = 	main.c \
 		pipe_red/redirections/heredoc.c \
 		pipe_red/redirections/heredoc3.c \
 		pipe_red/redirections/heredoc4.c \
+		pipe_red/redirections/heredoc5.c \
 		pipe_red/redirections/major_red.c \
 		pipe_red/redirections/major_red2.c \
 		pipe_red/redirections/minor_red.c \

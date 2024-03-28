@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:25:41 by eraccane          #+#    #+#             */
-/*   Updated: 2024/03/28 13:33:35 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/28 14:53:31 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*update_buffer_red(char *line, char *buffer, t_env *e)
 	if (line[0] == '$')
 		line = convert_line(line, e, 0, 0);
 	if (buffer != NULL)
-		all = (char *)malloc(sizeof(char ) * ft_strlen(buffer) + 1);
+		all = (char *)malloc(sizeof(char) * ft_strlen(buffer) + 1);
 	all = ft_strcpy(all, buffer);
 	buf = ft_strjoin_n(all, line);
 	free(buffer);
@@ -62,13 +62,25 @@ int	check_signals_red(t_env *e, char *line)
 void	init_heredoc(t_env *e)
 {
 	e->i = e->i_tmp;
-	if (check_builtin(e) == 0 && compare(e->v[e->i], "cat") == 0)
+	if (check_builtin(e) == 0)
 	{
 		pathcmd(e);
 		flag_matrix(e);
 	}
 	else
 		e->s = NULL;
+	if (redir_file(e) == 1)
+	{
+		redirect_mult_double(e);
+		if (e->here_p != 0)
+			free(e->here_p);
+		exiting(e, 0);
+	}
+	else
+	{
+		close(e->pipefd[1]);
+		dup2(e->pipefd[0], STDIN_FILENO);
+	}
 }
 
 void	continue_heredoc(t_env *e)
@@ -88,7 +100,7 @@ void	continue_heredoc(t_env *e)
 			e->here_p = 0;
 		}
 		else
-			shoreter_else(e);
+			variabletype(e);
 	}
 	if (e->here_p != 0)
 		free(e->here_p);
