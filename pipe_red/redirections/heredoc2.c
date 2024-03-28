@@ -6,17 +6,16 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:41:45 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/28 13:05:43 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/28 13:26:59 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//cta << here
 //wc << here
 //cat << here > file1
 
-void	continuing_minor_double(t_env *e, char *s, pid_t pid)
+void	continuing_minor_double(t_env *e, pid_t pid)
 {
 	if (pid == -1)
 	{
@@ -24,7 +23,7 @@ void	continuing_minor_double(t_env *e, char *s, pid_t pid)
 		return ;
 	}
 	if (pid == 0)
-		continue_heredoc(e, s);
+		continue_heredoc(e);
 	else
 	{
 		waitpid(pid, &e->status, 0);
@@ -35,22 +34,20 @@ void	continuing_minor_double(t_env *e, char *s, pid_t pid)
 			close(e->pipefd[0]);
 		}
 	}
-	if (s != 0)
-		free(s);
+	if (e->here_p != 0)
+		free(e->here_p);
 }
 
 void	redirect_double_arrows(t_env *e, char *buffer)
 {
 	pid_t	pid;
-	char	*s;
 
 	e->exit_code = 0;
-	s = 0;
-	s = alloc_s(buffer);
+	e->here_p = alloc_s(buffer);
 	if (buffer != 0)
 		free(buffer);
 	pid = fork();
-	continuing_minor_double(e, s, pid);
+	continuing_minor_double(e, pid);
 }
 
 int	num_here(t_env *e)

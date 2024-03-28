@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:56:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/27 11:53:36 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/28 13:26:03 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int	main(int c, char **argv, char **env)
 	if (e == NULL)
 		return (1);
 	alloc_e(c, argv, env, e);
+	e->here_p = 0;
 	e->v = NULL;
 	e->s = NULL;
 	e->cmd = NULL;

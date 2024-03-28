@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:25:41 by eraccane          #+#    #+#             */
-/*   Updated: 2024/03/28 13:09:17 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/28 13:33:35 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	init_heredoc(t_env *e)
 		e->s = NULL;
 }
 
-void	continue_heredoc(t_env *e, char *s)
+void	continue_heredoc(t_env *e)
 {
 	if (e->delim != 0)
 		free_table(e->delim);
@@ -82,15 +82,15 @@ void	continue_heredoc(t_env *e, char *s)
 		{
 			if (e->c_path == 0 && access(e->s, X_OK) == 0)
 				pipe_com(e);
-			free(s);
-			s = 0;
+			else
+				printf("invalid command %s\n", e->v[e->i]);
+			free(e->here_p);
+			e->here_p = 0;
 		}
 		else
-		{
-			shoreter_else(e, s);
-		}
+			shoreter_else(e);
 	}
-	if (s != 0)
-		free(s);
+	if (e->here_p != 0)
+		free(e->here_p);
 	exiting(e, 0);
 }

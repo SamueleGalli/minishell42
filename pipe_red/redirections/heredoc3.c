@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:43:52 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/21 14:17:26 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/28 13:28:24 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	here_while(t_env *e, char *line, int i)
 	e->i = e->i_here;
 }
 
-void	shoreter_else(t_env *e, char *s)
+void	shoreter_else(t_env *e)
 {
 	if (e->here_pipe == 1)
 	{
@@ -45,14 +45,14 @@ void	shoreter_else(t_env *e, char *s)
 	}
 	if (compare(e->v[e->i], "cat") == 1)
 	{
-		if (s == 0)
+		if (e->here_p == 0)
 			e->no_here = 1;
 		else
-			printf("%s", s);
+			printf("%s", e->here_p);
 	}
 	else
 	{
-		free(s);
+		free(e->here_p);
 		variabletype(e);
 	}
 }
