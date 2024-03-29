@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 13:07:09 by eraccane          #+#    #+#             */
-/*   Updated: 2024/03/21 14:24:14 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/29 11:04:48 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	execve_red(t_env *e, int fd)
 {
 	dup2(fd, 1);
 	close(fd);
-	in_major(e);
-	if (check_builtin(e) == 0)
+	if (check_builtin(e) == 0 && e->do_here == 0)
 	{
 		pathcmd(e);
 		flag_matrix(e);
@@ -81,6 +80,11 @@ void	check_red_fork(t_env *e)
 {
 	pid_t	pid;
 
+	if (e->do_here == 1)
+	{
+		fork_pid_zero(e);
+		return ;
+	}
 	e->s = NULL;
 	pid = fork();
 	if (pid < 0)

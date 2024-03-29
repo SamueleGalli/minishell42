@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 12:33:46 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/27 11:23:57 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/29 13:20:12 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,27 @@ void	com_flag(t_env *e)
 		waiting(e);
 }
 
+void	cont_dir(t_env *e)
+{
+	if (access(e->s, X_OK) == 0)
+	{
+		if (access(e->s, R_OK | X_OK) == 0)
+			com_flag(e);
+	}
+	else
+	{
+		printf("bash: %s: permission denied\n", e->v[e->i]);
+		e->exit_code = 126;
+	}
+}
+
 void	check_valid_file(t_env *e)
 {
 	DIR	*dir;
 
 	dir = opendir(e->v[e->i]);
 	if (dir == NULL)
-	{
-		if (access(e->s, X_OK) == 0)
-		{
-			if (access(e->s, R_OK | X_OK) == 0)
-				com_flag(e);
-		}
-		else
-		{
-			printf("bash: %s: permission denied\n", e->v[e->i]);
-			e->exit_code = 126;
-		}
-	}
+		cont_dir(e);
 	else
 	{
 		printf("bash: %s: is a directory\n", e->v[e->i]);
@@ -77,7 +80,8 @@ void	com(t_env *e)
 		return ;
 	}
 	pathcmd(e);
-	flag_matrix(e);
+	if (access(e->s, R_OK | X_OK) == 0)
+		flag_matrix(e);
 	if (empty(e) == 0)
 		return ;
 	if (e->c_path == 0 && access(e->s, F_OK) == 0)

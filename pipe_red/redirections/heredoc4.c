@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 12:01:40 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/21 12:35:43 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/29 13:16:02 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,34 @@ int	final_here(t_env *e, int i)
 	{
 		free(e->buffer);
 		e->buffer = NULL;
+	}
+	return (0);
+}
+
+void	writing_here(t_env *e)
+{
+	int	i;
+
+	i = 0;
+	close(e->pipefd[0]);
+	while (e->here_p[i] != 0)
+	{
+		write(e->pipefd[1], &e->here_p[i], 1);
+		i++;
+	}
+	close(e->pipefd[1]);
+}
+
+int	redir_file(t_env *e)
+{
+	int	i;
+
+	i = e->i;
+	while (e->v[i] != 0)
+	{
+		if (e->v[i][0] == '>')
+			return (1);
+		i++;
 	}
 	return (0);
 }

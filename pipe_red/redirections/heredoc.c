@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 21:25:41 by eraccane          #+#    #+#             */
-/*   Updated: 2024/03/28 14:53:31 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/29 10:33:26 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	check_signals_red(t_env *e, char *line)
 void	init_heredoc(t_env *e)
 {
 	e->i = e->i_tmp;
+	e->do_here = 1;
 	if (check_builtin(e) == 0)
 	{
 		pathcmd(e);
@@ -71,10 +72,13 @@ void	init_heredoc(t_env *e)
 		e->s = NULL;
 	if (redir_file(e) == 1)
 	{
-		redirect_mult_double(e);
+		e->i += 2;
 		if (e->here_p != 0)
 			free(e->here_p);
-		exiting(e, 0);
+		close(e->pipefd[1]);
+		dup2(e->pipefd[0], STDIN_FILENO);
+		close(e->pipefd[0]);
+		redirect_mult_double(e);
 	}
 	else
 	{

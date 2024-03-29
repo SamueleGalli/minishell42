@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 09:56:59 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/28 13:26:03 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/29 13:14:52 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,10 @@ int	main(int c, char **argv, char **env)
 		return (1);
 	alloc_e(c, argv, env, e);
 	e->here_p = 0;
+	e->do_here = 0;
 	e->v = NULL;
 	e->s = NULL;
+	e->her = 0;
 	e->cmd = NULL;
 	while (1)
 	{

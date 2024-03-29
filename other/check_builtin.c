@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 11:36:41 by sgalli            #+#    #+#             */
-/*   Updated: 2024/01/03 11:36:43 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/29 11:21:19 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	check_builtin(t_env *e)
 	else if (compare(e->v[e->i], "exit") == 1)
 		return (1);
 	else if (compare(e->v[e->i], "pwd") == 1)
+		return (1);
+	else if (e->v[e->i][0] == '$')
 		return (1);
 	else
 		return (0);

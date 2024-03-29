@@ -44,6 +44,7 @@ typedef struct s_env
 	char	*filename;
 	char	*path;
 	char	*here_p;
+	char	*dir;
 	int		r;
 	int		here_pipe;
 	int		i;
@@ -57,8 +58,10 @@ typedef struct s_env
 	int		sign;
 	int		finded_path;
 	int		c_path;
+	int		her;
 	int		word;
 	int		indx;
+	int		do_here;
 	int		pi_re;
 	int		iter;
 	int		numb;
@@ -168,7 +171,6 @@ void	exp_split(t_env *e);
 void	singal_fork(void);
 void	alloc_pwd(t_env *e, int i);
 void	cont_pwd(t_env *e);
-void	in_major(t_env *e);
 void	reset_variable(t_env *e);
 void	here_while(t_env *e, char *line, int i);
 void	check_next_car(t_env *e);

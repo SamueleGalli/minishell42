@@ -6,7 +6,7 @@
 /*   By: sgalli <sgalli@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:12:38 by sgalli            #+#    #+#             */
-/*   Updated: 2024/03/28 15:09:09 by sgalli           ###   ########.fr       */
+/*   Updated: 2024/03/28 15:15:54 by sgalli           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,22 @@ void	singals(t_env *e)
 {
 	signal(SIGINT, &handle_signal);
 	signal(SIGQUIT, SIG_IGN);
-	if (g_code == 130)
+	if (g_code == 130 && e->her == 0)
 	{
 		e->exit_code = g_code;
 		g_code = 0;
 	}
-	else if (g_code == 131)
+	else if (g_code == 131 && e->her == 0)
 	{
 		e->exit_code = g_code;
 		g_code = 0;
 		return ;
+	}
+	else if (g_code == 131 && e->her == 1)
+	{
+		e->exit_code = g_code;
+		g_code = 0;
+		exiting(e, 0);
 	}
 }
 
